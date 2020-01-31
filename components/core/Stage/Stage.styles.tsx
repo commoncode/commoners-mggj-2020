@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   position: relative;
   display: flex;
-  background: red;
+  background: #1e1e1e;
   width: 100%;
   overflow: hidden;
 `;
@@ -15,6 +15,7 @@ type InnerProps = {
 export const Inner = styled.div<InnerProps>`
   display: flex;
   transition: margin 800ms ease-out;
+  background: #282828;
 
   &.bedroom {
     margin-left: calc(50vw - 32rem);
@@ -36,8 +37,8 @@ export const Inner = styled.div<InnerProps>`
 export const Floor = styled.div`
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 5rem;
+  right: 5rem;
 
   height: 10rem;
   background: rgba(0, 0, 0, 0.6);
@@ -48,4 +49,5 @@ export const sceneBase = css`
   flex-shrink: 0;
   width: 64rem;
   height: 38rem;
+  margin-right: 3rem;
 `;

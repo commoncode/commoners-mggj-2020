@@ -13,5 +13,7 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        background: #1e1e1e;
     }
 `;
