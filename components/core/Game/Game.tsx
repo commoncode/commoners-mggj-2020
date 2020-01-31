@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
@@ -55,8 +55,22 @@ const Game = () => {
     y: gameState.player.position.y
   });
 
+  const gameLoop = useRef(null);
+  const eventsLoop = useRef(null);
+
   useEffect(() => {
-    const gameLoop = setInterval(() => {
+    eventsLoop.current = setInterval(() => {
+
+    }, 1000)
+
+    return () => {
+      clearInterval(eventsLoop.current);
+    }
+  })
+
+
+  useEffect(() => {
+    gameLoop.current = setInterval(() => {
       // Update player position
       // if (
       //   (targetLocation && gameState.player.position.x !== targetLocation.x) ||
@@ -84,11 +98,9 @@ const Game = () => {
     }, 1000 / 60); // Frame renderer
 
     return () => {
-      clearInterval(gameLoop);
+      clearInterval(gameLoop.current);
     };
   });
-
-  //   setGameState({ ...gameState, myChange: 12 });
 
   return (
     <>
@@ -125,6 +137,7 @@ const Game = () => {
       >
         <Player state={gameState.player} />
         <Lover state={gameState.lover} />
+        {displayEvents()}
       </Stage>
     </>
   );
