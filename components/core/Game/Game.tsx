@@ -11,6 +11,7 @@ type Position = {
   scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
   x: number;
   y: number;
+  speed: number; // The calculated speed at which the character should move to its new position
 };
 
 type CharacterType = {
@@ -31,14 +32,16 @@ const initialState: GameStateType = {
     position: {
       scene: "bedroom",
       x: 10,
-      y: 50
+      y: 50,
+      speed: 1
     }
   },
   lover: {
     position: {
       scene: "bedroom",
       x: 80,
-      y: 50
+      y: 50,
+      speed: 1
     }
   },
   love: 0,
@@ -55,34 +58,29 @@ const Game = () => {
   useEffect(() => {
     const gameLoop = setInterval(() => {
       // Update player position
-      if (
-        (targetLocation && gameState.player.position.x !== targetLocation.x) ||
-        (targetLocation && gameState.player.position.y !== targetLocation.y)
-      ) {
-        console.log("Updating user position...");
-        const travelX = targetLocation.x - gameState.player.position.x;
-        const travelY = targetLocation.y - gameState.player.position.y;
-
-        const movementSpeed = 1000 / 60; // Pixels per second / frames
-
-        let x =
-          travelX > movementSpeed
-            ? gameState.player.position.x + movementSpeed
-            : targetLocation.x;
-
-        let y =
-          travelY > movementSpeed
-            ? gameState.player.position.y + movementSpeed
-            : targetLocation.y;
-
-        setGameState({
-          ...gameState,
-          player: {
-            ...gameState.player,
-            position: { ...gameState.player.position, x, y }
-          }
-        });
-      }
+      // if (
+      //   (targetLocation && gameState.player.position.x !== targetLocation.x) ||
+      //   (targetLocation && gameState.player.position.y !== targetLocation.y)
+      // ) {
+      //   const travelX = targetLocation.x - gameState.player.position.x;
+      //   const travelY = targetLocation.y - gameState.player.position.y;
+      //   const movementSpeed = 1000 / 60; // Pixels per second / frames
+      //   let x =
+      //     travelX > movementSpeed
+      //       ? gameState.player.position.x + movementSpeed
+      //       : targetLocation.x;
+      //   let y =
+      //     travelY > movementSpeed
+      //       ? gameState.player.position.y + movementSpeed
+      //       : targetLocation.y;
+      //   setGameState({
+      //     ...gameState,
+      //     player: {
+      //       ...gameState.player,
+      //       position: { ...gameState.player.position, x, y }
+      //     }
+      //   });
+      // }
     }, 1000 / 60); // Frame renderer
 
     return () => {
@@ -98,8 +96,31 @@ const Game = () => {
       <Stage
         scene={gameState.player.position.scene}
         setLocation={(x, y) => {
-          console.log("Setting target", x, y, targetLocation);
-          setTargetLocation({ x, y });
+          const travelX =
+            x > gameState.player.position.x
+              ? x - gameState.player.position.x
+              : gameState.player.position.x - x;
+
+          const travelY =
+            y > gameState.player.position.y
+              ? y - gameState.player.position.y
+              : gameState.player.position.y - y;
+
+          const distance = Math.sqrt(
+            Math.pow(travelX, 2) + Math.pow(travelY, 2)
+          );
+
+          const movementSpeed = 500; // Pixels per second
+          const speed = Math.abs(distance / movementSpeed);
+
+          // setTargetLocation({ x, y });
+          setGameState({
+            ...gameState,
+            player: {
+              ...gameState.player,
+              position: { ...gameState.player.position, x, y, speed }
+            }
+          });
         }}
       >
         <Player state={gameState.player} />

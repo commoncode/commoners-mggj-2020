@@ -9,5 +9,5 @@ type ContainerProps = {
 
 export const Container = styled.div<ContainerProps>`
   ${characterBase}
-  ${({ x, y }) => characterPosition(x, y)}
+  ${({ x, y, speed }) => characterPosition(x, y, `${speed}s`)}
 `;

@@ -13,9 +13,13 @@ export const characterBase = css`
   border: 5px solid black;
 
   top: -15rem;
+
+  transition: left 1s ease-out, top 1s ease-out;
 `;
 
-export const characterPosition = (x, y) => css`
+export const characterPosition = (x, y, time) => css`
+  transition: left ${time} ease-out, top ${time} ease-out;
+
   left: calc(${x}px - 5rem);
   top: calc(${y}px - 15rem);
 `;
