@@ -1,5 +1,5 @@
 import { Container } from "./Kitchen.styles";
 
-const Kitchen = () => <Container>The Kitchen component</Container>;
+const Kitchen = ({ children }) => <Container>{children}</Container>;
 
 export default Kitchen;

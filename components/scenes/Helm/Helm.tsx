@@ -1,5 +1,5 @@
 import { Container } from "./Helm.styles";
 
-const Helm = () => <Container>The Helm component</Container>;
+const Helm = ({ children }) => <Container>{children}</Container>;
 
 export default Helm;

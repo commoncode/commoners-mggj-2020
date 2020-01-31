@@ -1,5 +1,5 @@
 import { Container } from "./Bedroom.styles";
 
-const Bedroom = () => <Container>The bedroom component</Container>;
+const Bedroom = ({ children }) => <Container>{children}</Container>;
 
 export default Bedroom;
