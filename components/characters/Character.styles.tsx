@@ -22,4 +22,6 @@ export const characterPosition = (x, y, time) => css`
 
   left: calc(${x}px - 5rem);
   top: calc(${y}px - 15rem);
+
+  z-index: ${y.toFixed(2) * 100};
 `;
