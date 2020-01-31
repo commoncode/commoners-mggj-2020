@@ -59,43 +59,7 @@ const Game = () => {
   const eventsLoop = useRef(null);
 
   useEffect(() => {
-    eventsLoop.current = setInterval(() => {
-
-    }, 1000)
-
-    return () => {
-      clearInterval(eventsLoop.current);
-    }
-  })
-
-
-  useEffect(() => {
-    gameLoop.current = setInterval(() => {
-      // Update player position
-      // if (
-      //   (targetLocation && gameState.player.position.x !== targetLocation.x) ||
-      //   (targetLocation && gameState.player.position.y !== targetLocation.y)
-      // ) {
-      //   const travelX = targetLocation.x - gameState.player.position.x;
-      //   const travelY = targetLocation.y - gameState.player.position.y;
-      //   const movementSpeed = 1000 / 60; // Pixels per second / frames
-      //   let x =
-      //     travelX > movementSpeed
-      //       ? gameState.player.position.x + movementSpeed
-      //       : targetLocation.x;
-      //   let y =
-      //     travelY > movementSpeed
-      //       ? gameState.player.position.y + movementSpeed
-      //       : targetLocation.y;
-      //   setGameState({
-      //     ...gameState,
-      //     player: {
-      //       ...gameState.player,
-      //       position: { ...gameState.player.position, x, y }
-      //     }
-      //   });
-      // }
-    }, 1000 / 60); // Frame renderer
+    gameLoop.current = setInterval(() => {}, 1000 / 60); // Frame renderer
 
     return () => {
       clearInterval(gameLoop.current);
@@ -134,9 +98,21 @@ const Game = () => {
             }
           });
         }}
+        setScene={nextScene => {
+          console.log("Setting Scene", nextScene);
+          setGameState({
+            ...gameState,
+            player: {
+              ...gameState.player,
+              position: { ...gameState.player.position, scene: nextScene }
+            }
+          });
+        }}
       >
         <Player state={gameState.player} />
-        <Lover state={gameState.lover} />
+        {gameState.lover.position.scene === gameState.player.position.scene ? (
+          <Lover state={gameState.lover} />
+        ) : null}
         {displayEvents()}
       </Stage>
     </>
