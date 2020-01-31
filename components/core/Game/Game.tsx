@@ -45,8 +45,6 @@ const initialState: GameStateType = {
   time: 60 * 5
 };
 
-let gameLoop = null;
-
 const Game = () => {
   const [gameState, setGameState] = useState(initialState);
   const [targetLocation, setTargetLocation] = useState({
@@ -55,8 +53,7 @@ const Game = () => {
   });
 
   useEffect(() => {
-    gameLoop = setInterval(() => {
-      // console.log("Target location", targetLocation);
+    const gameLoop = setInterval(() => {
       // Update player position
       if (
         (targetLocation && gameState.player.position.x !== targetLocation.x) ||
@@ -66,7 +63,7 @@ const Game = () => {
         const travelX = targetLocation.x - gameState.player.position.x;
         const travelY = targetLocation.y - gameState.player.position.y;
 
-        const movementSpeed = 100 / 60; // Pixels per second / frames
+        const movementSpeed = 1000 / 60; // Pixels per second / frames
 
         let x =
           travelX > movementSpeed
@@ -91,7 +88,7 @@ const Game = () => {
     return () => {
       clearInterval(gameLoop);
     };
-  }, []);
+  });
 
   //   setGameState({ ...gameState, myChange: 12 });
 
