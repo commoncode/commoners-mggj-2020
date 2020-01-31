@@ -5,6 +5,8 @@ import Lover from "../../characters/Lover";
 
 import Stage from "../Stage";
 
+import { GlobalStyle } from "./Game.styles";
+
 type Position = {
   scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
   x: number;
@@ -27,7 +29,7 @@ type GameStateType = {
 const state: GameStateType = {
   player: {
     position: {
-      scene: "helm",
+      scene: "bedroom",
       x: 10,
       y: 50
     }
@@ -54,10 +56,13 @@ const Game = () => {
   //   setGameState({ ...gameState, myChange: 12 });
 
   return (
-    <Stage scene={state.player.position.scene}>
-      <Player state={state.player} />
-      <Lover state={state.player} />
-    </Stage>
+    <>
+      <GlobalStyle />
+      <Stage scene={state.player.position.scene}>
+        <Player state={state.player} />
+        <Lover state={state.player} />
+      </Stage>
+    </>
   );
 };
 

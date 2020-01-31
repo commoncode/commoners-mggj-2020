@@ -33,5 +33,5 @@ export const Inner = styled.div<InnerProps>`
 export const sceneBase = css`
   flex-shrink: 0;
   width: 64rem;
-  height: 48rem;
+  height: 38rem;
 `;
