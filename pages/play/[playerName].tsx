@@ -1,4 +1,6 @@
-const PlayPage = () => <div>This is the play page</div>;
+import Game from "../../components/core/Game";
+
+const PlayPage = () => <Game />;
 
 PlayPage.getInitialProps = ({ req, res, query }) => {
   return { playerName: "", partnerName: "" };
