@@ -51,3 +51,25 @@ export const sceneBase = css`
   height: 38rem;
   margin-right: 3rem;
 `;
+
+const Button = css`
+  position: absolute;
+  top: 2rem;
+
+  background: white;
+  border-radius: 0.5rem;
+
+  z-index: 1000;
+`;
+
+export const LeftButton = styled.button`
+  ${Button}
+
+  left: 2rem;
+`;
+
+export const RightButton = styled.button`
+  ${Button}
+
+  right: 2rem
+`;
