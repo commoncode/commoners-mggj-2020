@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 type ContainerProps = {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 };
 
 export const eventBase = css`
@@ -21,6 +21,7 @@ export const eventBase = css`
 `;
 
 export const Container = styled.div<ContainerProps>`
-  ${({ x }) => `left: ${x}`}
-  ${({ y }) => `top: ${y}`}
+  left: ${({ x }) => x}px;
+  top: ${({ y }) => y}px;
+  z-index: 999999999;
 `;

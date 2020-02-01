@@ -27,6 +27,17 @@ type GameStateType = {
   time: number;
 };
 
+type EventType = {
+  activation: () => {};
+  position: {
+    scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
+    x: number;
+    y: number;
+  };
+  display: number; // display the event until reach some ammount of time
+  status: "display" | "hidden";
+}
+
 const initialState: GameStateType = {
   player: {
     position: {
@@ -56,10 +67,9 @@ const Game = () => {
   });
 
   const gameLoop = useRef(null);
-  const eventsLoop = useRef(null);
 
   useEffect(() => {
-    gameLoop.current = setInterval(() => {}, 1000 / 60); // Frame renderer
+    gameLoop.current = setInterval(() => { }, 1000 / 60); // Frame renderer
 
     return () => {
       clearInterval(gameLoop.current);
@@ -113,7 +123,6 @@ const Game = () => {
         {gameState.lover.position.scene === gameState.player.position.scene ? (
           <Lover state={gameState.lover} />
         ) : null}
-        {displayEvents()}
       </Stage>
     </>
   );

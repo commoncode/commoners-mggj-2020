@@ -5,6 +5,10 @@ import Hatch from "../../scenes/Hatch";
 import Helm from "../../scenes/Helm";
 import Kitchen from "../../scenes/Kitchen";
 
+// events
+import Event from "../../events/Event";
+import Leak from '../../events/Leak';
+
 import {
   Container,
   Inner,
@@ -23,6 +27,29 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
     setLocation(x, y);
   };
 
+  const [events, setEvents] = useState([{
+    eventComponent: Leak,
+    eventState: {
+      position: {
+        x: 100,
+        y: 100,
+        scene: "bedroom"
+      },
+      status: 'display',
+      display: 30
+    }
+  }
+  ]);
+
+  console.log(events, scene)
+
+  const displayEvents = () => events
+    .filter((event) => event.eventState.position.scene === scene)
+    .map(({ eventComponent: EventComponent, eventState }, index) => {
+      return (<EventComponent key={`event-${index}`} {...eventState} />)
+    })
+
+
   return (
     <>
       <Container>
@@ -39,6 +66,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "bedroom" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
           </Bedroom>
 
           <Kitchen>
@@ -56,6 +84,8 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "kitchen" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
+
           </Kitchen>
 
           <Helm>
@@ -73,6 +103,8 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "helm" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
+
           </Helm>
 
           <Hatch>
@@ -85,6 +117,8 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "hatch" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
+
           </Hatch>
         </Inner>
       </Container>
