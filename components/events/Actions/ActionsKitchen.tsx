@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ActionEvent from "./ActionEvent";
 import Cookie from "../Cookie/Cookie";
 import Flower from "../Flower/Flower";
+import Wrench from "../Wrench/Wrench";
 
 // captions for Kitchen scene
 import CoffeeCaption from "../../captions/texts/kitchen/CoffeeCaption";
@@ -13,6 +14,8 @@ import FlowerCaption from "../../captions/texts/kitchen/FlowerCaption";
 import GrabFlowerCaption from "../../captions/texts/kitchen/GrabFlowerCaption";
 import LeakingCaption from "../../captions/texts/kitchen/LeakingCaption";
 import WrenchCaption from "../../captions/texts/kitchen/WrenchCaption";
+import GrabWrenchCaption from "../../captions/texts/kitchen/GrabWrenchCaption";
+import PutItemBackCaption from "../../captions/texts/PutItemBackCaption";
 
 const ActionsKitchen = ({ language }) => {
 
@@ -23,6 +26,9 @@ const ActionsKitchen = ({ language }) => {
   const [showGrabCookieCaption, setShowGrabCookieCaption] = useState(false);
   const [showFlowerCaption, setShowFlowerCaption] = useState(false);
   const [showGrabFlowerCaption, setShowGrabFlowerCaption] = useState(false);
+  const [showWrenchCaption, setShowWrenchCaption] = useState(false);
+  const [showGrabWrenchCaption, setShowGrabWrenchCaption] = useState(false);
+  const [showPutItemBackCaption, setShowPutItemBackCaption] = useState(false);
 
   return (
     <>
@@ -32,6 +38,9 @@ const ActionsKitchen = ({ language }) => {
       <GrabCookieCaption x={50} y={250} language={language} isToggled={showGrabCookieCaption} />
       <FlowerCaption x={300} y={100} language={language} isToggled={showFlowerCaption} />
       <GrabFlowerCaption x={300} y={100} language={language} isToggled={showGrabFlowerCaption}/>
+      <WrenchCaption x={300} y={100} language={language} isToggled={showWrenchCaption}/>
+      <GrabWrenchCaption x={300} y={100} language={language} isToggled={showGrabWrenchCaption} />
+      <PutItemBackCaption x={300} y={100} language={language} isToggled={showPutItemBackCaption}/>
 
       <ActionEvent
         x={240}
@@ -89,10 +98,39 @@ const ActionsKitchen = ({ language }) => {
           }, 3000)
         }}
         put={async () => {
-          console.log('putting flower back.')
-        }}
+          setShowPutItemBackCaption(true)
 
+          await setTimeout(() => {
+            setShowPutItemBackCaption(false)
+          }, 3000)
+        }}
       />
+
+      <Wrench
+        x={300}
+        y={250}
+        activation={() => {
+          setShowWrenchCaption(true)
+          setTimeout(() => {
+            setShowWrenchCaption(false)
+          }, 3000)
+        }}
+        grab={async () => {
+          setShowGrabWrenchCaption(true)
+
+          await setTimeout(() => {
+            setShowGrabWrenchCaption(false)
+          }, 3000)
+        }}
+        put={async () => {
+          setShowPutItemBackCaption(true)
+
+          await setTimeout(() => {
+            setShowPutItemBackCaption(false)
+          }, 3000)
+        }}
+      />
+
     </>
   )
 }
