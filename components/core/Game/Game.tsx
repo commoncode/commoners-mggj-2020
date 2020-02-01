@@ -22,9 +22,6 @@ type CharacterType = {
 };
 
 type CaptionType = {
-  position: Position;
-  language?: string;
-  text: string;
   isToggled: boolean;
 };
 
@@ -57,13 +54,6 @@ const initialState: GameStateType = {
     }
   },
   caption: {
-    position: {
-      scene: "bedroom",
-      x: 300,
-      y: 20,
-      duration: 1
-    },
-    text: "This relationship is beyond repair!",
     isToggled: true
   },
   language: "english",

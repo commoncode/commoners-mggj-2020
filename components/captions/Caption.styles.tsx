@@ -10,20 +10,17 @@ type ContainerProps = {
 };
 
 const captionBase = css`
-position: absolute;
 display: flex;
+position: absolute;
 align-items: center;
 
-width: 10rem;
-height: 3rem;
+width: 18rem;
 
-background: white;
-color: black;
+background: rgba(255, 255, 255, 0.3);
 border: 2px solid black;
 
 /* animation */
 transition: visibility 0s, opacity 0.5s linear;
-
 `
 const isVisibleStyle = css`
 visibility: 'visibility';
@@ -37,10 +34,13 @@ opacity: 0;
 pointer-events:none;
 `
 
-export const Container = styled.div<ContainerProps>`
-  ${captionBase}
-  ${({ isToggled }) => isToggled ? isVisibleStyle : isHiddenStyle}
-  left: ${({ x }) => x }px;
-  top: ${({ y }) => y}px;
+const Inner = styled.div`
+color: yellow;
 `
-
+export const Container = styled.div<ContainerProps>`
+${captionBase}
+${Inner}
+${({ isToggled }) => isToggled ? isVisibleStyle : isHiddenStyle}
+left: ${({ x }) => x }px;
+top: ${({ y }) => y}px;
+`
