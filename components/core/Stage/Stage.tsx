@@ -110,7 +110,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
         }
       </>
     )
-  }, [events, addEvent])
+  }, [scene, events, addEvent])
 
   return (
     <>
@@ -128,7 +128,10 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "bedroom" ? <>{children}</> : null}
             </Floor>
-            {displayEvents()}
+            {
+              scene === "bedroom" && displayEvents()
+            }
+
           </Bedroom>
 
           <Kitchen>
@@ -146,7 +149,9 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "kitchen" ? <>{children}</> : null}
             </Floor>
-            {displayEvents()}
+            {
+              scene === "kitchen" && displayEvents()
+            }
 
           </Kitchen>
 
@@ -165,7 +170,9 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "helm" ? <>{children}</> : null}
             </Floor>
-            {displayEvents()}
+            {
+              scene === "helm" && displayEvents()
+            }
 
           </Helm>
 
@@ -181,7 +188,9 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "hatch" ? <>{children}</> : null}
             </Floor>
-            {displayEvents()}
+            {
+              scene === "hatch" && displayEvents()
+            }
 
           </Hatch>
         </Inner>
