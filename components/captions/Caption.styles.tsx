@@ -6,41 +6,42 @@ type ContainerProps = {
   x: number;
   y: number;
   speed: number;
-  isToggled: boolean;
 };
 
 const captionBase = css`
-display: flex;
-position: absolute;
-align-items: center;
+  position: absolute;
 
-width: 18rem;
+  display: flex;
+  align-items: center;
 
-/* background: rgba(255, 255, 255, 0.3); */
-/* border: 2px solid black; */
+  margin-top: 0;
+  width: 18rem;
 
-/* animation */
-transition: visibility 0s, opacity 0.5s linear;
-`
-const isVisibleStyle = css`
-visibility: 'visibility';
-opacity: 1;
-z-index: 500;
-`
+  /* animation */
+  transition: opacity 0.5s ease-in-out, margin-top 0.5s ease-in-out;
 
-const isHiddenStyle = css`
-visibility: 'hidden';
-opacity: 0;
-pointer-events:none;
-`
+  background: #282828;
+  color: #fff;
+  padding: 20px;
+  font-size: 18px;
+  border-radius: 10px;
 
-const Inner = styled.div`
-color: yellow;
-`
+  z-index: 1200;
+
+  margin-top: 10px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  &.visible {
+    margin-top: 0;
+    opacity: 1;
+  }
+`;
+
 export const Container = styled.div<ContainerProps>`
-${captionBase}
-${Inner}
-${({ isToggled }) => isToggled ? isVisibleStyle : isHiddenStyle}
-left: ${({ x }) => x}px;
-top: ${({ y }) => y}px;
-`
+  ${captionBase}
+  
+  left: ${({ x }) => x}px;
+  top: ${({ y }) => y}px;
+`;

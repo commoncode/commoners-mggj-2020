@@ -1,4 +1,4 @@
-import { Container } from "./Caption.styles"
+import { Container } from "./Caption.styles";
 
 type CaptionType = {
   x: number;
@@ -6,17 +6,17 @@ type CaptionType = {
   children?: any;
   isToggled?: boolean;
   activation?: () => void;
-}
+};
 
 const Caption = ({ children, x, y, isToggled = false, activation = null }) => (
   <Container
     x={x}
     y={y}
-    isToggled={isToggled}
+    className={isToggled ? "visible" : null}
     onClick={() => activation && activation()}
   >
     {children}
   </Container>
-)
+);
 
 export default Caption;
