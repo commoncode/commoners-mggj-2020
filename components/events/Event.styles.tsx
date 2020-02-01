@@ -24,5 +24,5 @@ export const Container = styled.div<ContainerProps>`
   ${eventBase}
   left: ${({ x }) => x}px;
   top: ${({ y }) => y}px;
-  z-index: 999999999;
+  z-index: 8000;
 `;

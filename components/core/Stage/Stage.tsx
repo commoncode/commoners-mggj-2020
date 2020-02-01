@@ -7,15 +7,9 @@ import Kitchen from "../../scenes/Kitchen";
 
 // events
 import Leak from "../../events/Leak";
-import ActionEvent from "../../events/ActionEvent";
+import Actions from "../../events/Actions/Actions";
 import Argument from "../../captions/texts/bedroom/Argument";
 
-// captions for Bedroom scene
-import Bed from "../../captions/texts/bedroom/Bed";
-import LoverYelling from "../../captions/texts/bedroom/LoverYelling";
-import Panic from "../../captions/texts/bedroom/Panic";
-import Photo from "../../captions/texts/bedroom/Photo";
-import PlayerShout from "../../captions/texts/bedroom/PlayerShout";
 
 import {
   Container,
@@ -88,17 +82,11 @@ const Stage = ({
   const capRight = 920;
   const capLeft = 100;
 
-  // Bedroom captions
-  const [showArgument, setShowArgument] = useState(true);
-  const [showBedCaption, setShowBedCaption] = useState(false);
-  const [showPhotoCaption, setShowPhotoCaption] = useState(false);
-  const [showPanicCaption, setShowPanicCaption] = useState(false);
 
   // Bedroom events
+  const [showArgument, setShowArgument] = useState(true);
   const [showFirstLeak, setShowFirstLeak] = useState(false);
   const [showSecondLeak, setShowSecondLeak] = useState(false);
-
-
 
 
   const runInitialConversation = async () => {
@@ -129,14 +117,7 @@ const Stage = ({
             <RightButton onClick={() => setScene("kitchen", "right", 880)}>
               Right
             </RightButton>
-
             <Argument x={450} y={100} language={language} isToggled={showArgument} />
-            <PlayerShout x={450} y={170} language={language} isToggled={false} />
-            <LoverYelling x={820} y={270} language={language} isToggled={false} />
-            <Photo x={300} y={180} language={language} isToggled={showPhotoCaption} />
-            <Bed x={250} y={180} language={language} isToggled={showBedCaption} />
-            <Panic x={450} y={150} language={language} isToggled={showPanicCaption} />
-
 
             {showFirstLeak && <Leak x={500} y={200} activation={() => {
               setShowFirstLeak(false)
@@ -148,50 +129,7 @@ const Stage = ({
               setShowSecondLeak(false);
             }} />}
 
-            <ActionEvent
-              x={220}
-              y={300}
-              style={{
-                width: '16rem',
-                height: '10rem',
-                background: 'transparent',
-              }}
-              activation={() => {
-                setShowBedCaption(true)
-                setTimeout(() => {
-                  setShowBedCaption(false)
-                }, 1500)
-              }} />
-
-            <ActionEvent
-              x={368}
-              y={230}
-              style={{
-                width: '5rem',
-                height: '3rem',
-                background: 'transparent',
-              }}
-              activation={() => {
-                setShowPhotoCaption(true)
-                setTimeout(() => {
-                  setShowPhotoCaption(false)
-                }, 1500)
-              }} />
-
-            <ActionEvent
-              x={600}
-              y={450}
-              style={{
-                width: '8rem',
-                height: '3rem',
-                background: 'transparent',
-              }}
-              activation={() => {
-                setShowPanicCaption(true)
-                setTimeout(() => {
-                  setShowPanicCaption(false)
-                }, 1500)
-              }} />
+            <Actions language={language}></Actions>
 
             <Floor
               onClick={e =>
