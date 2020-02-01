@@ -1,4 +1,4 @@
-import Caption from "../Caption"
+import Caption from "../../Caption"
 
 const PlayerShout = ({ x, y, language, isToggled }) => {
   let text = null;

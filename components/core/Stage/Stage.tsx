@@ -8,14 +8,14 @@ import Kitchen from "../../scenes/Kitchen";
 // events
 import Leak from "../../events/Leak";
 import ActionEvent from "../../events/ActionEvent";
-import Argument from "../../captions/texts/Argument";
+import Argument from "../../captions/texts/bedroom/Argument";
 
 // captions for Bedroom scene
-import Bed from "../../captions/texts/Bed";
-import LoverYelling from "../../captions/texts/LoverYelling";
-import Panic from "../../captions/texts/Panic";
-import Photo from "../../captions/texts/Photo";
-import PlayerShout from "../../captions/texts/PlayerShout";
+import Bed from "../../captions/texts/bedroom/Bed";
+import LoverYelling from "../../captions/texts/bedroom/LoverYelling";
+import Panic from "../../captions/texts/bedroom/Panic";
+import Photo from "../../captions/texts/bedroom/Photo";
+import PlayerShout from "../../captions/texts/bedroom/PlayerShout";
 
 import {
   Container,

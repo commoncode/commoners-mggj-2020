@@ -1,14 +1,14 @@
-import Caption from "../Caption"
+import Caption from "../../Caption"
 
-const Bed = ({ x, y, language, isToggled }) => {
+const Panic = ({ x, y, language, isToggled }) => {
   let text = null;
 
   switch(language) {
     case "english":
-      text = "No time for this!"
+      text = "WE'RE GOING TO DIE HERE!"
       break;
     case "french":
-      text = "C'est vraiment pas le moment!"
+      text = "ON VA MOURIR ICI!"
       break;
   }
 
@@ -21,4 +21,4 @@ const Bed = ({ x, y, language, isToggled }) => {
     </Caption>
 }
 
-export default Bed;
+export default Panic;
