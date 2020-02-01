@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
 import Helm from "../../scenes/Helm";
 import Kitchen from "../../scenes/Kitchen";
+
+// events
+import Leak from '../../events/Leak';
 
 import {
   Container,
@@ -12,6 +15,53 @@ import {
   LeftButton,
   RightButton
 } from "./Stage.styles";
+
+type EventType = {
+  activation?: () => {};
+  component: any,
+  position: {
+    scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
+    x: number;
+    y: number;
+  };
+  display: number; // display the event until reach some ammount of time
+  status: "display" | "hidden";
+}
+
+type StageStateType = {
+  events: EventType[]
+}
+
+const LeakEvent = {
+  component: Leak,
+  position: {
+    x: 300,
+    y: 300,
+    scene: "bedroom"
+  },
+  display: 30,
+  status: 'display',
+}
+
+const BedroomInitialState = [{
+  ...LeakEvent,
+  activation: (fn) => () => fn({
+    ...LeakEvent,
+    position: {
+      x: 500,
+      y: 300,
+      scene: 'bedroom'
+    },
+    activation: (fn) => () => fn({
+      ...LeakEvent,
+      position: {
+        x: 700,
+        y: 300,
+        scene: 'bedroom'
+      }
+    })
+  })
+}];
 
 const Stage = ({ children, scene, setLocation, setScene }) => {
   const handleClick = e => {
@@ -26,6 +76,41 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
       setLocation(x, y);
     }
   };
+
+  const [events, setEvents] = useState(BedroomInitialState);
+
+  const addEvent = useCallback((event) => {
+    setEvents([...events, event])
+  }, [setEvents])
+
+  const displayEvents = useCallback(() => {
+    return (
+      <>
+        {
+          events && events.length > 0 &&
+          events
+            .filter(({ component, ...eventState }) => eventState.position.scene === scene)
+            .map(({ component: EventComponent, activation, ...eventState }, index) => {
+
+              let additionalProps = {}
+              if (activation) {
+                additionalProps = {
+                  activation: activation(addEvent)
+                }
+              }
+
+              return (
+                <EventComponent
+                  key={`event-${index}`}
+                  {...eventState}
+                  {...additionalProps}
+                />
+              )
+            })
+        }
+      </>
+    )
+  }, [events, addEvent])
 
   return (
     <>
@@ -43,6 +128,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "bedroom" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
           </Bedroom>
 
           <Kitchen>
@@ -60,6 +146,8 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "kitchen" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
+
           </Kitchen>
 
           <Helm>
@@ -77,6 +165,8 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "helm" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
+
           </Helm>
 
           <Hatch>
@@ -91,6 +181,8 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             <Floor onClick={handleClick} className={`floor`}>
               {scene === "hatch" ? <>{children}</> : null}
             </Floor>
+            {displayEvents()}
+
           </Hatch>
         </Inner>
       </Container>
