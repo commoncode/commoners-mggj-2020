@@ -17,7 +17,7 @@ import FlowerCaption from "../../captions/texts/kitchen/FlowerCaption";
 import LeakingCaption from "../../captions/texts/kitchen/LeakingCaption";
 import WrenchCaption from "../../captions/texts/kitchen/WrenchCaption";
 
-const Actions = (language) => {
+const Actions = ({language}) => {
 
   // Bedroom captions states
   const [showBedCaption, setShowBedCaption] = useState(false);
@@ -45,6 +45,7 @@ const Actions = (language) => {
           console.log('Click on bed')
           console.log(showBedCaption)
           setShowBedCaption(true)
+          console.log(showBedCaption)
           setTimeout(() => {
             setShowBedCaption(false)
           }, 1500)
