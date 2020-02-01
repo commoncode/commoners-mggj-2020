@@ -7,12 +7,14 @@ type ContainerProps = {
 export const Container = styled.div<ContainerProps>`
   position: relative;
   display: flex;
-  background: #72a8c1;
   width: 100%;
   overflow: hidden;
 
   transition: margin 4s ease-in;
   margin-top: ${({ offset }) => offset}px;
+
+  -webkit-transform: translate3d(250px, 250px, 250px)
+    rotate3d(250px, 250px, 250px, -120deg) scale3d(0.5, 0.5, 0.5);
 `;
 
 type InnerProps = {
@@ -22,7 +24,6 @@ type InnerProps = {
 export const Inner = styled.div<InnerProps>`
   display: flex;
   transition: margin 800ms ease-out;
-  background: #282828;
 
   &.bedroom {
     margin-left: calc(50vw - 32rem);
@@ -53,7 +54,6 @@ export const Floor = styled.div<FloorProps>`
   right: ${({ right }) => right || 0}rem;
 
   height: 6rem;
-  // background: rgba(0, 0, 0, 0.6);
 `;
 
 export const sceneBase = css`
@@ -61,9 +61,9 @@ export const sceneBase = css`
   flex-shrink: 0;
   width: 64rem;
   height: 38rem;
-  margin-right: 3rem;
+  border-right: 3rem solid #282828;
   overflow: hidden;
-  background: #72a8c1;
+
   transition: opacity 1s ease-in-out;
 
   > * {

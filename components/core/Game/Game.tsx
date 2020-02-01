@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from "react";
 
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
-import Caption from "../../captions/Caption";
 import EventsProvider from "../../core/Context";
 
 import Stage from "../Stage";
+import Water from "./Water";
 
 import { GlobalStyle } from "./Game.styles";
 import { getWalkDuration } from "./movement";
@@ -97,6 +97,7 @@ const Game = () => {
     <>
       <GlobalStyle />
       <EventsProvider>
+        <Water />
         <Stage
           scene={gameState.player.position.scene}
           language={gameState.language}
@@ -201,7 +202,7 @@ const Game = () => {
                     }
                   }
                 });
-              }, 0);
+              }, 100);
             }, leaveDuration * 1000);
           }}
         >
