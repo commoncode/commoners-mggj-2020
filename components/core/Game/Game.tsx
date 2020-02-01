@@ -31,6 +31,7 @@ type GameStateType = {
   player: CharacterType;
   lover: CharacterType;
   caption: CaptionType;
+  language: "english" | "french";
 
   // Tracking
   love: number;
@@ -61,11 +62,11 @@ const initialState: GameStateType = {
       y: 20,
       duration: 1
     },
-    language: "English",
     text: "This relationship is beyond repair!",
     isToggled: true,
 
   },
+  language: "english",
   love: 0,
   time: 60 * 5
 };
@@ -92,6 +93,7 @@ const Game = () => {
       <GlobalStyle />
       <Stage
         scene={gameState.player.position.scene}
+        language={gameState.language}
         setLocation={(x, y) => {
           const duration = getWalkDuration(
             x,
@@ -186,7 +188,6 @@ const Game = () => {
           }, leaveDuration * 1000);
         }}
       >
-        <Caption state={gameState.caption} />
         <Player state={gameState.player} />
         {gameState.lover.position.scene === gameState.player.position.scene ? (
           <Lover state={gameState.lover} />

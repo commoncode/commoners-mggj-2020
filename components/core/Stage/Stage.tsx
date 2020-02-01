@@ -7,6 +7,7 @@ import Kitchen from "../../scenes/Kitchen";
 
 // events
 import Leak from '../../events/Leak';
+import Argument from "../../captions/texts/Argument";
 
 import {
   Container,
@@ -63,7 +64,7 @@ const BedroomInitialState = [{
   })
 }];
 
-const Stage = ({ children, scene, setLocation, setScene }) => {
+const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const handleClick = e => {
     const rect = e.target.classList.contains("floor")
       ? e.target.getBoundingClientRect()
@@ -122,6 +123,13 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
                 <RightButton onClick={() => setScene("kitchen", "right")}>
                   Right
                 </RightButton>
+
+                <Argument
+                x={100}
+                y={100}
+                language={language}
+                isToggled
+                />
               </>
             ) : null}
 
