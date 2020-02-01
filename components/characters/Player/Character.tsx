@@ -9,15 +9,15 @@ type CharacterType = {
 const Svg = styled.svg`
   @keyframes walkin {
     0% {
-      transform: translate(0, -40px);
-    }
-
-    50% {
       transform: translate(0, 0);
     }
 
-    100% {
+    50% {
       transform: translate(0, -40px);
+    }
+
+    100% {
+      transform: translate(0, 0);
     }
   }
 

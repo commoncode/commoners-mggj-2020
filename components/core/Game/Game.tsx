@@ -68,7 +68,7 @@ const initialState: GameStateType = {
 const Game = () => {
   const [gameState, setGameState] = useState({ ...initialState });
   const [offset, setOffset] = useState(0);
-  const [showOverlayNotClickable, setShowOverlayNotClickable] = useState(true)
+  const [showOverlayNotClickable, setShowOverlayNotClickable] = useState(true);
 
   // Player states
   const [playerWalking, setPlayerWalking] = useState(false);
@@ -223,6 +223,8 @@ const Game = () => {
             500
           );
 
+          setLoverWalking(true);
+
           setGameState({
             ...gameState,
             lover: {
@@ -230,16 +232,24 @@ const Game = () => {
               position: { ...gameState.lover.position, x, y, duration }
             }
           });
+
+          setTimeout(() => {
+            setLoverWalking(false);
+          }, duration * 1000);
         }}
       >
         <Player
           state={gameState.player}
           walking={playerWalking}
-          expression={"sad"}
+          expression={playerExpression}
         />
 
         {gameState.lover.position.scene === gameState.player.position.scene ? (
-          <Lover state={gameState.lover} />
+          <Lover
+            state={gameState.lover}
+            walking={loverWalking}
+            expression={loverExpression}
+          />
         ) : null}
       </Stage>
     </>
