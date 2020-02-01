@@ -72,7 +72,7 @@ const initialState: GameStateType = {
 };
 
 const Game = () => {
-  const [gameState, setGameState] = useState(initialState);
+  const [gameState, setGameState] = useState({ ...initialState });
   const [targetLocation, setTargetLocation] = useState({
     x: gameState.player.position.x,
     y: gameState.player.position.y
