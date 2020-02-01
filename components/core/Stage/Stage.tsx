@@ -10,6 +10,13 @@ import Kitchen from "../../scenes/Kitchen";
 import Leak from "../../events/Leak";
 import Argument from "../../captions/texts/Argument";
 
+// captions for Bedroom scene
+import Bed from "../../captions/texts/Bed";
+import LoverYelling from "../../captions/texts/LoverYelling";
+import Panic from "../../captions/texts/Panic";
+import Photo from "../../captions/texts/Photo";
+import PlayerShout from "../../captions/texts/PlayerShout";
+
 import {
   Container,
   Inner,
@@ -135,7 +142,12 @@ const Stage = ({
               Right
             </RightButton>
 
-            <Argument x={100} y={100} language={language} isToggled />
+            <Argument x={450} y={100} language={language} isToggled={false} />
+            <PlayerShout x={450} y={170} language={language} isToggled={false} />
+            <LoverYelling x={820} y={270} language={language} isToggled={false} />
+            <Photo x={300} y={180} language={language} isToggled={false} />
+            <Bed x={250} y={180} language={language} isToggled />
+            <Panic x={450} y={150} language={language} isToggled />
 
             <Floor
               onClick={e =>
