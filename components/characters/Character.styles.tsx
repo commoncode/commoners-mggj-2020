@@ -18,7 +18,9 @@ export const characterBase = css`
 `;
 
 export const characterPosition = (x, y, time) => css`
-  transition: left ${time} ease-out, top ${time} ease-out;
+  transition: ${y > 0
+    ? `left ${time} ease-out, top ${time} ease-out`
+    : "unset"};
 
   left: calc(${x}px - 5rem);
   top: calc(${y}px - 15rem);

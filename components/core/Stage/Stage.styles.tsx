@@ -51,6 +51,10 @@ export const sceneBase = css`
   height: 38rem;
   margin-right: 3rem;
   overflow: hidden;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const Button = css`

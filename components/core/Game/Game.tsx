@@ -99,7 +99,7 @@ const Game = () => {
             y,
             gameState.player.position.x,
             gameState.player.position.y,
-            800
+            1000
           );
 
           setGameState({
@@ -118,6 +118,8 @@ const Game = () => {
           // Change Scene
           setTimeout(() => {
             console.log("Scene change...", nextScene);
+            const xExited = direction === "right" ? -300 : 1024 + 300;
+            const xEntered = direction === "right" ? 100 : 1024 - 260;
 
             setGameState({
               ...gameState,
@@ -135,7 +137,7 @@ const Game = () => {
                 position: {
                   ...gameState.player.position,
                   scene: nextScene,
-                  x: direction === "right" ? -300 : 1124,
+                  x: xExited,
                   y,
                   duration: 0
                 }
@@ -143,27 +145,23 @@ const Game = () => {
             });
 
             // Animate character running on screen
-            const enterDuration = getWalkDuration(
-              direction === "right" ? 50 : 1024 - 50,
-              y,
-              direction === "right" ? -300 : 1124,
-              y,
-              800
-            );
+            const enterDuration = getWalkDuration(xEntered, y, xExited, y, 800);
 
-            setGameState({
-              ...gameState,
-              player: {
-                ...gameState.player,
-                position: {
-                  ...gameState.player.position,
-                  scene: nextScene,
-                  x: direction === "right" ? 50 : 1024 - 50,
-                  y,
-                  duration: enterDuration
+            setTimeout(() => {
+              setGameState({
+                ...gameState,
+                player: {
+                  ...gameState.player,
+                  position: {
+                    ...gameState.player.position,
+                    scene: nextScene,
+                    x: xEntered,
+                    y,
+                    duration: enterDuration
+                  }
                 }
-              }
-            });
+              });
+            }, 0);
           }, leaveDuration * 1000);
         }}
       >
