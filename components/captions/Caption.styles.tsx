@@ -5,9 +5,11 @@ import { characterPosition } from "../characters/Character.styles";
 type ContainerProps = {
   x: number;
   y: number;
+  speed: number;
+  isToggled: boolean;
 };
 
-export const captionBase = css`
+const captionBase = css`
 position: absolute;
 display: flex;
 align-items: center;
@@ -18,9 +20,27 @@ height: 3rem;
 background: white;
 color: black;
 border: 2px solid black;
+
+/* animation */
+transition: visibility 0s, opacity 0.5s linear;
+
 `
+const isVisibleStyle = css`
+visibility: 'visibility';
+opacity: 1;
+z-index: 500;
+`
+
+const isHiddenStyle = css`
+visibility: 'hidden';
+opacity: 0;
+pointer-events:none;
+`
+
 export const Container = styled.div<ContainerProps>`
   ${captionBase}
-  ${({ x, y, speed }) => characterPosition(x, y, `${speed}s`)}
+  ${({ isToggled }) => isToggled ? isVisibleStyle : isHiddenStyle}
+  left: ${({ x }) => x }px;
+  top: ${({ y }) => y}px;
 `
 

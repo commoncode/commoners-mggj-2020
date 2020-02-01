@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
 import Helm from "../../scenes/Helm";
 import Kitchen from "../../scenes/Kitchen";
+
+// events
+import Leak from "../../events/Leak";
+import Argument from "../../captions/texts/Argument";
 
 import {
   Container,
@@ -13,7 +17,58 @@ import {
   RightButton
 } from "./Stage.styles";
 
-const Stage = ({ children, scene, setLocation, setScene }) => {
+type EventType = {
+  activation?: () => {};
+  component: any;
+  position: {
+    scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
+    x: number;
+    y: number;
+  };
+  display: number; // display the event until reach some ammount of time
+  status: "display" | "hidden";
+};
+
+type StageStateType = {
+  events: EventType[];
+};
+
+const LeakEvent = {
+  component: Leak,
+  position: {
+    x: 300,
+    y: 300,
+    scene: "bedroom"
+  },
+  display: 30,
+  status: "display"
+};
+
+const BedroomInitialState = [
+  {
+    ...LeakEvent,
+    activation: fn => () =>
+      fn({
+        ...LeakEvent,
+        position: {
+          x: 500,
+          y: 300,
+          scene: "bedroom"
+        },
+        activation: fn => () =>
+          fn({
+            ...LeakEvent,
+            position: {
+              x: 700,
+              y: 300,
+              scene: "bedroom"
+            }
+          })
+      })
+  }
+];
+
+const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
       ? e.target.getBoundingClientRect()
@@ -37,6 +92,50 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
   const capRight = 920;
   const capLeft = 100;
 
+  const [events, setEvents] = useState(BedroomInitialState);
+
+  const addEvent = useCallback(
+    event => {
+      setEvents([...events, event]);
+    },
+    [setEvents]
+  );
+
+  const displayEvents = useCallback(() => {
+    return (
+      <>
+        {events &&
+          events.length > 0 &&
+          events
+            .filter(
+              ({ component, ...eventState }) =>
+                eventState.position.scene === scene
+            )
+            .map(
+              (
+                { component: EventComponent, activation, ...eventState },
+                index
+              ) => {
+                let additionalProps = {};
+                if (activation) {
+                  additionalProps = {
+                    activation: activation(addEvent)
+                  };
+                }
+
+                return (
+                  <EventComponent
+                    key={`event-${index}`}
+                    {...eventState}
+                    {...additionalProps}
+                  />
+                );
+              }
+            )}
+      </>
+    );
+  }, [scene, events, addEvent]);
+
   return (
     <>
       <Container>
@@ -47,6 +146,8 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
                 <RightButton onClick={() => setScene("kitchen", "right")}>
                   Right
                 </RightButton>
+
+                <Argument x={100} y={100} language={language} isToggled />
               </>
             ) : null}
 
@@ -57,6 +158,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             >
               {scene === "bedroom" ? <>{children}</> : null}
             </Floor>
+            {scene === "bedroom" && displayEvents()}
           </Bedroom>
 
           <Kitchen>
@@ -77,6 +179,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             >
               {scene === "kitchen" ? <>{children}</> : null}
             </Floor>
+            {scene === "kitchen" && displayEvents()}
           </Kitchen>
 
           <Helm>
@@ -97,6 +200,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             >
               {scene === "helm" ? <>{children}</> : null}
             </Floor>
+            {scene === "helm" && displayEvents()}
           </Helm>
 
           <Hatch>
@@ -114,6 +218,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
             >
               {scene === "hatch" ? <>{children}</> : null}
             </Floor>
+            {scene === "hatch" && displayEvents()}
           </Hatch>
         </Inner>
       </Container>

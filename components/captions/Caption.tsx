@@ -1,13 +1,12 @@
 import { Container } from "./Caption.styles"
 
-const Caption = ({ state }) => (
-
+const Caption = ({ children, x, y, isToggled }) => (
   <Container
-    x={state.position.x}
-    y={state.position.y}
-    speed={state.position.speed}
->
-  {state.text}
+    x={x}
+    y={y}
+    isToggled={isToggled}
+  >
+  {children}
   </Container>
 )
 
