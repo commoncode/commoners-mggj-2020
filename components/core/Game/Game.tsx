@@ -24,6 +24,7 @@ type CaptionType = {
   position: Position;
   language?: string;
   text: string;
+  isToggled: boolean;
 };
 
 type GameStateType = {
@@ -61,7 +62,9 @@ const initialState: GameStateType = {
       duration: 1
     },
     language: "English",
-    text: "This relationship is beyond repair!"
+    text: "This relationship is beyond repair!",
+    isToggled: true,
+
   },
   love: 0,
   time: 60 * 5
