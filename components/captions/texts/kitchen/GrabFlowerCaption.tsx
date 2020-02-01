@@ -1,14 +1,14 @@
 import Caption from "../../Caption"
 
-const PlayerShout = ({ x, y, language, isToggled }) => {
+const GrabFlowerCaption = ({ x, y, language, isToggled }) => {
   let text = null;
 
   switch(language) {
     case "english":
-      text = "Hey, come back here and help me!"
+      text = "I can give him a flower."
       break;
     case "french":
-      text = "Reviens me donner un coup de main!"
+      text = "Je peux lui donner une fleur."
       break;
   }
 
@@ -21,4 +21,4 @@ const PlayerShout = ({ x, y, language, isToggled }) => {
     </Caption>
 }
 
-export default PlayerShout;
+export default GrabFlowerCaption;

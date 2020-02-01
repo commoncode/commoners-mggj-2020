@@ -30,7 +30,7 @@ pointer-events:none;
 `
 
 const Inner = styled.div`
-color: yellow;
+flex-shrink: 1;
 `
 export const Container = styled.div<ContainerProps>`
 ${captionBase}

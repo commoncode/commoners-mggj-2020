@@ -8,7 +8,7 @@ const LoverYelling = ({ x, y, language, isToggled }) => {
       text = "I'd rather drown!"
       break;
     case "french":
-      text = "Plutôt mourir!"
+      text = "Plutôt mourir ici!"
       break;
   }
 
