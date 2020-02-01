@@ -20,7 +20,11 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
       : e.target.parentElement.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    setLocation(x, y);
+
+    // Characters peaking above the touch zone extend it ><'
+    if (y >= 0) {
+      setLocation(x, y);
+    }
   };
 
   return (

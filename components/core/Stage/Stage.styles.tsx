@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   position: relative;
   display: flex;
-  background: #1e1e1e;
+  background: #72a8c1;
   width: 100%;
   overflow: hidden;
 `;
