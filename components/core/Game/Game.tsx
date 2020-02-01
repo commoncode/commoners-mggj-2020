@@ -110,7 +110,7 @@ const Game = () => {
           console.log("Setting Scene", nextScene, direction);
           // Animate character running off screen
           const x = direction === "left" ? -300 : 1124;
-          const y = 80;
+          const y = 50;
           const leaveDuration = getWalkDuration(
             x,
             y,

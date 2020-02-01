@@ -14,18 +14,28 @@ import {
 } from "./Stage.styles";
 
 const Stage = ({ children, scene, setLocation, setScene }) => {
-  const handleClick = e => {
+  const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
       ? e.target.getBoundingClientRect()
       : e.target.parentElement.getBoundingClientRect();
-    const x = e.clientX - rect.left;
+    let x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+
+    // Clip max / min so it doesn't leak over the edge of the sub
+    if (x < clipLeft) {
+      x = clipLeft;
+    } else if (x > clipRight) {
+      x = clipRight;
+    }
 
     // Characters peaking above the touch zone extend it ><'
     if (y >= 0) {
       setLocation(x, y);
     }
   };
+
+  const capRight = 920;
+  const capLeft = 100;
 
   return (
     <>
@@ -40,7 +50,11 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
               </>
             ) : null}
 
-            <Floor onClick={handleClick} className={`floor`}>
+            <Floor
+              onClick={e => handleClick(e, 100, 770)}
+              className={`floor`}
+              left={9}
+            >
               {scene === "bedroom" ? <>{children}</> : null}
             </Floor>
           </Bedroom>
@@ -57,7 +71,10 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
               </>
             ) : null}
 
-            <Floor onClick={handleClick} className={`floor`}>
+            <Floor
+              onClick={e => handleClick(e, capLeft, capRight)}
+              className={`floor`}
+            >
               {scene === "kitchen" ? <>{children}</> : null}
             </Floor>
           </Kitchen>
@@ -74,7 +91,10 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
               </>
             ) : null}
 
-            <Floor onClick={handleClick} className={`floor`}>
+            <Floor
+              onClick={e => handleClick(e, capLeft, capRight)}
+              className={`floor`}
+            >
               {scene === "helm" ? <>{children}</> : null}
             </Floor>
           </Helm>
@@ -88,7 +108,10 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
               </>
             ) : null}
 
-            <Floor onClick={handleClick} className={`floor`}>
+            <Floor
+              onClick={e => handleClick(e, capLeft, capRight)}
+              className={`floor`}
+            >
               {scene === "hatch" ? <>{children}</> : null}
             </Floor>
           </Hatch>

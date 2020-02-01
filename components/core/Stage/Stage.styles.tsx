@@ -34,13 +34,18 @@ export const Inner = styled.div<InnerProps>`
   }
 `;
 
-export const Floor = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 5rem;
-  right: 5rem;
+type FloorProps = {
+  left?: number;
+  right?: number;
+};
 
-  height: 10rem;
+export const Floor = styled.div<FloorProps>`
+  position: absolute;
+  bottom: 5.5rem;
+  left: ${({ left }) => left || 0}rem;
+  right: ${({ right }) => right || 0}rem;
+
+  height: 6rem;
   background: rgba(0, 0, 0, 0.6);
 `;
 
