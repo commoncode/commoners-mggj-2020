@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import EventsContext from "../../core/Context/EventsContext";
 import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
 import Helm from "../../scenes/Helm";
@@ -87,60 +86,28 @@ const Stage = ({
 
   const capRight = 920;
   const capLeft = 100;
+
+  // Bedroom interactions
   const [showArgument, setShowArgument] = useState(true);
-
-  const { bedroom: bedroomState, init, addEvent, removeEvent } = useContext(EventsContext);
-
-  const displayEvents = (scene) => {
-
-    if (scene === "bedroom") {
-
-      return (
-        <>
-          {
-            bedroomState && bedroomState.events.length > 0 && bedroomState.events.map(({ component: EventComponent, ...eventState }, index) => {
-              return (
-                <EventComponent
-                  key={`event-${index}`}
-                  activation={() => {
-
-                    removeEvent("bedroom")
-                    setTimeout(() => {
-                      addEvent({
-                        ...LeakEvent,
-                        position: {
-                          x: eventState.position.x + 200,
-                          y: eventState.position.y,
-                          scene: 'bedroom'
-                        },
-                      }, "bedroom");
-                    }, 0)
-                  }}
-                  {...eventState}
-                />
-              );
-            })}
-        </>
-      );
-    }
-  };
+  const [showFirstLeak, setShowFirstLeak] = useState(false);
+  const [showSecondLeak, setShowSecondLeak] = useState(false);
 
 
   const runInitialConversation = async () => {
+    await setTimeout(() => {
+      setShowFirstLeak(true);
+    }, 500);
 
     await setTimeout(() => {
-      setShowArgument(false)
+      setShowArgument(false);
     }, 5000);
-
-    await setTimeout(() => {
-      setTargetLocationLover(1000, 50)
-    }, 4500)
-
   }
+
   useEffect(() => {
-    init(scene);
     runInitialConversation();
   }, [scene])
+
+
 
   return (
     <>
@@ -158,6 +125,17 @@ const Stage = ({
             <Bed x={250} y={180} language={language} isToggled={false} />
             <Panic x={450} y={150} language={language} isToggled={false} />
 
+
+            {showFirstLeak && <Leak x={500} y={200} activation={() => {
+              setShowFirstLeak(false)
+              setShowSecondLeak(true)
+            }} />}
+
+            {showSecondLeak && <Leak x={700} y={200} activation={() => {
+              setShowFirstLeak(true);
+              setShowSecondLeak(false);
+            }} />}
+
             <Floor
               onClick={e =>
                 scene === "bedroom" ? handleClick(e, 100, 770) : null
@@ -168,7 +146,6 @@ const Stage = ({
               {children}
             </Floor>
 
-            {scene === "bedroom" && displayEvents("bedroom")}
           </Bedroom>
 
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
@@ -190,7 +167,6 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "kitchen" && displayEvents("kitchen")}
           </Kitchen>
 
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
@@ -212,7 +188,6 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "hatch" && displayEvents("hatch")}
           </Hatch>
 
           <Helm className={scene !== "helm" ? "deselected" : null}>
@@ -231,7 +206,6 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "helm" && displayEvents("helm")}
           </Helm>
         </Inner>
       </Container>
