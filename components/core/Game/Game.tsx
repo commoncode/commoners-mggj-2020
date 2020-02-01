@@ -15,6 +15,7 @@ type Position = {
   x: number;
   y: number;
   duration: number; // The calculated speed at which the character should move to its new position
+  walking: boolean;
 };
 
 type CharacterType = {
@@ -42,7 +43,8 @@ const initialState: GameStateType = {
       scene: "bedroom",
       x: 10,
       y: 50,
-      duration: 1
+      duration: 1,
+      walking: false
     }
   },
   lover: {
@@ -50,7 +52,8 @@ const initialState: GameStateType = {
       scene: "bedroom",
       x: 80,
       y: 50,
-      duration: 1
+      duration: 1,
+      walking: false
     }
   },
   caption: {
@@ -65,8 +68,15 @@ const Game = () => {
   const [gameState, setGameState] = useState({ ...initialState });
   const [offset, setOffset] = useState(0);
 
-  const gameLoop = useRef(null);
+  // Player states
+  const [playerWalking, setPlayerWalking] = useState(false);
+  const [playerExpression, setPlayerExpression] = useState("sad");
 
+  // Lover States
+  const [loverWalking, setLoverWalking] = useState(false);
+  const [loverExpression, setLoverExpression] = useState("sad");
+
+  const gameLoop = useRef(null);
   useEffect(() => {
     gameLoop.current = setInterval(() => {
       // Randomly generate a new offset for the ship every 5 seconds
@@ -96,13 +106,23 @@ const Game = () => {
             500
           );
 
+          setPlayerWalking(true);
           setGameState({
             ...gameState,
             player: {
               ...gameState.player,
-              position: { ...gameState.player.position, x, y, duration }
+              position: {
+                ...gameState.player.position,
+                x,
+                y,
+                duration
+              }
             }
           });
+
+          setTimeout(() => {
+            setPlayerWalking(false);
+          }, duration * 1000);
         }}
         setScene={(
           nextScene,
@@ -110,6 +130,7 @@ const Game = () => {
           floorWidth = 1024
         ) => {
           console.log("Setting Scene", nextScene, direction);
+
           // Animate character running off screen
           const x = direction === "left" ? -300 : floorWidth + 300;
           const y = 50;
@@ -121,6 +142,7 @@ const Game = () => {
             1000
           );
 
+          setPlayerWalking(true);
           setGameState({
             ...gameState,
             player: {
@@ -137,6 +159,7 @@ const Game = () => {
           // Change Scene
           setTimeout(() => {
             console.log("Scene change...", nextScene);
+
             const xExited = direction === "right" ? -300 : floorWidth + 300;
             const xEntered = direction === "right" ? 100 : floorWidth - 110;
 
@@ -180,6 +203,10 @@ const Game = () => {
                   }
                 }
               });
+
+              setTimeout(() => {
+                setPlayerWalking(false);
+              }, enterDuration * 1000);
             }, 100);
           }, leaveDuration * 1000);
         }}
@@ -201,7 +228,12 @@ const Game = () => {
           });
         }}
       >
-        <Player state={gameState.player} />
+        <Player
+          state={gameState.player}
+          walking={playerWalking}
+          expression={"sad"}
+        />
+
         {gameState.lover.position.scene === gameState.player.position.scene ? (
           <Lover state={gameState.lover} />
         ) : null}
