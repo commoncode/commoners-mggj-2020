@@ -91,6 +91,8 @@ const Stage = ({
   // Bedroom captions
   const [showArgument, setShowArgument] = useState(true);
   const [showBedCaption, setShowBedCaption] = useState(false);
+  const [showPhotoCaption, setShowPhotoCaption] = useState(false);
+  const [showPanicCaption, setShowPanicCaption] = useState(false);
 
   // Bedroom events
   const [showFirstLeak, setShowFirstLeak] = useState(false);
@@ -131,9 +133,9 @@ const Stage = ({
             <Argument x={450} y={100} language={language} isToggled={showArgument} />
             <PlayerShout x={450} y={170} language={language} isToggled={false} />
             <LoverYelling x={820} y={270} language={language} isToggled={false} />
-            <Photo x={300} y={180} language={language} isToggled={false} />
+            <Photo x={300} y={180} language={language} isToggled={showPhotoCaption} />
             <Bed x={250} y={180} language={language} isToggled={showBedCaption} />
-            <Panic x={450} y={150} language={language} isToggled={false} />
+            <Panic x={450} y={150} language={language} isToggled={showPanicCaption} />
 
 
             {showFirstLeak && <Leak x={500} y={200} activation={() => {
@@ -158,6 +160,36 @@ const Stage = ({
                 setShowBedCaption(true)
                 setTimeout(() => {
                   setShowBedCaption(false)
+                }, 1500)
+              }} />
+
+            <ActionEvent
+              x={368}
+              y={230}
+              style={{
+                width: '5rem',
+                height: '3rem',
+                background: 'transparent',
+              }}
+              activation={() => {
+                setShowPhotoCaption(true)
+                setTimeout(() => {
+                  setShowPhotoCaption(false)
+                }, 1500)
+              }} />
+
+            <ActionEvent
+              x={600}
+              y={450}
+              style={{
+                width: '8rem',
+                height: '3rem',
+                background: 'transparent',
+              }}
+              activation={() => {
+                setShowPanicCaption(true)
+                setTimeout(() => {
+                  setShowPanicCaption(false)
                 }, 1500)
               }} />
 
