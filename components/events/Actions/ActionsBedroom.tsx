@@ -60,10 +60,7 @@ const ActionsBedroom = ({ language, setTargetLocationLover }) => {
           background: 'transparent',
         }}
         activation={() => {
-          console.log('Click on bed')
-          console.log(showBedCaption)
           setShowBedCaption(true)
-          console.log(showBedCaption)
           setTimeout(() => {
             setShowBedCaption(false)
           }, 1500)
