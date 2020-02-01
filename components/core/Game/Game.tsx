@@ -63,8 +63,7 @@ const initialState: GameStateType = {
       duration: 1
     },
     text: "This relationship is beyond repair!",
-    isToggled: true,
-
+    isToggled: true
   },
   language: "english",
   love: 0,
@@ -81,7 +80,7 @@ const Game = () => {
   const gameLoop = useRef(null);
 
   useEffect(() => {
-    gameLoop.current = setInterval(() => { }, 1000 / 60); // Frame renderer
+    gameLoop.current = setInterval(() => {}, 1000 / 60); // Frame renderer
 
     return () => {
       clearInterval(gameLoop.current);
@@ -112,10 +111,14 @@ const Game = () => {
             }
           });
         }}
-        setScene={(nextScene, direction: "left" | "right") => {
+        setScene={(
+          nextScene,
+          direction: "left" | "right",
+          floorWidth = 1024
+        ) => {
           console.log("Setting Scene", nextScene, direction);
           // Animate character running off screen
-          const x = direction === "left" ? -300 : 1124;
+          const x = direction === "left" ? -300 : floorWidth + 300;
           const y = 50;
           const leaveDuration = getWalkDuration(
             x,
@@ -141,8 +144,8 @@ const Game = () => {
           // Change Scene
           setTimeout(() => {
             console.log("Scene change...", nextScene);
-            const xExited = direction === "right" ? -300 : 1024 + 300;
-            const xEntered = direction === "right" ? 100 : 1024 - 260;
+            const xExited = direction === "right" ? -300 : floorWidth + 300;
+            const xEntered = direction === "right" ? 100 : floorWidth - 110;
 
             setGameState({
               ...gameState,

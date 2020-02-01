@@ -143,7 +143,7 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
           <Bedroom>
             {scene === "bedroom" ? (
               <>
-                <RightButton onClick={() => setScene("kitchen", "right")}>
+                <RightButton onClick={() => setScene("kitchen", "right", 880)}>
                   Right
                 </RightButton>
 
@@ -164,7 +164,7 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
           <Kitchen>
             {scene === "kitchen" ? (
               <>
-                <LeftButton onClick={() => setScene("bedroom", "left")}>
+                <LeftButton onClick={() => setScene("bedroom", "left", 880)}>
                   Left
                 </LeftButton>
                 <RightButton onClick={() => setScene("helm", "right")}>
