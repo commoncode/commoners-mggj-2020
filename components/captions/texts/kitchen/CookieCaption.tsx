@@ -5,10 +5,10 @@ const CookieCaption = ({ x, y, language, isToggled }) => {
 
   switch(language) {
     case "english":
-      text = "Okay, one for the road. Yum."
+      text = "Those cookies look yum."
       break;
     case "french":
-      text = "Aller, un pour la route. Miam."
+      text = "Ces cookies ont l'air bon."
       break;
   }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import ActionEvent from "./ActionEvent";
+import Leak from "../Leak";
 
 // captions for Bedroom scene
 import Argument from "../../captions/texts/bedroom/Argument";
@@ -10,7 +11,7 @@ import Panic from "../../captions/texts/bedroom/Panic";
 import Photo from "../../captions/texts/bedroom/Photo";
 import PlayerShout from "../../captions/texts/bedroom/PlayerShout";
 import Wrench from "../../captions/texts/bedroom/Wrench";
-import Leak from "../Leak";
+
 
 const ActionsBedroom = ({ language, setTargetLocationLover }) => {
 

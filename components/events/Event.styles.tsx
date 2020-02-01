@@ -11,10 +11,10 @@ export const eventBase = css`
   align-items: center;
   justify-content: center;
 
-  width: 5rem;
-  height: 5rem;
+  width: 3rem;
+  height: 3rem;
 
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
   border: 2px solid black;
 
   top: -5rem;
