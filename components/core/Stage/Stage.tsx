@@ -44,9 +44,11 @@ const LeakEvent = {
   status: "display"
 };
 
-const BedroomInitialState = [{
-  ...LeakEvent,
-}];
+const BedroomInitialState = [
+  {
+    ...LeakEvent
+  }
+];
 
 const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const handleClick = (e, clipLeft, clipRight) => {
@@ -54,13 +56,17 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
       ? e.target.getBoundingClientRect()
       : e.target.parentElement.getBoundingClientRect();
     let x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    let y = e.clientY - rect.top;
 
     // Clip max / min so it doesn't leak over the edge of the sub
     if (x < clipLeft) {
       x = clipLeft;
     } else if (x > clipRight) {
       x = clipRight;
+    }
+
+    if (y > 70) {
+      y = 70;
     }
 
     // Characters peaking above the touch zone extend it ><'
@@ -72,12 +78,11 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const capRight = 920;
   const capLeft = 100;
 
-
   const [events, setEvents] = useState([...BedroomInitialState]);
 
- const addAndPopEvent = (event) => {
+  const addAndPopEvent = event => {
     const [_first, ...others] = events;
-    setEvents([...others, event])
+    setEvents([...others, event]);
   };
 
   const displayEvents = () => {
@@ -86,9 +91,11 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
         {events &&
           events.length > 0 &&
           events
-            .filter(({ component, ...eventState }) => eventState.position.scene === scene)
+            .filter(
+              ({ component, ...eventState }) =>
+                eventState.position.scene === scene
+            )
             .map(({ component: EventComponent, ...eventState }, index) => {
-
               return (
                 <EventComponent
                   key={`event-${index}`}
@@ -98,21 +105,19 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
                       position: {
                         x: eventState.position.x + 200,
                         y: eventState.position.y,
-                        scene: 'bedroom'
-                      },
-                    })
+                        scene: "bedroom"
+                      }
+                    });
                   }}
                   {...eventState}
-
                 />
-              )
-            })
-        }
+              );
+            })}
       </>
-    )
-  }
+    );
+  };
 
-  console.log(events)
+  console.log(events);
   return (
     <>
       <Container>
