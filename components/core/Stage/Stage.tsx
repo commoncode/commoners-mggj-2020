@@ -96,9 +96,6 @@ const Stage = ({
   const [showFirstLeak, setShowFirstLeak] = useState(false);
   const [showSecondLeak, setShowSecondLeak] = useState(false);
 
-
-
-
   const runInitialConversation = async () => {
     await setTimeout(() => {
       setShowFirstLeak(true);
@@ -109,15 +106,13 @@ const Stage = ({
     }, 5000);
 
     await setTimeout(() => {
-      setTargetLocationLover(1000, 50)
-    }, 3500)
-  }
+      setTargetLocationLover(1000, 50);
+    }, 3500);
+  };
 
   useEffect(() => {
     runInitialConversation();
-  }, [])
-
-
+  }, []);
 
   return (
     <>
@@ -128,38 +123,70 @@ const Stage = ({
               Right
             </RightButton>
 
-            <Argument x={450} y={100} language={language} isToggled={showArgument} />
-            <PlayerShout x={450} y={170} language={language} isToggled={false} />
-            <LoverYelling x={820} y={270} language={language} isToggled={false} />
+            <Argument
+              x={450}
+              y={100}
+              language={language}
+              isToggled={showArgument}
+            />
+            <PlayerShout
+              x={450}
+              y={170}
+              language={language}
+              isToggled={false}
+            />
+            <LoverYelling
+              x={820}
+              y={270}
+              language={language}
+              isToggled={false}
+            />
             <Photo x={300} y={180} language={language} isToggled={false} />
-            <Bed x={250} y={180} language={language} isToggled={showBedCaption} />
+            <Bed
+              x={250}
+              y={180}
+              language={language}
+              isToggled={showBedCaption}
+            />
             <Panic x={450} y={150} language={language} isToggled={false} />
 
+            {showFirstLeak && (
+              <Leak
+                x={500}
+                y={200}
+                activation={() => {
+                  setShowFirstLeak(false);
+                  setShowSecondLeak(true);
+                }}
+              />
+            )}
 
-            {showFirstLeak && <Leak x={500} y={200} activation={() => {
-              setShowFirstLeak(false)
-              setShowSecondLeak(true)
-            }} />}
-
-            {showSecondLeak && <Leak x={700} y={200} activation={() => {
-              setShowFirstLeak(true);
-              setShowSecondLeak(false);
-            }} />}
+            {showSecondLeak && (
+              <Leak
+                x={700}
+                y={200}
+                activation={() => {
+                  setShowFirstLeak(true);
+                  setShowSecondLeak(false);
+                }}
+              />
+            )}
 
             <ActionEvent
               x={220}
               y={300}
               style={{
-                width: '16rem',
-                height: '10rem',
-                background: 'transparent',
+                width: "16rem",
+                height: "10rem",
+                background: "transparent"
               }}
               activation={() => {
-                setShowBedCaption(true)
+                setShowBedCaption(true);
                 setTimeout(() => {
-                  setShowBedCaption(false)
-                }, 1500)
-              }} />
+                  setShowBedCaption(false);
+                }, 1500);
+              }}
+            />
 
             <Floor
               onClick={e =>
@@ -170,7 +197,6 @@ const Stage = ({
             >
               {children}
             </Floor>
-
           </Bedroom>
 
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
@@ -191,7 +217,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Kitchen>
 
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
@@ -212,7 +237,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Hatch>
 
           <Helm className={scene !== "helm" ? "deselected" : null}>
@@ -230,7 +254,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Helm>
         </Inner>
       </Container>
