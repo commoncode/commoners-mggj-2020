@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   position: relative;
   display: flex;
-  background: #1e1e1e;
+  background: #72a8c1;
   width: 100%;
   overflow: hidden;
 `;
@@ -50,6 +50,11 @@ export const sceneBase = css`
   width: 64rem;
   height: 38rem;
   margin-right: 3rem;
+  overflow: hidden;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const Button = css`

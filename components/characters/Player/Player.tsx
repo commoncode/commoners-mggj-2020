@@ -4,7 +4,7 @@ const Player = ({ state }) => (
   <Container
     x={state.position.x}
     y={state.position.y}
-    speed={state.position.speed}
+    speed={state.position.duration}
   >
     Player
   </Container>

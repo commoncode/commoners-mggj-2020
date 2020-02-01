@@ -4,7 +4,7 @@ const Lover = ({ state }) => (
   <Container
     x={state.position.x}
     y={state.position.y}
-    speed={state.position.speed}
+    speed={state.position.duration}
   >
     Lover
   </Container>

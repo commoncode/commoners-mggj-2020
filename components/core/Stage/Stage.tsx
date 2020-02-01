@@ -70,7 +70,11 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
       : e.target.parentElement.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    setLocation(x, y);
+
+    // Characters peaking above the touch zone extend it ><'
+    if (y >= 0) {
+      setLocation(x, y);
+    }
   };
 
   const [events, setEvents] = useState(BedroomInitialState);
@@ -115,7 +119,7 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
           <Bedroom>
             {scene === "bedroom" ? (
               <>
-                <RightButton onClick={() => setScene("kitchen")}>
+                <RightButton onClick={() => setScene("kitchen", "right")}>
                   Right
                 </RightButton>
               </>
@@ -130,10 +134,10 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
           <Kitchen>
             {scene === "kitchen" ? (
               <>
-                <LeftButton onClick={() => setScene("bedroom")}>
+                <LeftButton onClick={() => setScene("bedroom", "left")}>
                   Left
                 </LeftButton>
-                <RightButton onClick={() => setScene("helm")}>
+                <RightButton onClick={() => setScene("helm", "right")}>
                   Right
                 </RightButton>
               </>
@@ -149,10 +153,10 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
           <Helm>
             {scene === "helm" ? (
               <>
-                <LeftButton onClick={() => setScene("kitchen")}>
+                <LeftButton onClick={() => setScene("kitchen", "left")}>
                   Left
                 </LeftButton>
-                <RightButton onClick={() => setScene("hatch")}>
+                <RightButton onClick={() => setScene("hatch", "right")}>
                   Right
                 </RightButton>
               </>
@@ -168,7 +172,9 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
           <Hatch>
             {scene === "hatch" ? (
               <>
-                <LeftButton onClick={() => setScene("helm")}>Left</LeftButton>
+                <LeftButton onClick={() => setScene("helm", "left")}>
+                  Left
+                </LeftButton>
               </>
             ) : null}
 

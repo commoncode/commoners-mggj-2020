@@ -6,6 +6,7 @@ const Caption = ({ state }) => (
     x={state.position.x}
     y={state.position.y}
     speed={state.position.speed}
+    isToggled={state.isToggled}
 >
   {state.text}
   </Container>
