@@ -1,14 +1,14 @@
-import Caption from "../Caption"
+import Caption from "../../Caption"
 
-const Photo = ({ x, y, language, isToggled }) => {
+const FlowerCaption = ({ x, y, language, isToggled }) => {
   let text = null;
 
   switch(language) {
     case "english":
-      text = "That was when he still loved me..."
+      text = "His favourite flowers."
       break;
     case "french":
-      text = "On a l'air amoureux sur cette photo..."
+      text = "Ses fleurs préférées."
       break;
   }
 
@@ -21,4 +21,4 @@ const Photo = ({ x, y, language, isToggled }) => {
     </Caption>
 }
 
-export default Photo;
+export default FlowerCaption;

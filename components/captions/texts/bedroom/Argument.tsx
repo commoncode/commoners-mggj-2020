@@ -1,4 +1,4 @@
-import Caption from "../Caption"
+import Caption from "../../Caption"
 
 const Argument = ({ x, y, language, isToggled }) => {
   let text = null;

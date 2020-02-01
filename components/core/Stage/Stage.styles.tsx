@@ -71,7 +71,7 @@ export const sceneBase = css`
   }
 
   &:last-child {
-    margin-right: 0;
+    border: none;
   }
 
   &.deselected {
