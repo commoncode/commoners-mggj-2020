@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
-import Caption from '../../captions/Caption';
+import Caption from "../../captions/Caption";
 
 import Stage from "../Stage";
 
@@ -58,7 +58,7 @@ const initialState: GameStateType = {
       scene: "bedroom",
       x: 300,
       y: 20,
-      speed: 1
+      duration: 1
     },
     language: "English",
     text: "This relationship is beyond repair!"
