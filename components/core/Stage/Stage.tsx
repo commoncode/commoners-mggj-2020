@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import EventsContext from "../../core/Context/EventsContext";
 import Bedroom from "../../scenes/Bedroom";
@@ -52,18 +52,13 @@ const LeakEvent = {
   status: "display"
 };
 
-const BedroomInitialState = [
-  {
-    ...LeakEvent
-  }
-];
-
 const Stage = ({
   children,
   scene,
   language,
   offset, // wave offset
   setLocation,
+  setTargetLocationLover,
   setScene
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
@@ -92,6 +87,7 @@ const Stage = ({
 
   const capRight = 920;
   const capLeft = 100;
+  const [showArgument, setShowArgument] = useState(true);
 
   const { bedroom: bedroomState, init, addEvent, removeEvent } = useContext(EventsContext);
 
@@ -129,8 +125,21 @@ const Stage = ({
     }
   };
 
+
+  const runInitialConversation = async () => {
+
+    await setTimeout(() => {
+      setShowArgument(false)
+    }, 5000);
+
+    await setTimeout(() => {
+      setTargetLocationLover(1000, 50)
+    }, 4500)
+
+  }
   useEffect(() => {
     init(scene);
+    runInitialConversation();
   }, [scene])
 
   return (
@@ -142,12 +151,12 @@ const Stage = ({
               Right
             </RightButton>
 
-            <Argument x={450} y={100} language={language} isToggled={false} />
+            <Argument x={450} y={100} language={language} isToggled={showArgument} />
             <PlayerShout x={450} y={170} language={language} isToggled={false} />
             <LoverYelling x={820} y={270} language={language} isToggled={false} />
             <Photo x={300} y={180} language={language} isToggled={false} />
-            <Bed x={250} y={180} language={language} isToggled />
-            <Panic x={450} y={150} language={language} isToggled />
+            <Bed x={250} y={180} language={language} isToggled={false} />
+            <Panic x={450} y={150} language={language} isToggled={false} />
 
             <Floor
               onClick={e =>

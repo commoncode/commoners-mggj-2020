@@ -3,7 +3,7 @@ import Caption from "../Caption"
 const Argument = ({ x, y, language, isToggled }) => {
   let text = null;
 
-  switch(language) {
+  switch (language) {
     case "english":
       text = "This is too much! I told you this submarine was in a bad shape. It is as rusty as my love for you. This relationship is beyond repair! I'm done!"
       break;
@@ -18,7 +18,7 @@ const Argument = ({ x, y, language, isToggled }) => {
     isToggled={isToggled}
   >
     {text}
-    </Caption>
+  </Caption>
 }
 
 export default Argument;
