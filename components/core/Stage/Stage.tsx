@@ -44,29 +44,9 @@ const LeakEvent = {
   status: "display"
 };
 
-const BedroomInitialState = [
-  {
-    ...LeakEvent,
-    activation: fn => () =>
-      fn({
-        ...LeakEvent,
-        position: {
-          x: 500,
-          y: 300,
-          scene: "bedroom"
-        },
-        activation: fn => () =>
-          fn({
-            ...LeakEvent,
-            position: {
-              x: 700,
-              y: 300,
-              scene: "bedroom"
-            }
-          })
-      })
-  }
-];
+const BedroomInitialState = [{
+  ...LeakEvent,
+}];
 
 const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const handleClick = (e, clipLeft, clipRight) => {
@@ -92,50 +72,47 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const capRight = 920;
   const capLeft = 100;
 
-  const [events, setEvents] = useState(BedroomInitialState);
 
-  const addEvent = useCallback(
-    event => {
-      setEvents([...events, event]);
-    },
-    [setEvents]
-  );
+  const [events, setEvents] = useState([...BedroomInitialState]);
 
-  const displayEvents = useCallback(() => {
+ const addAndPopEvent = (event) => {
+    const [_first, ...others] = events;
+    setEvents([...others, event])
+  };
+
+  const displayEvents = () => {
     return (
       <>
         {events &&
           events.length > 0 &&
           events
-            .filter(
-              ({ component, ...eventState }) =>
-                eventState.position.scene === scene
-            )
-            .map(
-              (
-                { component: EventComponent, activation, ...eventState },
-                index
-              ) => {
-                let additionalProps = {};
-                if (activation) {
-                  additionalProps = {
-                    activation: activation(addEvent)
-                  };
-                }
+            .filter(({ component, ...eventState }) => eventState.position.scene === scene)
+            .map(({ component: EventComponent, ...eventState }, index) => {
 
-                return (
-                  <EventComponent
-                    key={`event-${index}`}
-                    {...eventState}
-                    {...additionalProps}
-                  />
-                );
-              }
-            )}
+              return (
+                <EventComponent
+                  key={`event-${index}`}
+                  activation={() => {
+                    addAndPopEvent({
+                      ...LeakEvent,
+                      position: {
+                        x: eventState.position.x + 200,
+                        y: eventState.position.y,
+                        scene: 'bedroom'
+                      },
+                    })
+                  }}
+                  {...eventState}
+
+                />
+              )
+            })
+        }
       </>
-    );
-  }, [scene, events, addEvent]);
+    )
+  }
 
+  console.log(events)
   return (
     <>
       <Container>
