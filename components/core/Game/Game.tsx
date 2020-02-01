@@ -6,12 +6,13 @@ import Lover from "../../characters/Lover";
 import Stage from "../Stage";
 
 import { GlobalStyle } from "./Game.styles";
+import { getWalkDuration } from "./movement";
 
 type Position = {
   scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
   x: number;
   y: number;
-  speed: number; // The calculated speed at which the character should move to its new position
+  duration: number; // The calculated speed at which the character should move to its new position
 };
 
 type CharacterType = {
@@ -33,7 +34,7 @@ const initialState: GameStateType = {
       scene: "bedroom",
       x: 10,
       y: 50,
-      speed: 1
+      duration: 1
     }
   },
   lover: {
@@ -41,7 +42,7 @@ const initialState: GameStateType = {
       scene: "bedroom",
       x: 80,
       y: 50,
-      speed: 1
+      duration: 1
     }
   },
   love: 0,
@@ -71,41 +72,99 @@ const Game = () => {
       <Stage
         scene={gameState.player.position.scene}
         setLocation={(x, y) => {
-          const travelX =
-            x > gameState.player.position.x
-              ? x - gameState.player.position.x
-              : gameState.player.position.x - x;
-
-          const travelY =
-            y > gameState.player.position.y
-              ? y - gameState.player.position.y
-              : gameState.player.position.y - y;
-
-          const distance = Math.sqrt(
-            Math.pow(travelX, 2) + Math.pow(travelY, 2)
+          const duration = getWalkDuration(
+            x,
+            y,
+            gameState.player.position.x,
+            gameState.player.position.y,
+            500
           );
-
-          const movementSpeed = 500; // Pixels per second
-          const speed = Math.abs(distance / movementSpeed);
 
           // setTargetLocation({ x, y });
           setGameState({
             ...gameState,
             player: {
               ...gameState.player,
-              position: { ...gameState.player.position, x, y, speed }
+              position: { ...gameState.player.position, x, y, duration }
             }
           });
         }}
-        setScene={nextScene => {
-          console.log("Setting Scene", nextScene);
+        setScene={(nextScene, direction: "left" | "right") => {
+          console.log("Setting Scene", nextScene, direction);
+          // Animate character running off screen
+          const x = direction === "left" ? -300 : 1124;
+          const y = 80;
+          const leaveDuration = getWalkDuration(
+            x,
+            y,
+            gameState.player.position.x,
+            gameState.player.position.y,
+            800
+          );
+
           setGameState({
             ...gameState,
             player: {
               ...gameState.player,
-              position: { ...gameState.player.position, scene: nextScene }
+              position: {
+                ...gameState.player.position,
+                x,
+                y,
+                duration: leaveDuration
+              }
             }
           });
+
+          // Change Scene
+          setTimeout(() => {
+            console.log("Scene change...", nextScene);
+
+            setGameState({
+              ...gameState,
+              player: {
+                ...gameState.player,
+                position: { ...gameState.player.position, scene: nextScene }
+              }
+            });
+
+            // Teleport character
+            setGameState({
+              ...gameState,
+              player: {
+                ...gameState.player,
+                position: {
+                  ...gameState.player.position,
+                  scene: nextScene,
+                  x: direction === "right" ? -300 : 1124,
+                  y,
+                  duration: 0
+                }
+              }
+            });
+
+            // Animate character running on screen
+            const enterDuration = getWalkDuration(
+              direction === "right" ? 50 : 1024 - 50,
+              y,
+              direction === "right" ? -300 : 1124,
+              y,
+              800
+            );
+
+            setGameState({
+              ...gameState,
+              player: {
+                ...gameState.player,
+                position: {
+                  ...gameState.player.position,
+                  scene: nextScene,
+                  x: direction === "right" ? 50 : 1024 - 50,
+                  y,
+                  duration: enterDuration
+                }
+              }
+            });
+          }, leaveDuration * 1000);
         }}
       >
         <Player state={gameState.player} />

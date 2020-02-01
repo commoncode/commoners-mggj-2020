@@ -50,6 +50,7 @@ export const sceneBase = css`
   width: 64rem;
   height: 38rem;
   margin-right: 3rem;
+  overflow: hidden;
 `;
 
 const Button = css`
