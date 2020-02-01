@@ -3,12 +3,12 @@ import Caption from "../Caption"
 const Argument = ({ x, y, language, isToggled }) => {
   let text = null;
 
-  switch(language) {
+  switch (language) {
     case "english":
-      text = "This is in English"
+      text = "This is too much! I told you this submarine was in a bad shape. It is as rusty as my love for you. This relationship is beyond repair! I'm done!"
       break;
     case "french":
-      text = "Texte en francais"
+      text = "Y'en a marre! J't'avais bien dit que ce sous-marin était dans un sale état. Il est aussi rouillé que mon amour pour toi. Notre couple est irréparable! J'en ai fini avec toi!"
       break;
   }
 
@@ -18,7 +18,7 @@ const Argument = ({ x, y, language, isToggled }) => {
     isToggled={isToggled}
   >
     {text}
-    </Caption>
+  </Caption>
 }
 
 export default Argument;

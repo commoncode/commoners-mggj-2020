@@ -22,9 +22,6 @@ type CharacterType = {
 };
 
 type CaptionType = {
-  position: Position;
-  language?: string;
-  text: string;
   isToggled: boolean;
 };
 
@@ -57,13 +54,6 @@ const initialState: GameStateType = {
     }
   },
   caption: {
-    position: {
-      scene: "bedroom",
-      x: 300,
-      y: 20,
-      duration: 1
-    },
-    text: "This relationship is beyond repair!",
     isToggled: true
   },
   language: "english",
@@ -74,10 +64,6 @@ const initialState: GameStateType = {
 const Game = () => {
   const [gameState, setGameState] = useState({ ...initialState });
   const [offset, setOffset] = useState(0);
-  const [targetLocation, setTargetLocation] = useState({
-    x: gameState.player.position.x,
-    y: gameState.player.position.y
-  });
 
   const gameLoop = useRef(null);
 
@@ -111,7 +97,6 @@ const Game = () => {
               500
             );
 
-            // setTargetLocation({ x, y });
             setGameState({
               ...gameState,
               player: {
@@ -205,12 +190,29 @@ const Game = () => {
               }, 100);
             }, leaveDuration * 1000);
           }}
+          setTargetLocationLover={(x, y) => {
+            const duration = getWalkDuration(
+              x,
+              y,
+              gameState.lover.position.x,
+              gameState.lover.position.y,
+              500
+            );
+
+            setGameState({
+              ...gameState,
+              lover: {
+                ...gameState.lover,
+                position: { ...gameState.lover.position, x, y, duration }
+              }
+            })
+          }}
         >
           <Player state={gameState.player} />
           {gameState.lover.position.scene ===
-          gameState.player.position.scene ? (
-            <Lover state={gameState.lover} />
-          ) : null}
+            gameState.player.position.scene ? (
+              <Lover state={gameState.lover} />
+            ) : null}
         </Stage>
       </EventsProvider>
     </>

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import EventsContext from "../../core/Context/EventsContext";
 import Bedroom from "../../scenes/Bedroom";
@@ -9,6 +9,13 @@ import Kitchen from "../../scenes/Kitchen";
 // events
 import Leak from "../../events/Leak";
 import Argument from "../../captions/texts/Argument";
+
+// captions for Bedroom scene
+import Bed from "../../captions/texts/Bed";
+import LoverYelling from "../../captions/texts/LoverYelling";
+import Panic from "../../captions/texts/Panic";
+import Photo from "../../captions/texts/Photo";
+import PlayerShout from "../../captions/texts/PlayerShout";
 
 import {
   Container,
@@ -45,18 +52,13 @@ const LeakEvent = {
   status: "display"
 };
 
-const BedroomInitialState = [
-  {
-    ...LeakEvent
-  }
-];
-
 const Stage = ({
   children,
   scene,
   language,
   offset, // wave offset
   setLocation,
+  setTargetLocationLover,
   setScene
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
@@ -85,45 +87,61 @@ const Stage = ({
 
   const capRight = 920;
   const capLeft = 100;
+  const [showArgument, setShowArgument] = useState(true);
 
-  const { events, addEvent, removeEvent } = useContext(EventsContext);
+  const { bedroom: bedroomState, init, addEvent, removeEvent } = useContext(EventsContext);
 
-  const displayEvents = () => {
-    return (
-      <>
-        {events &&
-          events.length > 0 &&
-          events
-            .filter(
-              ({ component, ...eventState }) =>
-                eventState.position.scene === scene
-            )
-            .map(({ component: EventComponent, ...eventState }, index) => {
+  const displayEvents = (scene) => {
+
+    if (scene === "bedroom") {
+
+      return (
+        <>
+          {
+            bedroomState && bedroomState.events.length > 0 && bedroomState.events.map(({ component: EventComponent, ...eventState }, index) => {
               return (
                 <EventComponent
                   key={`event-${index}`}
                   activation={() => {
-                    removeEvent();
+
+                    removeEvent("bedroom")
                     setTimeout(() => {
                       addEvent({
                         ...LeakEvent,
                         position: {
                           x: eventState.position.x + 200,
                           y: eventState.position.y,
-                          scene: "bedroom"
-                        }
-                      });
-                    }, 0);
+                          scene: 'bedroom'
+                        },
+                      }, "bedroom");
+                    }, 0)
                   }}
                   {...eventState}
                 />
               );
             })}
-      </>
-    );
+        </>
+      );
+    }
   };
 
-  console.log(events);
+
+  const runInitialConversation = async () => {
+
+    await setTimeout(() => {
+      setShowArgument(false)
+    }, 5000);
+
+    await setTimeout(() => {
+      setTargetLocationLover(1000, 50)
+    }, 4500)
+
+  }
+  useEffect(() => {
+    init(scene);
+    runInitialConversation();
+  }, [scene])
+
   return (
     <>
       <Container offset={offset}>
@@ -133,7 +151,12 @@ const Stage = ({
               Right
             </RightButton>
 
-            <Argument x={100} y={100} language={language} isToggled />
+            <Argument x={450} y={100} language={language} isToggled={showArgument} />
+            <PlayerShout x={450} y={170} language={language} isToggled={false} />
+            <LoverYelling x={820} y={270} language={language} isToggled={false} />
+            <Photo x={300} y={180} language={language} isToggled={false} />
+            <Bed x={250} y={180} language={language} isToggled={false} />
+            <Panic x={450} y={150} language={language} isToggled={false} />
 
             <Floor
               onClick={e =>
@@ -145,7 +168,7 @@ const Stage = ({
               {children}
             </Floor>
 
-            {scene === "bedroom" && displayEvents()}
+            {scene === "bedroom" && displayEvents("bedroom")}
           </Bedroom>
 
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
@@ -167,7 +190,7 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "kitchen" && displayEvents()}
+            {scene === "kitchen" && displayEvents("kitchen")}
           </Kitchen>
 
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
@@ -189,7 +212,7 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "hatch" && displayEvents()}
+            {scene === "hatch" && displayEvents("hatch")}
           </Hatch>
 
           <Helm className={scene !== "helm" ? "deselected" : null}>
@@ -208,7 +231,7 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "helm" && displayEvents()}
+            {scene === "helm" && displayEvents("helm")}
           </Helm>
         </Inner>
       </Container>
