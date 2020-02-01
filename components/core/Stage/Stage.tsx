@@ -6,7 +6,6 @@ import Helm from "../../scenes/Helm";
 import Kitchen from "../../scenes/Kitchen";
 
 // events
-import Event from "../../events/Event";
 import Leak from '../../events/Leak';
 
 import {
@@ -16,6 +15,19 @@ import {
   LeftButton,
   RightButton
 } from "./Stage.styles";
+
+
+const BedroomInitialState = [{
+  component: Leak,
+  position: {
+    x: 300,
+    y: 300,
+    scene: "bedroom"
+  },
+  status: 'display',
+  display: 30
+}
+]
 
 const Stage = ({ children, scene, setLocation, setScene }) => {
   const handleClick = e => {
@@ -27,27 +39,22 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
     setLocation(x, y);
   };
 
-  const [events, setEvents] = useState([{
-    eventComponent: Leak,
-    eventState: {
-      position: {
-        x: 100,
-        y: 100,
-        scene: "bedroom"
-      },
-      status: 'display',
-      display: 30
-    }
+  const [events, setEvents] = useState(BedroomInitialState);
+
+  const displayEvents = () => {
+    return (
+      <>
+        {
+          events
+            .filter(({ component, ...eventState }) => eventState.position.scene === scene)
+            .map(({ component: EventComponent, ...eventState }, index) => {
+
+              return (<EventComponent key={`event-${index}`} {...eventState} />)
+            })
+        }
+      </>
+    )
   }
-  ]);
-
-  console.log(events, scene)
-
-  const displayEvents = () => events
-    .filter((event) => event.eventState.position.scene === scene)
-    .map(({ eventComponent: EventComponent, eventState }, index) => {
-      return (<EventComponent key={`event-${index}`} {...eventState} />)
-    })
 
 
   return (

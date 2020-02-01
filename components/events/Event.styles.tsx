@@ -12,15 +12,16 @@ export const eventBase = css`
   justify-content: center;
 
   width: 5rem;
-  height: 8rem;
+  height: 5rem;
 
   background: white;
-  border: 5px solid black;
+  border: 2px solid black;
 
-  top: -8rem;
+  top: -5rem;
 `;
 
 export const Container = styled.div<ContainerProps>`
+  ${eventBase}
   left: ${({ x }) => x}px;
   top: ${({ y }) => y}px;
   z-index: 999999999;
