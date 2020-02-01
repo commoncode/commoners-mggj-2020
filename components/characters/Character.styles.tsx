@@ -3,14 +3,11 @@ import { css } from "styled-components";
 export const characterBase = css`
   position: absolute;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 
   width: 10rem;
   height: 15rem;
-
-  background: white;
-  border: 5px solid black;
 
   top: -15rem;
 

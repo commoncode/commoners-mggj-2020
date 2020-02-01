@@ -83,15 +83,13 @@ const Stage = ({
     }, 5000);
 
     await setTimeout(() => {
-      setTargetLocationLover(1000, 50)
-    }, 3500)
-  }
+      setTargetLocationLover(1000, 50);
+    }, 3500);
+  };
 
   useEffect(() => {
     runInitialConversation();
-  }, [])
-
-
+  }, []);
 
   return (
     <>
@@ -102,13 +100,42 @@ const Stage = ({
               Right
             </RightButton>
 
-            <Argument x={450} y={100} language={language} isToggled={showArgument} />
-            <PlayerShout x={450} y={170} language={language} isToggled={showPlayerShout} />
-            <LoverYelling x={820} y={270} language={language} isToggled={showLoverYelling} />
-            <Photo x={300} y={180} language={language} isToggled={showPhotoCaption} />
-            <Bed x={250} y={180} language={language} isToggled={showBedCaption} />
-            <Panic x={450} y={150} language={language} isToggled={showPanicCaption} />
-
+            <Argument
+              x={450}
+              y={100}
+              language={language}
+              isToggled={showArgument}
+            />
+            <PlayerShout
+              x={450}
+              y={170}
+              language={language}
+              isToggled={showPlayerShout}
+            />
+            <LoverYelling
+              x={820}
+              y={270}
+              language={language}
+              isToggled={showLoverYelling}
+            />
+            <Photo
+              x={300}
+              y={180}
+              language={language}
+              isToggled={showPhotoCaption}
+            />
+            <Bed
+              x={250}
+              y={180}
+              language={language}
+              isToggled={showBedCaption}
+            />
+            <Panic
+              x={450}
+              y={150}
+              language={language}
+              isToggled={showPanicCaption}
+            />
 
             {/* Leaks */}
             {showFirstLeak &&
@@ -186,46 +213,49 @@ const Stage = ({
               x={220}
               y={300}
               style={{
-                width: '16rem',
-                height: '10rem',
-                background: 'transparent',
+                width: "16rem",
+                height: "10rem",
+                background: "transparent"
               }}
               activation={() => {
-                setShowBedCaption(true)
+                setShowBedCaption(true);
                 setTimeout(() => {
-                  setShowBedCaption(false)
-                }, 1500)
-              }} />
+                  setShowBedCaption(false);
+                }, 1500);
+              }}
+            />
 
             <ActionEvent
               x={368}
               y={230}
               style={{
-                width: '5rem',
-                height: '3rem',
-                background: 'transparent',
+                width: "5rem",
+                height: "3rem",
+                background: "transparent"
               }}
               activation={() => {
-                setShowPhotoCaption(true)
+                setShowPhotoCaption(true);
                 setTimeout(() => {
-                  setShowPhotoCaption(false)
-                }, 1500)
-              }} />
+                  setShowPhotoCaption(false);
+                }, 1500);
+              }}
+            />
 
             <ActionEvent
               x={600}
               y={450}
               style={{
-                width: '8rem',
-                height: '3rem',
-                background: 'transparent',
+                width: "8rem",
+                height: "3rem",
+                background: "transparent"
               }}
               activation={() => {
-                setShowPanicCaption(true)
+                setShowPanicCaption(true);
                 setTimeout(() => {
-                  setShowPanicCaption(false)
-                }, 1500)
-              }} />
+                  setShowPanicCaption(false);
+                }, 1500);
+              }}
+            />
 
             <Floor
               onClick={e =>
@@ -236,7 +266,6 @@ const Stage = ({
             >
               {children}
             </Floor>
-
           </Bedroom>
 
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
@@ -257,7 +286,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Kitchen>
 
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
@@ -278,7 +306,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Hatch>
 
           <Helm className={scene !== "helm" ? "deselected" : null}>
@@ -296,7 +323,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Helm>
         </Inner>
       </Container>
