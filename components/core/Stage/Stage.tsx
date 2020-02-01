@@ -122,86 +122,88 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
     <>
       <Container>
         <Inner className={scene}>
-          <Bedroom>
-            {scene === "bedroom" ? (
-              <>
-                <RightButton onClick={() => setScene("kitchen", "right", 880)}>
-                  Right
-                </RightButton>
+          <Bedroom className={scene !== "bedroom" ? "deselected" : null}>
+            <RightButton onClick={() => setScene("kitchen", "right", 880)}>
+              Right
+            </RightButton>
 
-                <Argument x={100} y={100} language={language} isToggled />
-              </>
-            ) : null}
+            <Argument x={100} y={100} language={language} isToggled />
 
             <Floor
-              onClick={e => handleClick(e, 100, 770)}
+              onClick={e =>
+                scene === "bedroom" ? handleClick(e, 100, 770) : null
+              }
               className={`floor`}
               left={9}
             >
-              {scene === "bedroom" ? <>{children}</> : null}
+              {children}
             </Floor>
+
             {scene === "bedroom" && displayEvents()}
           </Bedroom>
 
-          <Kitchen>
+          <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
             {scene === "kitchen" ? (
               <>
                 <LeftButton onClick={() => setScene("bedroom", "left", 880)}>
                   Left
                 </LeftButton>
-                <RightButton onClick={() => setScene("helm", "right")}>
+                <RightButton onClick={() => setScene("hatch", "right")}>
                   Right
                 </RightButton>
+
+                <Floor
+                  onClick={e => handleClick(e, capLeft, capRight)}
+                  className={`floor`}
+                >
+                  {children}
+                </Floor>
               </>
             ) : null}
 
-            <Floor
-              onClick={e => handleClick(e, capLeft, capRight)}
-              className={`floor`}
-            >
-              {scene === "kitchen" ? <>{children}</> : null}
-            </Floor>
             {scene === "kitchen" && displayEvents()}
           </Kitchen>
 
-          <Helm>
-            {scene === "helm" ? (
+          <Hatch className={scene !== "hatch" ? "deselected" : null}>
+            {scene === "hatch" ? (
               <>
                 <LeftButton onClick={() => setScene("kitchen", "left")}>
                   Left
                 </LeftButton>
-                <RightButton onClick={() => setScene("hatch", "right")}>
+                <RightButton onClick={() => setScene("helm", "right")}>
                   Right
                 </RightButton>
+
+                <Floor
+                  onClick={e => handleClick(e, capLeft, capRight)}
+                  className={`floor`}
+                >
+                  {children}
+                </Floor>
               </>
             ) : null}
 
-            <Floor
-              onClick={e => handleClick(e, capLeft, capRight)}
-              className={`floor`}
-            >
-              {scene === "helm" ? <>{children}</> : null}
-            </Floor>
-            {scene === "helm" && displayEvents()}
-          </Helm>
-
-          <Hatch>
-            {scene === "hatch" ? (
-              <>
-                <LeftButton onClick={() => setScene("helm", "left")}>
-                  Left
-                </LeftButton>
-              </>
-            ) : null}
-
-            <Floor
-              onClick={e => handleClick(e, capLeft, capRight)}
-              className={`floor`}
-            >
-              {scene === "hatch" ? <>{children}</> : null}
-            </Floor>
             {scene === "hatch" && displayEvents()}
           </Hatch>
+
+          <Helm className={scene !== "helm" ? "deselected" : null}>
+            {scene === "helm" ? (
+              <>
+                <LeftButton onClick={() => setScene("hatch", "left")}>
+                  Left
+                </LeftButton>
+
+                <Floor
+                  onClick={e => handleClick(e, capLeft, capRight)}
+                  className={`floor`}
+                >
+                  {children}
+                </Floor>
+              </>
+            ) : null}
+
+            {scene === "helm" && displayEvents()}
+          </Helm>
         </Inner>
       </Container>
     </>

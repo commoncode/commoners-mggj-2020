@@ -25,11 +25,11 @@ export const Inner = styled.div<InnerProps>`
     margin-left: calc(50vw - 32rem - 64rem);
   }
 
-  &.helm {
+  &.hatch {
     margin-left: calc(50vw - 32rem - 128rem);
   }
 
-  &.hatch {
+  &.helm {
     margin-left: calc(50vw - 32rem - 192rem);
   }
 `;
@@ -46,7 +46,7 @@ export const Floor = styled.div<FloorProps>`
   right: ${({ right }) => right || 0}rem;
 
   height: 6rem;
-  background: rgba(0, 0, 0, 0.6);
+  // background: rgba(0, 0, 0, 0.6);
 `;
 
 export const sceneBase = css`
@@ -56,9 +56,25 @@ export const sceneBase = css`
   height: 38rem;
   margin-right: 3rem;
   overflow: hidden;
+  background: #72a8c1;
+  transition: opacity 1s ease-in-out;
+
+  > * {
+    transition: opacity 1s ease-in-out;
+  }
 
   &:last-child {
     margin-right: 0;
+  }
+
+  &.deselected {
+    > * {
+      opacity: 0;
+
+      &:first-child {
+        opacity: 0.4;
+      }
+    }
   }
 `;
 

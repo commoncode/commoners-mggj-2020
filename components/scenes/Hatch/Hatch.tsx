@@ -1,5 +1,7 @@
 import { Container } from "./Hatch.styles";
 
-const Hatch = ({ children }) => <Container>{children}</Container>;
+const Hatch = ({ children, className }) => (
+  <Container className={className}>{children}</Container>
+);
 
 export default Hatch;
