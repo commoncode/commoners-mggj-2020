@@ -164,13 +164,7 @@ const Game = () => {
             });
 
             // Animate character running on screen
-            const enterDuration = getWalkDuration(
-              xEntered,
-              y,
-              xExited,
-              y,
-              800
-            );
+            const enterDuration = getWalkDuration(xEntered, y, xExited, y, 800);
 
             setTimeout(() => {
               setGameState({
@@ -186,60 +180,6 @@ const Game = () => {
                   }
                 }
               });
-<<<<<<< HEAD
-
-              // Animate character running on screen
-              const enterDuration = getWalkDuration(
-                xEntered,
-                y,
-                xExited,
-                y,
-                800
-              );
-
-              setTimeout(() => {
-                setGameState({
-                  ...gameState,
-                  player: {
-                    ...gameState.player,
-                    position: {
-                      ...gameState.player.position,
-                      scene: nextScene,
-                      x: xEntered,
-                      y,
-                      duration: enterDuration
-                    }
-                  }
-                });
-              }, 100);
-            }, leaveDuration * 1000);
-          }}
-          setTargetLocationLover={(x, y) => {
-            const duration = getWalkDuration(
-              x,
-              y,
-              gameState.lover.position.x,
-              gameState.lover.position.y,
-              500
-            );
-
-            setGameState({
-              ...gameState,
-              lover: {
-                ...gameState.lover,
-                position: { ...gameState.lover.position, x, y, duration }
-              }
-            });
-          }}
-        >
-          <Player state={gameState.player} />
-          {gameState.lover.position.scene ===
-          gameState.player.position.scene ? (
-            <Lover state={gameState.lover} />
-          ) : null}
-        </Stage>
-      </EventsProvider>
-=======
             }, 100);
           }, leaveDuration * 1000);
         }}
@@ -258,16 +198,14 @@ const Game = () => {
               ...gameState.lover,
               position: { ...gameState.lover.position, x, y, duration }
             }
-          })
+          });
         }}
       >
         <Player state={gameState.player} />
-        {gameState.lover.position.scene ===
-          gameState.player.position.scene ? (
-            <Lover state={gameState.lover} />
-          ) : null}
+        {gameState.lover.position.scene === gameState.player.position.scene ? (
+          <Lover state={gameState.lover} />
+        ) : null}
       </Stage>
->>>>>>> 63b3f0be995a6eb512fe28faed7a27fb5fd14589
     </>
   );
 };
