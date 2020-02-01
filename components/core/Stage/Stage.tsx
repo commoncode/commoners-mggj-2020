@@ -19,33 +19,6 @@ import {
   RightButton
 } from "./Stage.styles";
 
-type EventType = {
-  activation?: () => {};
-  component: any;
-  position: {
-    scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
-    x: number;
-    y: number;
-  };
-  display: number; // display the event until reach some ammount of time
-  status: "display" | "hidden";
-};
-
-type StageStateType = {
-  events: EventType[];
-};
-
-const LeakEvent = {
-  component: Leak,
-  position: {
-    x: 300,
-    y: 300,
-    scene: "bedroom"
-  },
-  display: 30,
-  status: "display"
-};
-
 const Stage = ({
   children,
   scene,
@@ -82,11 +55,14 @@ const Stage = ({
   const capRight = 920;
   const capLeft = 100;
 
-
   // Bedroom events
   const [showArgument, setShowArgument] = useState(true);
   const [showFirstLeak, setShowFirstLeak] = useState(false);
   const [showSecondLeak, setShowSecondLeak] = useState(false);
+
+  const [showPlayerShout, setShowPlayerShout] = useState(false);
+  const [showLoverYelling, setShowLoverYelling] = useState(false);
+  const [showPanicCaption, setShowPanicCaption] = useState(false);
 
 
   const runInitialConversation = async () => {
@@ -99,15 +75,13 @@ const Stage = ({
     }, 5000);
 
     await setTimeout(() => {
-      setTargetLocationLover(1000, 50)
-    }, 3500)
-  }
+      setTargetLocationLover(1000, 50);
+    }, 3500);
+  };
 
   useEffect(() => {
     runInitialConversation();
-  }, [])
-
-
+  }, []);
 
   return (
     <>
@@ -117,17 +91,80 @@ const Stage = ({
             <RightButton onClick={() => setScene("kitchen", "right", 880)}>
               Right
             </RightButton>
+            
             <Argument x={450} y={100} language={language} isToggled={showArgument} />
 
-            {showFirstLeak && <Leak x={500} y={200} activation={() => {
-              setShowFirstLeak(false)
-              setShowSecondLeak(true)
-            }} />}
+            {/* Leaks */}
+            {showFirstLeak &&
+              <Leak x={500}
+                y={200}
+                activation={() => {
+                  console.log('click leak')
+                }}
+                repair={() => {
+                  setShowFirstLeak(false);
+                  setShowSecondLeak(true);
+                }}
+                yell={async () => {
+                  setShowPlayerShout(true)
+
+                  await setTimeout(() => {
+                    setShowPlayerShout(false)
+                  }, 1500)
+
+                  await setTimeout(() => {
+                    setShowLoverYelling(true)
+                  }, 2000)
+
+                  await setTimeout(() => {
+                    setShowLoverYelling(false)
+                  }, 3500)
+
+                }}
+                panic={async () => {
+                  setShowPanicCaption(true)
+
+                  await setTimeout(() => {
+                    setShowPanicCaption(false)
+                  }, 2500)
+                }}
+              />
+            }
 
             {showSecondLeak && <Leak x={700} y={200} activation={() => {
-              setShowFirstLeak(true);
-              setShowSecondLeak(false);
-            }} />}
+
+              // setShowSecondLeak(false);
+            }}
+
+              repair={() => {
+                setShowSecondLeak(false);
+                setShowFirstLeak(true);
+              }}
+              yell={async () => {
+                setShowPlayerShout(true)
+
+                await setTimeout(() => {
+                  setShowPlayerShout(false)
+                }, 1500)
+
+                await setTimeout(() => {
+                  setShowLoverYelling(true)
+                }, 2000)
+
+                await setTimeout(() => {
+                  setShowLoverYelling(false)
+                }, 3500)
+              }}
+              panic={async () => {
+                setShowPanicCaption(true)
+
+                await setTimeout(() => {
+                  setShowPanicCaption(false)
+                }, 2500)
+              }}
+            />}
+
+            {/* END Leaks */}
 
             <Actions language={language}></Actions>
 
@@ -140,7 +177,6 @@ const Stage = ({
             >
               {children}
             </Floor>
-
           </Bedroom>
 
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
@@ -161,7 +197,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Kitchen>
 
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
@@ -182,7 +217,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Hatch>
 
           <Helm className={scene !== "helm" ? "deselected" : null}>
@@ -200,7 +234,6 @@ const Stage = ({
                 </Floor>
               </>
             ) : null}
-
           </Helm>
         </Inner>
       </Container>

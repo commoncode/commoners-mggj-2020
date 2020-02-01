@@ -52,8 +52,8 @@ export const Floor = styled.div<FloorProps>`
   bottom: 5.5rem;
   left: ${({ left }) => left || 0}rem;
   right: ${({ right }) => right || 0}rem;
-
   height: 6rem;
+  z-index: 600;
 `;
 
 export const sceneBase = css`
@@ -70,6 +70,16 @@ export const sceneBase = css`
     transition: opacity 1s ease-in-out;
   }
 
+  .background {
+    position: absolute;
+    z-index: 500;
+  }
+
+  .silhouette {
+    position: absolute;
+    z-index: 499;
+  }
+
   &:last-child {
     border: none;
   }
@@ -78,8 +88,12 @@ export const sceneBase = css`
     > * {
       opacity: 0;
 
-      &:first-child {
-        opacity: 0.4;
+      &.background {
+        opacity: 0.2;
+      }
+
+      &.silhouette {
+        opacity: 1;
       }
     }
   }
