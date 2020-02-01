@@ -25,33 +25,6 @@ import {
   RightButton
 } from "./Stage.styles";
 
-type EventType = {
-  activation?: () => {};
-  component: any;
-  position: {
-    scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
-    x: number;
-    y: number;
-  };
-  display: number; // display the event until reach some ammount of time
-  status: "display" | "hidden";
-};
-
-type StageStateType = {
-  events: EventType[];
-};
-
-const LeakEvent = {
-  component: Leak,
-  position: {
-    x: 300,
-    y: 300,
-    scene: "bedroom"
-  },
-  display: 30,
-  status: "display"
-};
-
 const Stage = ({
   children,
   scene,
@@ -92,11 +65,13 @@ const Stage = ({
   const [showArgument, setShowArgument] = useState(true);
   const [showBedCaption, setShowBedCaption] = useState(false);
   const [showPhotoCaption, setShowPhotoCaption] = useState(false);
-  const [showPanicCaption, setShowPanicCaption] = useState(false);
 
   // Bedroom events
   const [showFirstLeak, setShowFirstLeak] = useState(false);
   const [showSecondLeak, setShowSecondLeak] = useState(false);
+  const [showPlayerShout, setShowPlayerShout] = useState(false);
+  const [showLoverYelling, setShowLoverYelling] = useState(false);
+  const [showPanicCaption, setShowPanicCaption] = useState(false);
 
   const runInitialConversation = async () => {
     await setTimeout(() => {
@@ -135,13 +110,13 @@ const Stage = ({
               x={450}
               y={170}
               language={language}
-              isToggled={false}
+              isToggled={showPlayerShout}
             />
             <LoverYelling
               x={820}
               y={270}
               language={language}
-              isToggled={false}
+              isToggled={showLoverYelling}
             />
             <Photo
               x={300}
@@ -162,27 +137,77 @@ const Stage = ({
               isToggled={showPanicCaption}
             />
 
-            {showFirstLeak && (
-              <Leak
-                x={500}
+            {/* Leaks */}
+            {showFirstLeak &&
+              <Leak x={500}
                 y={200}
                 activation={() => {
+                  console.log('click leak')
+                }}
+                repair={() => {
                   setShowFirstLeak(false);
                   setShowSecondLeak(true);
                 }}
-              />
-            )}
+                yell={async () => {
+                  setShowPlayerShout(true)
 
-            {showSecondLeak && (
-              <Leak
-                x={700}
-                y={200}
-                activation={() => {
-                  setShowFirstLeak(true);
-                  setShowSecondLeak(false);
+                  await setTimeout(() => {
+                    setShowPlayerShout(false)
+                  }, 1500)
+
+                  await setTimeout(() => {
+                    setShowLoverYelling(true)
+                  }, 2000)
+
+                  await setTimeout(() => {
+                    setShowLoverYelling(false)
+                  }, 3500)
+
+                }}
+                panic={async () => {
+                  setShowPanicCaption(true)
+
+                  await setTimeout(() => {
+                    setShowPanicCaption(false)
+                  }, 2500)
                 }}
               />
-            )}
+            }
+
+            {showSecondLeak && <Leak x={700} y={200} activation={() => {
+
+              // setShowSecondLeak(false);
+            }}
+
+              repair={() => {
+                setShowSecondLeak(false);
+                setShowFirstLeak(true);
+              }}
+              yell={async () => {
+                setShowPlayerShout(true)
+
+                await setTimeout(() => {
+                  setShowPlayerShout(false)
+                }, 1500)
+
+                await setTimeout(() => {
+                  setShowLoverYelling(true)
+                }, 2000)
+
+                await setTimeout(() => {
+                  setShowLoverYelling(false)
+                }, 3500)
+              }}
+              panic={async () => {
+                setShowPanicCaption(true)
+
+                await setTimeout(() => {
+                  setShowPanicCaption(false)
+                }, 2500)
+              }}
+            />}
+
+            {/* END Leaks */}
 
             <ActionEvent
               x={220}
