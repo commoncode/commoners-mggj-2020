@@ -42,8 +42,8 @@ const initialState: GameStateType = {
   player: {
     position: {
       scene: "bedroom",
-      x: 10,
-      y: 50,
+      x: 400,
+      y: 80,
       duration: 1,
       walking: false
     }
@@ -51,8 +51,8 @@ const initialState: GameStateType = {
   lover: {
     position: {
       scene: "bedroom",
-      x: 80,
-      y: 50,
+      x: 700,
+      y: 40,
       duration: 1,
       walking: false
     }
