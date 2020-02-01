@@ -50,7 +50,14 @@ const BedroomInitialState = [
   }
 ];
 
-const Stage = ({ children, scene, language, setLocation, setScene }) => {
+const Stage = ({
+  children,
+  scene,
+  language,
+  offset, // wave offset
+  setLocation,
+  setScene
+}) => {
   const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
       ? e.target.getBoundingClientRect()
@@ -120,7 +127,7 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
   console.log(events);
   return (
     <>
-      <Container>
+      <Container offset={offset}>
         <Inner className={scene}>
           <Bedroom className={scene !== "bedroom" ? "deselected" : null}>
             <RightButton onClick={() => setScene("kitchen", "right", 880)}>

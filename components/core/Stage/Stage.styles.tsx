@@ -1,11 +1,18 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+type ContainerProps = {
+  offset: number;
+};
+
+export const Container = styled.div<ContainerProps>`
   position: relative;
   display: flex;
   background: #72a8c1;
   width: 100%;
   overflow: hidden;
+
+  transition: margin 4s ease-in;
+  margin-top: ${({ offset }) => offset}px;
 `;
 
 type InnerProps = {

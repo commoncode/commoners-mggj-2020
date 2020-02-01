@@ -72,6 +72,7 @@ const initialState: GameStateType = {
 
 const Game = () => {
   const [gameState, setGameState] = useState({ ...initialState });
+  const [offset, setOffset] = useState(0);
   const [targetLocation, setTargetLocation] = useState({
     x: gameState.player.position.x,
     y: gameState.player.position.y
@@ -80,7 +81,11 @@ const Game = () => {
   const gameLoop = useRef(null);
 
   useEffect(() => {
-    gameLoop.current = setInterval(() => {}, 1000 / 60); // Frame renderer
+    gameLoop.current = setInterval(() => {
+      // Randomly generate a new offset for the ship every 5 seconds
+      let items = [0, 25, 50, 125, -25, -50, -125];
+      setOffset(items[Math.floor(Math.random() * items.length)]);
+    }, 1000); // Frame renderer
 
     return () => {
       clearInterval(gameLoop.current);
@@ -93,6 +98,7 @@ const Game = () => {
       <Stage
         scene={gameState.player.position.scene}
         language={gameState.language}
+        offset={offset}
         setLocation={(x, y) => {
           const duration = getWalkDuration(
             x,
