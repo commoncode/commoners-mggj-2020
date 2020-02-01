@@ -5,7 +5,7 @@ const FlowerCaption = ({ x, y, language, isToggled }) => {
 
   switch(language) {
     case "english":
-      text = "His favourite flowers."
+      text = "Those are his favourite flowers."
       break;
     case "french":
       text = "Ses fleurs préférées."

@@ -4,6 +4,7 @@ import Helm from "../../scenes/Helm";
 import Kitchen from "../../scenes/Kitchen";
 
 import ActionsBedroom from "../../events/Actions/ActionsBedroom";
+import ActionsKitchen from "../../events/Actions/ActionsKitchen";
 
 import {
   Container,
@@ -20,6 +21,7 @@ const Stage = ({
   offset, // wave offset
   setLocation,
   setTargetLocationLover,
+  setShowOverlayNotClickable,
   setScene
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
@@ -59,7 +61,7 @@ const Stage = ({
               Right
             </RightButton>
 
-            <ActionsBedroom language={language} setTargetLocationLover={setTargetLocationLover} />
+            <ActionsBedroom language={language} setTargetLocationLover={setTargetLocationLover} setShowOverlayNotClickable={setShowOverlayNotClickable} />
 
             <Floor
               onClick={e =>
@@ -81,6 +83,8 @@ const Stage = ({
                 <RightButton onClick={() => setScene("hatch", "right")}>
                   Right
                 </RightButton>
+
+                <ActionsKitchen language={language}/>
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}

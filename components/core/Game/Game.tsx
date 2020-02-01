@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
+import OverlayNotClickable from "../OverlayNotClickable/OverlayNotClickable";
 
 import "../Audio";
 import Stage from "../Stage";
@@ -67,6 +68,7 @@ const initialState: GameStateType = {
 const Game = () => {
   const [gameState, setGameState] = useState({ ...initialState });
   const [offset, setOffset] = useState(0);
+  const [showOverlayNotClickable, setShowOverlayNotClickable] = useState(true)
 
   // Player states
   const [playerWalking, setPlayerWalking] = useState(false);
@@ -92,11 +94,13 @@ const Game = () => {
   return (
     <>
       <GlobalStyle />
+      <OverlayNotClickable isToggled={showOverlayNotClickable} />
       <Water />
       <Stage
         scene={gameState.player.position.scene}
         language={gameState.language}
         offset={offset}
+        setShowOverlayNotClickable={setShowOverlayNotClickable}
         setLocation={(x, y) => {
           const duration = getWalkDuration(
             x,
@@ -243,18 +247,3 @@ const Game = () => {
 };
 
 export default Game;
-
-// const GameTimer = new setInterval(() => updateGameState(), 1000);
-
-// Animation {
-//     currentProgress: 1,
-//     aniamtionEvents: {}
-// }
-
-// animationEvents[animation.currentProgress].forEach((e) => {e.step()})
-
-// type Animation = Animation []
-// type AnimationEvent
-
-// player2RunRight
-// navigatePlayer2(x+1)
