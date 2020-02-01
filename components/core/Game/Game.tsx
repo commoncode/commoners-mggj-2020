@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
 import Caption from "../../captions/Caption";
+import EventsProvider from '../../core/Context';
 
 import Stage from "../Stage";
 
@@ -80,7 +81,7 @@ const Game = () => {
   const gameLoop = useRef(null);
 
   useEffect(() => {
-    gameLoop.current = setInterval(() => {}, 1000 / 60); // Frame renderer
+    gameLoop.current = setInterval(() => { }, 1000 / 60); // Frame renderer
 
     return () => {
       clearInterval(gameLoop.current);
@@ -90,90 +91,69 @@ const Game = () => {
   return (
     <>
       <GlobalStyle />
-      <Stage
-        scene={gameState.player.position.scene}
-        language={gameState.language}
-        setLocation={(x, y) => {
-          const duration = getWalkDuration(
-            x,
-            y,
-            gameState.player.position.x,
-            gameState.player.position.y,
-            500
-          );
+      <EventsProvider>
+        <Stage
+          scene={gameState.player.position.scene}
+          language={gameState.language}
+          setLocation={(x, y) => {
+            const duration = getWalkDuration(
+              x,
+              y,
+              gameState.player.position.x,
+              gameState.player.position.y,
+              500
+            );
 
-          // setTargetLocation({ x, y });
-          setGameState({
-            ...gameState,
-            player: {
-              ...gameState.player,
-              position: { ...gameState.player.position, x, y, duration }
-            }
-          });
-        }}
-        setScene={(
-          nextScene,
-          direction: "left" | "right",
-          floorWidth = 1024
-        ) => {
-          console.log("Setting Scene", nextScene, direction);
-          // Animate character running off screen
-          const x = direction === "left" ? -300 : floorWidth + 300;
-          const y = 50;
-          const leaveDuration = getWalkDuration(
-            x,
-            y,
-            gameState.player.position.x,
-            gameState.player.position.y,
-            1000
-          );
-
-          setGameState({
-            ...gameState,
-            player: {
-              ...gameState.player,
-              position: {
-                ...gameState.player.position,
-                x,
-                y,
-                duration: leaveDuration
-              }
-            }
-          });
-
-          // Change Scene
-          setTimeout(() => {
-            console.log("Scene change...", nextScene);
-            const xExited = direction === "right" ? -300 : floorWidth + 300;
-            const xEntered = direction === "right" ? 100 : floorWidth - 110;
-
+            // setTargetLocation({ x, y });
             setGameState({
               ...gameState,
               player: {
                 ...gameState.player,
-                position: { ...gameState.player.position, scene: nextScene }
+                position: { ...gameState.player.position, x, y, duration }
               }
             });
+          }}
+          setScene={(nextScene, direction: "left" | "right") => {
+            console.log("Setting Scene", nextScene, direction);
+            // Animate character running off screen
+            const x = direction === "left" ? -300 : 1124;
+            const y = 50;
+            const leaveDuration = getWalkDuration(
+              x,
+              y,
+              gameState.player.position.x,
+              gameState.player.position.y,
+              1000
+            );
 
-            // Teleport character
             setGameState({
               ...gameState,
               player: {
                 ...gameState.player,
                 position: {
                   ...gameState.player.position,
-                  scene: nextScene,
-                  x: xExited,
+                  x,
                   y,
-                  duration: 0
+                  duration: leaveDuration
                 }
               }
             });
 
-            // Animate character running on screen
-            const enterDuration = getWalkDuration(xEntered, y, xExited, y, 800);
-
+            // Change Scene
             setTimeout(() => {
+              console.log("Scene change...", nextScene);
+              const xExited = direction === "right" ? -300 : 1024 + 300;
+              const xEntered = direction === "right" ? 100 : 1024 - 260;
+
+              setGameState({
+                ...gameState,
+                player: {
+                  ...gameState.player,
+                  position: { ...gameState.player.position, scene: nextScene }
+                }
+              });
+
+              // Teleport character
               setGameState({
                 ...gameState,
                 player: {
@@ -181,28 +161,47 @@ const Game = () => {
                   position: {
                     ...gameState.player.position,
                     scene: nextScene,
-                    x: xEntered,
+                    x: xExited,
                     y,
-                    duration: enterDuration
+                    duration: 0
                   }
                 }
               });
-            }, 0);
-          }, leaveDuration * 1000);
-        }}
-      >
-        <Player state={gameState.player} />
-        {gameState.lover.position.scene === gameState.player.position.scene ? (
-          <Lover state={gameState.lover} />
-        ) : null}
-      </Stage>
+
+              // Animate character running on screen
+              const enterDuration = getWalkDuration(xEntered, y, xExited, y, 800);
+
+              setTimeout(() => {
+                setGameState({
+                  ...gameState,
+                  player: {
+                    ...gameState.player,
+                    position: {
+                      ...gameState.player.position,
+                      scene: nextScene,
+                      x: xEntered,
+                      y,
+                      duration: enterDuration
+                    }
+                  }
+                });
+              }, 0);
+            }, leaveDuration * 1000);
+          }}
+        >
+          <Player state={gameState.player} />
+          {gameState.lover.position.scene === gameState.player.position.scene ? (
+            <Lover state={gameState.lover} />
+          ) : null}
+        </Stage>
+      </EventsProvider>
     </>
   );
 };
 
 export default Game;
 
-// const GameTimer = new setInterval(() => updateGameState(), 1000);
+    // const GameTimer = new setInterval(() => updateGameState(), 1000);
 
 // Animation {
 //     currentProgress: 1,

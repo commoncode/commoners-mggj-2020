@@ -1,5 +1,6 @@
-import { useState, useCallback } from "react";
+import { useContext, useEffect } from "react";
 
+import EventsContext from '../../core/Context/EventsContext';
 import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
 import Helm from "../../scenes/Helm";
@@ -44,12 +45,6 @@ const LeakEvent = {
   status: "display"
 };
 
-const BedroomInitialState = [
-  {
-    ...LeakEvent
-  }
-];
-
 const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
@@ -78,12 +73,7 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
   const capRight = 920;
   const capLeft = 100;
 
-  const [events, setEvents] = useState([...BedroomInitialState]);
-
-  const addAndPopEvent = event => {
-    const [_first, ...others] = events;
-    setEvents([...others, event]);
-  };
+  const { events, addEvent, removeEvent } = useContext(EventsContext);
 
   const displayEvents = () => {
     return (
@@ -100,14 +90,18 @@ const Stage = ({ children, scene, language, setLocation, setScene }) => {
                 <EventComponent
                   key={`event-${index}`}
                   activation={() => {
-                    addAndPopEvent({
-                      ...LeakEvent,
-                      position: {
-                        x: eventState.position.x + 200,
-                        y: eventState.position.y,
-                        scene: "bedroom"
-                      }
-                    });
+
+                    removeEvent()
+                    setTimeout(() => {
+                      addEvent({
+                        ...LeakEvent,
+                        position: {
+                          x: eventState.position.x + 200,
+                          y: eventState.position.y,
+                          scene: 'bedroom'
+                        },
+                      });
+                    }, 0)
                   }}
                   {...eventState}
                 />
