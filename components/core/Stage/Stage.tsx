@@ -20,6 +20,7 @@ const Stage = ({
   offset, // wave offset
   setLocation,
   setTargetLocationLover,
+  setShowOverlayNotClickable,
   setScene
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
@@ -59,7 +60,7 @@ const Stage = ({
               Right
             </RightButton>
 
-            <ActionsBedroom language={language} setTargetLocationLover={setTargetLocationLover} />
+            <ActionsBedroom language={language} setTargetLocationLover={setTargetLocationLover} setShowOverlayNotClickable={setShowOverlayNotClickable} />
 
             <Floor
               onClick={e =>

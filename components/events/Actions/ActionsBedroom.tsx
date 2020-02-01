@@ -12,7 +12,7 @@ import PlayerShout from "../../captions/texts/bedroom/PlayerShout";
 import Wrench from "../../captions/texts/bedroom/Wrench";
 import Leak from "../Leak";
 
-const ActionsBedroom = ({ language, setTargetLocationLover }) => {
+const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotClickable }) => {
 
   // Bedroom captions states
   const [showArgument, setShowArgument] = useState(true);
@@ -31,11 +31,13 @@ const ActionsBedroom = ({ language, setTargetLocationLover }) => {
 
     await setTimeout(() => {
       setShowArgument(false);
+      setShowOverlayNotClickable(false);
     }, 5000);
 
     await setTimeout(() => {
       setTargetLocationLover(1000, 50);
     }, 3500);
+
   };
 
   useEffect(() => {
