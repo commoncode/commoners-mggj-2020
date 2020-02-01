@@ -86,44 +86,46 @@ const Stage = ({
   const capRight = 920;
   const capLeft = 100;
 
-  const { events, addEvent, removeEvent } = useContext(EventsContext);
+  const { bedroom: bedroomState, init, addEvent, removeEvent } = useContext(EventsContext);
 
-  const displayEvents = () => {
-    return (
-      <>
-        {events &&
-          events.length > 0 &&
-          events
-            .filter(
-              ({ component, ...eventState }) =>
-                eventState.position.scene === scene
-            )
-            .map(({ component: EventComponent, ...eventState }, index) => {
+  const displayEvents = (scene) => {
+
+    if (scene === "bedroom") {
+
+      return (
+        <>
+          {
+            bedroomState && bedroomState.events.length > 0 && bedroomState.events.map(({ component: EventComponent, ...eventState }, index) => {
               return (
                 <EventComponent
                   key={`event-${index}`}
                   activation={() => {
-                    removeEvent();
+
+                    removeEvent("bedroom")
                     setTimeout(() => {
                       addEvent({
                         ...LeakEvent,
                         position: {
                           x: eventState.position.x + 200,
                           y: eventState.position.y,
-                          scene: "bedroom"
-                        }
-                      });
-                    }, 0);
+                          scene: 'bedroom'
+                        },
+                      }, "bedroom");
+                    }, 0)
                   }}
                   {...eventState}
                 />
               );
             })}
-      </>
-    );
+        </>
+      );
+    }
   };
 
-  console.log(events);
+  useEffect(() => {
+    init(scene);
+  }, [scene])
+
   return (
     <>
       <Container offset={offset}>
@@ -145,7 +147,7 @@ const Stage = ({
               {children}
             </Floor>
 
-            {scene === "bedroom" && displayEvents()}
+            {scene === "bedroom" && displayEvents("bedroom")}
           </Bedroom>
 
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
@@ -167,7 +169,7 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "kitchen" && displayEvents()}
+            {scene === "kitchen" && displayEvents("kitchen")}
           </Kitchen>
 
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
@@ -189,7 +191,7 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "hatch" && displayEvents()}
+            {scene === "hatch" && displayEvents("hatch")}
           </Hatch>
 
           <Helm className={scene !== "helm" ? "deselected" : null}>
@@ -208,7 +210,7 @@ const Stage = ({
               </>
             ) : null}
 
-            {scene === "helm" && displayEvents()}
+            {scene === "helm" && displayEvents("helm")}
           </Helm>
         </Inner>
       </Container>
