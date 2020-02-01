@@ -7,6 +7,7 @@ import Kitchen from "../../scenes/Kitchen";
 
 // events
 import Leak from "../../events/Leak";
+import ActionEvent from "../../events/ActionEvent";
 import Argument from "../../captions/texts/Argument";
 
 // captions for Bedroom scene
@@ -87,10 +88,15 @@ const Stage = ({
   const capRight = 920;
   const capLeft = 100;
 
-  // Bedroom interactions
+  // Bedroom captions
   const [showArgument, setShowArgument] = useState(true);
+  const [showBedCaption, setShowBedCaption] = useState(false);
+
+  // Bedroom events
   const [showFirstLeak, setShowFirstLeak] = useState(false);
   const [showSecondLeak, setShowSecondLeak] = useState(false);
+
+
 
 
   const runInitialConversation = async () => {
@@ -101,11 +107,15 @@ const Stage = ({
     await setTimeout(() => {
       setShowArgument(false);
     }, 5000);
+
+    await setTimeout(() => {
+      setTargetLocationLover(1000, 50)
+    }, 3500)
   }
 
   useEffect(() => {
     runInitialConversation();
-  }, [scene])
+  }, [])
 
 
 
@@ -122,7 +132,7 @@ const Stage = ({
             <PlayerShout x={450} y={170} language={language} isToggled={false} />
             <LoverYelling x={820} y={270} language={language} isToggled={false} />
             <Photo x={300} y={180} language={language} isToggled={false} />
-            <Bed x={250} y={180} language={language} isToggled={false} />
+            <Bed x={250} y={180} language={language} isToggled={showBedCaption} />
             <Panic x={450} y={150} language={language} isToggled={false} />
 
 
@@ -135,6 +145,21 @@ const Stage = ({
               setShowFirstLeak(true);
               setShowSecondLeak(false);
             }} />}
+
+            <ActionEvent
+              x={220}
+              y={300}
+              style={{
+                width: '16rem',
+                height: '10rem',
+                background: 'transparent',
+              }}
+              activation={() => {
+                setShowBedCaption(true)
+                setTimeout(() => {
+                  setShowBedCaption(false)
+                }, 1500)
+              }} />
 
             <Floor
               onClick={e =>

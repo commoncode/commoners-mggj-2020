@@ -16,8 +16,8 @@ align-items: center;
 
 width: 18rem;
 
-background: rgba(255, 255, 255, 0.3);
-border: 2px solid black;
+/* background: rgba(255, 255, 255, 0.3); */
+/* border: 2px solid black; */
 
 /* animation */
 transition: visibility 0s, opacity 0.5s linear;
@@ -41,6 +41,6 @@ export const Container = styled.div<ContainerProps>`
 ${captionBase}
 ${Inner}
 ${({ isToggled }) => isToggled ? isVisibleStyle : isHiddenStyle}
-left: ${({ x }) => x }px;
+left: ${({ x }) => x}px;
 top: ${({ y }) => y}px;
 `
