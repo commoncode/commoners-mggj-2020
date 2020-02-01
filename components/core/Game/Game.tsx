@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
+import Caption from '../../captions/Caption';
 
 import Stage from "../Stage";
 
@@ -18,9 +19,16 @@ type CharacterType = {
   position: Position;
 };
 
+type CaptionType = {
+  position: Position;
+  language?: string;
+  text: string;
+};
+
 type GameStateType = {
   player: CharacterType;
   lover: CharacterType;
+  caption: CaptionType;
 
   // Tracking
   love: number;
@@ -54,6 +62,16 @@ const initialState: GameStateType = {
       y: 50,
       speed: 1
     }
+  },
+  caption: {
+    position: {
+      scene: "bedroom",
+      x: 300,
+      y: 20,
+      speed: 1
+    },
+    language: "English",
+    text: "This relationship is beyond repair!"
   },
   love: 0,
   time: 60 * 5
@@ -119,6 +137,7 @@ const Game = () => {
           });
         }}
       >
+        <Caption state={gameState.caption} />
         <Player state={gameState.player} />
         {gameState.lover.position.scene === gameState.player.position.scene ? (
           <Lover state={gameState.lover} />
