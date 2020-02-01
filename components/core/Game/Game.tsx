@@ -4,6 +4,7 @@ import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
 import EventsProvider from "../../core/Context";
 
+import "../Audio";
 import Stage from "../Stage";
 import Water from "./Water";
 
@@ -72,7 +73,7 @@ const Game = () => {
       // Randomly generate a new offset for the ship every 5 seconds
       let items = [0, 25, 50, 125, -25, -50, -125];
       setOffset(items[Math.floor(Math.random() * items.length)]);
-    }, 1000); // Frame renderer
+    }, 5000); // Frame renderer
 
     return () => {
       clearInterval(gameLoop.current);
@@ -205,14 +206,14 @@ const Game = () => {
                 ...gameState.lover,
                 position: { ...gameState.lover.position, x, y, duration }
               }
-            })
+            });
           }}
         >
           <Player state={gameState.player} />
           {gameState.lover.position.scene ===
-            gameState.player.position.scene ? (
-              <Lover state={gameState.lover} />
-            ) : null}
+          gameState.player.position.scene ? (
+            <Lover state={gameState.lover} />
+          ) : null}
         </Stage>
       </EventsProvider>
     </>
