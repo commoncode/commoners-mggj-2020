@@ -35,17 +35,6 @@ type GameStateType = {
   time: number;
 };
 
-type EventType = {
-  activation: () => {};
-  position: {
-    scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
-    x: number;
-    y: number;
-  };
-  display: number; // display the event until reach some ammount of time
-  status: "display" | "hidden";
-}
-
 const initialState: GameStateType = {
   player: {
     position: {

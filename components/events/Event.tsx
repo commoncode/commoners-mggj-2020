@@ -7,6 +7,7 @@ const Event = (state) => <>
             <Container
                 x={state.position.x}
                 y={state.position.y}
+                onClick={state.activation}
             >
                 Event
                 </Container>

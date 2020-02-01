@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
@@ -16,18 +16,52 @@ import {
   RightButton
 } from "./Stage.styles";
 
+type EventType = {
+  activation?: () => {};
+  component: any,
+  position: {
+    scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
+    x: number;
+    y: number;
+  };
+  display: number; // display the event until reach some ammount of time
+  status: "display" | "hidden";
+}
 
-const BedroomInitialState = [{
+type StageStateType = {
+  events: EventType[]
+}
+
+const LeakEvent = {
   component: Leak,
   position: {
     x: 300,
     y: 300,
     scene: "bedroom"
   },
+  display: 30,
   status: 'display',
-  display: 30
 }
-]
+
+const BedroomInitialState = [{
+  ...LeakEvent,
+  activation: (fn) => () => fn({
+    ...LeakEvent,
+    position: {
+      x: 500,
+      y: 300,
+      scene: 'bedroom'
+    },
+    activation: (fn) => () => fn({
+      ...LeakEvent,
+      position: {
+        x: 700,
+        y: 300,
+        scene: 'bedroom'
+      }
+    })
+  })
+}];
 
 const Stage = ({ children, scene, setLocation, setScene }) => {
   const handleClick = e => {
@@ -41,21 +75,38 @@ const Stage = ({ children, scene, setLocation, setScene }) => {
 
   const [events, setEvents] = useState(BedroomInitialState);
 
-  const displayEvents = () => {
+  const addEvent = useCallback((event) => {
+    setEvents([...events, event])
+  }, [setEvents])
+
+  const displayEvents = useCallback(() => {
     return (
       <>
         {
+          events && events.length > 0 &&
           events
             .filter(({ component, ...eventState }) => eventState.position.scene === scene)
-            .map(({ component: EventComponent, ...eventState }, index) => {
+            .map(({ component: EventComponent, activation, ...eventState }, index) => {
 
-              return (<EventComponent key={`event-${index}`} {...eventState} />)
+              let additionalProps = {}
+              if (activation) {
+                additionalProps = {
+                  activation: activation(addEvent)
+                }
+              }
+
+              return (
+                <EventComponent
+                  key={`event-${index}`}
+                  {...eventState}
+                  {...additionalProps}
+                />
+              )
             })
         }
       </>
     )
-  }
-
+  }, [events, addEvent])
 
   return (
     <>
