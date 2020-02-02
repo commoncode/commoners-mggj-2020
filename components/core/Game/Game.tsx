@@ -80,6 +80,9 @@ const Game = () => {
   const [loverWalking, setLoverWalking] = useState(false);
   const [loverExpression, setLoverExpression] = useState("sad");
 
+  // Love Meter (works with percent 0%-100%)
+  const [progressLove, setProgressLove] = useState(60);
+
   const gameLoop = useRef(null);
   useEffect(() => {
     gameLoop.current = setInterval(() => {
@@ -97,7 +100,7 @@ const Game = () => {
     <>
       <GlobalStyle />
       <OverlayNotClickable isToggled={showOverlayNotClickable} />
-      <EndingOverlay typeEnding={1} />
+      <EndingOverlay typeEnding={1} progressLove={progressLove} />
       <Water />
       <LoveMeter />
       <Stage
