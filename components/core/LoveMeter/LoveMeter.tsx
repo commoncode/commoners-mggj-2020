@@ -8,7 +8,7 @@ margin: auto;
 left: 20px;
 bottom: 20px;
 height: 7rem;
-z-index: 200;
+z-index: 900002;
 `;
 
 const WrapperLoveMeter = styled.div``;

@@ -9,7 +9,7 @@ const Bar = styled.div`
   margin: auto;
   left: 50px;
   bottom: 40px;
-  z-index: 100;
+  z-index: 900001;
   border-radius: 20px;
 `;
 

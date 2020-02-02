@@ -7,7 +7,7 @@ const OverlayModal = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 99999999;
+  z-index: 900000;
   overflow-y: auto;
   background-color: #74A8C0;
   display: flex;
