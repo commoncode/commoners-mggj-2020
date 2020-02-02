@@ -51,7 +51,7 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
       <PutItemBackCaption x={624} y={100} language={language} isToggled={showPutItemBackCaption} />
 
       <ActionEvent
-        x={240}
+        x={280}
         y={320}
         style={{
           width: '2rem',
@@ -66,7 +66,7 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
         }} />
 
       <Cookie
-        x={150}
+        x={350}
         y={320}
         activation={() => {
           setShowCookieCaption(true)
@@ -91,8 +91,8 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
       />
 
       <Flower
-        x={250}
-        y={320}
+        x={520}
+        y={190}
         activation={() => {
           setShowFlowerCaption(true)
           setTimeout(() => {
@@ -116,7 +116,7 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
       />
 
       <Wrench
-        x={624}
+        x={640}
         y={220}
         activation={() => {
           setShowWrenchCaption(true)
