@@ -3,8 +3,8 @@ import Head from "next/head";
 export const PageHead = () => (
   <Head>
     <link
-      href="https://fonts.googleapis.com/css?family=Frijole&display=swap"
-      rel="stylesheet "
+      href="https://fonts.googleapis.com/css?family=Frijole|Itim&display=swap"
+      rel="stylesheet"
     />
   </Head>
 );

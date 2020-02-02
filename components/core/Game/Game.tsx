@@ -43,7 +43,7 @@ const initialState: GameStateType = {
   player: {
     position: {
       scene: "bedroom",
-      x: 400,
+      x: 200,
       y: 80,
       duration: 1,
       walking: false
