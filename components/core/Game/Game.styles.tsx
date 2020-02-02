@@ -15,5 +15,6 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: center;
 
         background: #72a8c1;
+        font-family: 'Itim', cursive;
     }
 `;
