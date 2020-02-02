@@ -54,6 +54,7 @@ export const Floor = styled.div<FloorProps>`
   right: ${({ right }) => right || 0}rem;
   height: 6rem;
   z-index: 600;
+  cursor: pointer;
 `;
 
 export const sceneBase = css`
@@ -61,7 +62,7 @@ export const sceneBase = css`
   flex-shrink: 0;
   width: 64rem;
   height: 38rem;
-  border-right: 3rem solid #282828;
+
   overflow: hidden;
 
   transition: opacity 1s ease-in-out;

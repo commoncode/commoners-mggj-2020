@@ -2,6 +2,7 @@ import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
 import Helm from "../../scenes/Helm";
 import Kitchen from "../../scenes/Kitchen";
+import Divider from "../../scenes/Divider";
 
 import ActionsBedroom from "../../events/Actions/ActionsBedroom";
 import ActionsKitchen from "../../events/Actions/ActionsKitchen";
@@ -53,21 +54,20 @@ const Stage = ({
   const capRight = 920;
   const capLeft = 100;
 
-
   return (
     <>
       <Container offset={offset}>
         <Inner className={scene}>
           <Bedroom className={scene !== "bedroom" ? "deselected" : null}>
-            <RightButton onClick={() => setScene("kitchen", "right", 880)}>
-              Right
-            </RightButton>
-
-            <ActionsBedroom language={language} setTargetLocationLover={setTargetLocationLover} setShowOverlayNotClickable={setShowOverlayNotClickable} />
+            <ActionsBedroom
+              language={language}
+              setTargetLocationLover={setTargetLocationLover}
+              setShowOverlayNotClickable={setShowOverlayNotClickable}
+            />
 
             <Floor
               onClick={e =>
-                scene === "bedroom" ? handleClick(e, 100, 770) : null
+                scene === "bedroom" ? handleClick(e, 200, 770) : null
               }
               className={`floor`}
               left={9}
@@ -76,17 +76,21 @@ const Stage = ({
             </Floor>
           </Bedroom>
 
+          <Divider
+            kind={"first"}
+            onClick={() => {
+              if (scene === "bedroom") {
+                setScene("kitchen", "right", 880);
+              } else {
+                setScene("bedroom", "left", 880);
+              }
+            }}
+          />
+
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
             {scene === "kitchen" ? (
               <>
-                <LeftButton onClick={() => setScene("bedroom", "left", 880)}>
-                  Left
-                </LeftButton>
-                <RightButton onClick={() => setScene("hatch", "right")}>
-                  Right
-                </RightButton>
-
-                <ActionsKitchen language={language}/>
+                <ActionsKitchen language={language} />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -98,17 +102,21 @@ const Stage = ({
             ) : null}
           </Kitchen>
 
+          <Divider
+            kind={"second"}
+            onClick={() => {
+              if (scene === "kitchen") {
+                setScene("hatch", "right", 880);
+              } else {
+                setScene("kitchen", "left", 880);
+              }
+            }}
+          />
+
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
             {scene === "hatch" ? (
               <>
-                <LeftButton onClick={() => setScene("kitchen", "left")}>
-                  Left
-                </LeftButton>
-                <RightButton onClick={() => setScene("helm", "right")}>
-                  Right
-                </RightButton>
-
-                <ActionsHatch language={language}/>
+                <ActionsHatch language={language} />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -120,14 +128,21 @@ const Stage = ({
             ) : null}
           </Hatch>
 
+          <Divider
+            kind={"third"}
+            onClick={() => {
+              if (scene === "hatch") {
+                setScene("helm", "right", 880);
+              } else {
+                setScene("hatch", "left", 880);
+              }
+            }}
+          />
+
           <Helm className={scene !== "helm" ? "deselected" : null}>
             {scene === "helm" ? (
               <>
-                <LeftButton onClick={() => setScene("hatch", "left")}>
-                  Left
-                </LeftButton>
-
-                <ActionsHelm language={language}/>
+                <ActionsHelm language={language} />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
