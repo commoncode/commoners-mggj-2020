@@ -92,7 +92,6 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
             console.log('click leak')
           }}
           repair={() => {
-            setShowFirstLeak(false);
             setShowSecondLeak(true);
           }}
           yell={async () => {
@@ -124,11 +123,6 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
 
         // setShowSecondLeak(false);
       }}
-
-        repair={() => {
-          setShowSecondLeak(false);
-          setShowFirstLeak(true);
-        }}
         yell={async () => {
           setShowPlayerShout(true)
 
