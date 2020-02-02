@@ -15,7 +15,9 @@ import Wrench from "../../captions/texts/bedroom/Wrench";
 const ActionsBedroom = ({
   language,
   setTargetLocationLover,
-  setShowOverlayNotClickable
+  setShowOverlayNotClickable,
+  increaseLovePoints,
+  decreaseLovePoints
 }) => {
   // Bedroom captions states
   const [showArgument, setShowArgument] = useState(true);
@@ -36,6 +38,7 @@ const ActionsBedroom = ({
     }, 5000);
 
     await setTimeout(() => {
+      decreaseLovePoints();
       setTargetLocationLover(1000, 50);
     }, 3500);
   };

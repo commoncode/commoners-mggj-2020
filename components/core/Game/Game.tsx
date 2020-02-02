@@ -63,7 +63,7 @@ const initialState: GameStateType = {
     isToggled: true
   },
   language: "english",
-  love: 0,
+  love: 100,
   time: 60 * 5
 };
 
@@ -82,6 +82,13 @@ const Game = () => {
 
   // Love Meter (works with percent 0%-100%)
   const [progressLove, setProgressLove] = useState(100);
+
+  const increaseLovePoints = () => {
+    return progressLove <= 90 ? setProgressLove(progressLove + 10) : setProgressLove(progressLove);
+  }
+  const decreaseLovePoints = () => {
+    return progressLove >= 10 ? setProgressLove(progressLove - 10) : setProgressLove(progressLove);
+  }
 
   // Setup ending
   const [typeEnding, setTypeEnding] = useState(null);
@@ -110,6 +117,8 @@ const Game = () => {
         scene={gameState.player.position.scene}
         language={gameState.language}
         offset={offset}
+        increaseLovePoints={increaseLovePoints}
+        decreaseLovePoints={decreaseLovePoints}
         setShowOverlayNotClickable={setShowOverlayNotClickable}
         setLocation={(x, y) => {
           const duration = getWalkDuration(
