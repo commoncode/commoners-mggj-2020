@@ -176,8 +176,6 @@ const Game = () => {
           direction: "left" | "right",
           floorWidth = 1024
         ) => {
-          console.log("Setting Scene", nextScene, direction);
-
           // Animate character running off screen
           const x = direction === "left" ? -300 : floorWidth + 300;
           const y = 50;
@@ -205,8 +203,6 @@ const Game = () => {
 
           // Change Scene
           setTimeout(() => {
-            console.log("Scene change...", nextScene);
-
             const xExited = direction === "right" ? -300 : floorWidth + 300;
             const xEntered = direction === "right" ? 100 : floorWidth - 110;
 
