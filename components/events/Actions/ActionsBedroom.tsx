@@ -12,9 +12,11 @@ import Photo from "../../captions/texts/bedroom/Photo";
 import PlayerShout from "../../captions/texts/bedroom/PlayerShout";
 import Wrench from "../../captions/texts/bedroom/Wrench";
 
-
-const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotClickable }) => {
-
+const ActionsBedroom = ({
+  language,
+  setTargetLocationLover,
+  setShowOverlayNotClickable
+}) => {
   // Bedroom captions states
   const [showArgument, setShowArgument] = useState(true);
   const [showBedCaption, setShowBedCaption] = useState(false);
@@ -38,7 +40,6 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
     await setTimeout(() => {
       setTargetLocationLover(1000, 50);
     }, 3500);
-
   };
 
   useEffect(() => {
@@ -47,9 +48,19 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
 
   return (
     <>
-      <Argument x={450} y={100} language={language} isToggled={showArgument} />
-      <PlayerShout x={450} y={170} language={language} isToggled={showPlayerShout} />
-      <LoverYelling x={820} y={270} language={language} isToggled={showLoverYelling} />
+      <Argument x={510} y={120} language={language} isToggled={showArgument} />
+      <PlayerShout
+        x={450}
+        y={170}
+        language={language}
+        isToggled={showPlayerShout}
+      />
+      <LoverYelling
+        x={780}
+        y={150}
+        language={language}
+        isToggled={showLoverYelling}
+      />
       <Photo x={300} y={180} language={language} isToggled={showPhotoCaption} />
       <Bed x={250} y={180} language={language} isToggled={showBedCaption} />
       <Panic x={450} y={150} language={language} isToggled={showPanicCaption} />
@@ -58,105 +69,110 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
         x={220}
         y={300}
         style={{
-          width: '16rem',
-          height: '10rem',
-          background: 'transparent',
+          width: "16rem",
+          height: "10rem",
+          background: "transparent"
         }}
         activation={() => {
-          setShowBedCaption(true)
+          setShowBedCaption(true);
           setTimeout(() => {
-            setShowBedCaption(false)
-          }, 1500)
-        }} />
+            setShowBedCaption(false);
+          }, 1500);
+        }}
+      />
 
       <ActionEvent
         x={368}
         y={230}
         style={{
-          width: '5rem',
-          height: '3rem',
-          background: 'transparent',
+          width: "5rem",
+          height: "3rem",
+          background: "transparent"
         }}
         activation={() => {
-          setShowPhotoCaption(true)
+          setShowPhotoCaption(true);
           setTimeout(() => {
-            setShowPhotoCaption(false)
-          }, 1500)
-        }} />
+            setShowPhotoCaption(false);
+          }, 1500);
+        }}
+      />
 
       {/* Leaks */}
-      {showFirstLeak &&
-        <Leak x={500}
+      {showFirstLeak && (
+        <Leak
+          x={500}
           y={200}
           activation={() => {
-            console.log('click leak')
+            console.log("click leak");
           }}
           repair={() => {
             setShowFirstLeak(false);
             setShowSecondLeak(true);
           }}
           yell={async () => {
-            setShowPlayerShout(true)
+            setShowPlayerShout(true);
 
             await setTimeout(() => {
-              setShowPlayerShout(false)
-            }, 1500)
+              setShowPlayerShout(false);
+            }, 1500);
 
             await setTimeout(() => {
-              setShowLoverYelling(true)
-            }, 2000)
+              setShowLoverYelling(true);
+            }, 2000);
 
             await setTimeout(() => {
-              setShowLoverYelling(false)
-            }, 3500)
-
+              setShowLoverYelling(false);
+            }, 3500);
           }}
           panic={async () => {
-            setShowPanicCaption(true)
+            setShowPanicCaption(true);
 
             await setTimeout(() => {
-              setShowPanicCaption(false)
-            }, 2500)
+              setShowPanicCaption(false);
+            }, 2500);
           }}
         />
-      }
+      )}
 
-      {showSecondLeak && <Leak x={700} y={200} activation={() => {
+      {showSecondLeak && (
+        <Leak
+          x={700}
+          y={200}
+          activation={() => {
+            // setShowSecondLeak(false);
+          }}
+          repair={() => {
+            setShowSecondLeak(false);
+            setShowFirstLeak(true);
+          }}
+          yell={async () => {
+            setShowPlayerShout(true);
 
-        // setShowSecondLeak(false);
-      }}
+            await setTimeout(() => {
+              setShowPlayerShout(false);
+            }, 1500);
 
-        repair={() => {
-          setShowSecondLeak(false);
-          setShowFirstLeak(true);
-        }}
-        yell={async () => {
-          setShowPlayerShout(true)
+            await setTimeout(() => {
+              setShowLoverYelling(true);
+            }, 2000);
 
-          await setTimeout(() => {
-            setShowPlayerShout(false)
-          }, 1500)
+            await setTimeout(() => {
+              setShowLoverYelling(false);
+            }, 3500);
+          }}
+          panic={async () => {
+            setShowPanicCaption(true);
 
-          await setTimeout(() => {
-            setShowLoverYelling(true)
-          }, 2000)
-
-          await setTimeout(() => {
-            setShowLoverYelling(false)
-          }, 3500)
-        }}
-        panic={async () => {
-          setShowPanicCaption(true)
-
-          await setTimeout(() => {
-            setShowPanicCaption(false)
-          }, 2500)
-        }}
-      />}
+            await setTimeout(() => {
+              setShowPanicCaption(false);
+            }, 2500);
+          }}
+        />
+      )}
 
       {/* END Leaks */}
     </>
-  )
-}
+  );
+};
 
 export default ActionsBedroom;
