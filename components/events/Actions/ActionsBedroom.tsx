@@ -104,29 +104,13 @@ const ActionsBedroom = ({
       {/* Leaks */}
       {showFirstLeak && (
         <Leak
-          x={748}
-          y={180}
+          x={750}
+          y={160}
           activation={() => {
             console.log("click leak");
           }}
           repair={() => {
             setShowSecondLeak(true);
-          }}
-          yell={async () => {
-            setShowPlayerShout(true);
-
-            await setTimeout(() => {
-              setShowPlayerShout(false);
-            }, 1500);
-
-            await setTimeout(() => {
-              setShowLoverYelling(true);
-            }, 2000);
-
-            await setTimeout(() => {
-              setShowLoverYelling(false);
-            }, 3500);
-            decreaseLovePoints()
           }}
           panic={async () => {
             setShowPanicCaption(true);
@@ -140,8 +124,8 @@ const ActionsBedroom = ({
 
       {showSecondLeak && (
         <Leak
-          x={835}
-          y={216}
+          x={870}
+          y={200}
           activation={() => {
             // setShowSecondLeak(false);
           }}

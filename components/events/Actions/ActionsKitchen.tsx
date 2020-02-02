@@ -116,8 +116,8 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
       />
 
       <Wrench
-        x={640}
-        y={220}
+        x={625}
+        y={255}
         activation={() => {
           setShowWrenchCaption(true)
           setTimeout(() => {
