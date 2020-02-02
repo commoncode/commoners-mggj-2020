@@ -3,19 +3,20 @@ import React, { useRef, useEffect } from 'react';
 import Event from '../Event';
 import ActionCaption from '../../captions/ActionCaption';
 import useActionCaption from "../../captions/ActionCaption/useActionCaption";
-import { Leak1 } from './LeakStyles';
+import { Leak1, Leak2 } from './LeakStyles';
 
 type LeakProps = {
     x: number;
     y: number;
     activation: () => void;
-    repair: () => void;
+    repair?: () => void;
     yell?: () => void;
     panic?: () => void;
+    isSecondVersion?: boolean;
 }
 
 
-const Leak = ({ x, y, activation, repair, yell, panic }: LeakProps) => {
+const Leak = ({ x, y, activation, repair, yell, panic, isSecondVersion }: LeakProps) => {
     const option = useActionCaption();
     const eventRef = useRef(null);
 
@@ -52,10 +53,13 @@ const Leak = ({ x, y, activation, repair, yell, panic }: LeakProps) => {
                     activation();
                 }}
             />
-            <Leak1 x={x - 50} y={y + 25} />
-            <ActionCaption x={x + 20} y={y - 20} activation={() => { repair(); console.log('click repair') }} isToggled={option.show}>Repair</ActionCaption>
-            <ActionCaption x={x + 20} y={y + 80} activation={() => { yell && yell(); console.log('click yell') }} isToggled={option.show}>Yell</ActionCaption>
-            <ActionCaption x={x - 50} y={y + 40} activation={() => { panic && panic(); console.log('click PANIC') }} isToggled={option.show}>PANIC!</ActionCaption>
+            {
+                !isSecondVersion ? (<Leak1 x={x - 50} y={y + 25} />) : (<Leak2 x={x - 77} y={y + 25} style={{ width: '180px'}} />)
+            }
+            
+            { repair && (<ActionCaption x={x + 20} y={y - 20} activation={() => { repair(); console.log('click repair') }} isToggled={option.show}>Repair</ActionCaption>)}
+            { yell && (<ActionCaption x={x + 20} y={y + 80} activation={() => { yell(); console.log('click yell') }} isToggled={option.show}>Yell</ActionCaption>)}
+            { panic && (<ActionCaption x={x - 50} y={y + 40} activation={() => { panic(); console.log('click PANIC') }} isToggled={option.show}>PANIC!</ActionCaption>)}
         </>
     )
 
