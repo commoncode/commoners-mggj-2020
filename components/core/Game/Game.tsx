@@ -257,7 +257,7 @@ const Game = () => {
             }, 100);
           }, leaveDuration * 1000);
         }}
-        setTargetLocationLover={(x, y) => {
+        setTargetLocationLover={(x, y, newScene) => {
           const duration = getWalkDuration(
             x,
             y,
@@ -272,7 +272,13 @@ const Game = () => {
             ...gameState,
             lover: {
               ...gameState.lover,
-              position: { ...gameState.lover.position, x, y, duration }
+              position: {
+                ...gameState.lover.position,
+                x,
+                y,
+                duration,
+                scene: newScene ? newScene : gameState.player.position.scene
+              }
             }
           });
 

@@ -44,6 +44,8 @@ const ActionsBedroom = ({
     await setTimeout(() => {
       decreaseLovePoints();
       setTargetLocationLover(1000, 50);
+
+      setTimeout(() => setTargetLocationLover(700, 50, "helm"), 3000);
     }, 3500);
   };
 
