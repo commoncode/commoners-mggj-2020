@@ -86,8 +86,8 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
 
       {/* Leaks */}
       {showFirstLeak &&
-        <Leak x={500}
-          y={200}
+        <Leak x={759}
+          y={198}
           activation={() => {
             console.log('click leak')
           }}
@@ -120,7 +120,7 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
         />
       }
 
-      {showSecondLeak && <Leak x={700} y={200} activation={() => {
+      {showSecondLeak && <Leak x={835} y={216} activation={() => {
 
         // setShowSecondLeak(false);
       }}
