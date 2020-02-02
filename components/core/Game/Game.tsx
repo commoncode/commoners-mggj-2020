@@ -8,6 +8,7 @@ import EndingOverlay from "../EndingOverlay";
 import "../Audio";
 import Stage from "../Stage";
 import Water from "./Water";
+import LoveMeter from "./LoveMeter";
 
 import { GlobalStyle } from "./Game.styles";
 import { getWalkDuration } from "./movement";
@@ -43,7 +44,7 @@ const initialState: GameStateType = {
   player: {
     position: {
       scene: "bedroom",
-      x: 400,
+      x: 200,
       y: 80,
       duration: 1,
       walking: false
@@ -98,6 +99,7 @@ const Game = () => {
       <OverlayNotClickable isToggled={showOverlayNotClickable} />
       <EndingOverlay typeEnding={1} />
       <Water />
+      <LoveMeter />
       <Stage
         scene={gameState.player.position.scene}
         language={gameState.language}
