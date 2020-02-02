@@ -7,6 +7,7 @@ import OverlayNotClickable from "../OverlayNotClickable/OverlayNotClickable";
 import "../Audio";
 import Stage from "../Stage";
 import Water from "./Water";
+import LoveMeter from "./LoveMeter";
 
 import { GlobalStyle } from "./Game.styles";
 import { getWalkDuration } from "./movement";
@@ -96,6 +97,7 @@ const Game = () => {
       <GlobalStyle />
       <OverlayNotClickable isToggled={showOverlayNotClickable} />
       <Water />
+      <LoveMeter />
       <Stage
         scene={gameState.player.position.scene}
         language={gameState.language}
