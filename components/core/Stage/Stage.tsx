@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Title from "../../scenes/Title";
 import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
@@ -31,6 +33,8 @@ const Stage = ({
   setScene,
   setTypeEnding
 }) => {
+  const [startGame, setStartGame] = useState(false);
+
   const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
       ? e.target.getBoundingClientRect()
@@ -69,6 +73,7 @@ const Stage = ({
               setShowOverlayNotClickable={setShowOverlayNotClickable}
               increaseLovePoints={increaseLovePoints}
               decreaseLovePoints={decreaseLovePoints}
+              startGame={startGame}
             />
 
             <Floor
@@ -99,7 +104,8 @@ const Stage = ({
                 <ActionsKitchen
                   language={language}
                   increaseLovePoints={increaseLovePoints}
-                  decreaseLovePoints={decreaseLovePoints} />
+                  decreaseLovePoints={decreaseLovePoints}
+                />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -172,7 +178,13 @@ const Stage = ({
             ) : null}
           </Helm>
 
-          <Title onClick={() => setScene("bedroom", "right", 880)} />
+          <Title
+            onClick={() => {
+              setScene("bedroom", "right", 880);
+
+              setTimeout(() => setStartGame(true), 2000);
+            }}
+          />
         </Inner>
       </Container>
     </>

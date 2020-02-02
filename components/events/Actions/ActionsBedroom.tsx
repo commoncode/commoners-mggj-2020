@@ -17,7 +17,8 @@ const ActionsBedroom = ({
   setTargetLocationLover,
   setShowOverlayNotClickable,
   increaseLovePoints,
-  decreaseLovePoints
+  decreaseLovePoints,
+  startGame
 }) => {
   // Bedroom captions states
   const [showArgument, setShowArgument] = useState(true);
@@ -44,8 +45,11 @@ const ActionsBedroom = ({
   };
 
   useEffect(() => {
-    runInitialConversation();
-  }, []);
+    if (startGame === true) {
+      setShowOverlayNotClickable(true);
+      runInitialConversation();
+    }
+  }, [startGame]);
 
   return (
     <>
@@ -123,7 +127,7 @@ const ActionsBedroom = ({
             await setTimeout(() => {
               setShowLoverYelling(false);
             }, 3500);
-            decreaseLovePoints()
+            decreaseLovePoints();
           }}
           panic={async () => {
             setShowPanicCaption(true);

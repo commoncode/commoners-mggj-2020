@@ -70,7 +70,7 @@ const initialState: GameStateType = {
 const Game = () => {
   const [gameState, setGameState] = useState({ ...initialState });
   const [offset, setOffset] = useState(0);
-  const [showOverlayNotClickable, setShowOverlayNotClickable] = useState(true);
+  const [showOverlayNotClickable, setShowOverlayNotClickable] = useState(false);
 
   // Player states
   const [playerWalking, setPlayerWalking] = useState(false);
@@ -84,11 +84,15 @@ const Game = () => {
   const [progressLove, setProgressLove] = useState(100);
 
   const increaseLovePoints = () => {
-    return progressLove <= 90 ? setProgressLove(progressLove + 10) : setProgressLove(progressLove);
-  }
+    return progressLove <= 90
+      ? setProgressLove(progressLove + 10)
+      : setProgressLove(progressLove);
+  };
   const decreaseLovePoints = () => {
-    return progressLove >= 10 ? setProgressLove(progressLove - 10) : setProgressLove(progressLove);
-  }
+    return progressLove >= 10
+      ? setProgressLove(progressLove - 10)
+      : setProgressLove(progressLove);
+  };
 
   // Setup ending
   const [typeEnding, setTypeEnding] = useState(null);
@@ -108,7 +112,7 @@ const Game = () => {
 
   // Triggering bad ending when there is no more love :(
   if (progressLove === 0 && !typeEnding) {
-    setTypeEnding(1)
+    setTypeEnding(1);
   }
 
   return (
