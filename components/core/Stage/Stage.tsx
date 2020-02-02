@@ -1,3 +1,4 @@
+import Title from "../../scenes/Title";
 import Bedroom from "../../scenes/Bedroom";
 import Hatch from "../../scenes/Hatch";
 import Helm from "../../scenes/Helm";
@@ -164,7 +165,7 @@ const Stage = ({
                 />
 
                 <Floor
-                  onClick={e => handleClick(e, capLeft, capRight)}
+                  onClick={e => handleClick(e, capLeft, 800)}
                   className={`floor`}
                 >
                   {children}
@@ -172,6 +173,8 @@ const Stage = ({
               </>
             ) : null}
           </Helm>
+
+          <Title onClick={() => setScene("bedroom", "right", 880)} />
         </Inner>
       </Container>
     </>

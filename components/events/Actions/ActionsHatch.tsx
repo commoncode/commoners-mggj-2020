@@ -41,8 +41,8 @@ const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints }) => {
       <EscapeCaption x={300} y={100} language={language} isToggled={showEscapeCaption} />
       <TryNotToDie x={300} y={100} language={language} isToggled={showTryNotToDie} />
       <IkeaBox x={300} y={100} language={language} isToggled={showIkeaBox} />
-      <LookAtCalendar x={300} y={100} language={language} isToggled={showLookAtCalendar}/>
-      <Firies x={300} y={100} language={language} isToggled={showFiries}/>
+      <LookAtCalendar x={300} y={100} language={language} isToggled={showLookAtCalendar} />
+      <Firies x={300} y={100} language={language} isToggled={showFiries} />
 
       <ActionEvent
         x={240}
@@ -89,10 +89,14 @@ const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints }) => {
           }, 3000)
         }} />
 
-        <Calendar
-          x={100}
-          y={100}
-          activation={() => {
+      <Calendar
+        x={50}
+        y={110}
+        style={{
+          width: '96px',
+          height: '120px'
+        }}
+        activation={() => {
 
           }}
           look={() => {
@@ -109,7 +113,6 @@ const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints }) => {
               window.open('https://quickweb.westpac.com.au/OnlinePaymentServlet?cd_community=NSWRFS&cd_currency=AUD&cd_supplier_business=DONATIONS&action=EnterDetails', '_blank');
             }, 3000)
             decreaseLovePoints()
-
           }}
         />
     </>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Bar = styled.div`
   background-color: white;
   height: 2.5rem;
-  width: 416px;
+  width: ${({ progress }) => progress === 100 ? 416 : 420}px;
   position: absolute;
   margin: auto;
   left: 50px;
@@ -15,7 +15,7 @@ const Bar = styled.div`
 
 const Filler = styled.div`
   height: 100%;
-  transition: width 0.2s ease-in;
+  transition: width 0.5s ease-in;
   background-color: pink;
   ${({ progress }) => `
     width: ${progress}%;
@@ -38,7 +38,7 @@ const ProgressBar = ({ progress, style }: ProgressBarProps) => {
         fixedProgress = progress;
     }
     return (
-        <Bar style={style}>
+        <Bar style={style} progress={progress}>
             <Filler progress={fixedProgress} />
         </Bar>
     );

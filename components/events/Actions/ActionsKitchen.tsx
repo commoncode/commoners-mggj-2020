@@ -33,14 +33,20 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
   return (
     <>
       <CoffeeCaption x={200} y={280} language={language} isToggled={showCoffeeCaption} />
+
+      {/* Cookie captions */}
       <CookieCaption x={120} y={280} language={language} isToggled={showCookieCaption} />
       <CrumbCaption x={30} y={180} language={language} isToggled={showCrumbCaption} />
       <GrabCookieCaption x={50} y={250} language={language} isToggled={showGrabCookieCaption} />
+
+      {/* Flower captions */}
       <FlowerCaption x={300} y={100} language={language} isToggled={showFlowerCaption} />
       <GrabFlowerCaption x={300} y={100} language={language} isToggled={showGrabFlowerCaption} />
-      <WrenchCaption x={300} y={100} language={language} isToggled={showWrenchCaption} />
-      <GrabWrenchCaption x={300} y={100} language={language} isToggled={showGrabWrenchCaption} />
-      <PutItemBackCaption x={300} y={100} language={language} isToggled={showPutItemBackCaption} />
+
+      {/* Brench captions */}
+      <WrenchCaption x={640} y={100} language={language} isToggled={showWrenchCaption} />
+      <GrabWrenchCaption x={620} y={100} language={language} isToggled={showGrabWrenchCaption} />
+      <PutItemBackCaption x={624} y={100} language={language} isToggled={showPutItemBackCaption} />
 
       <ActionEvent
         x={240}
@@ -105,8 +111,8 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
       />
 
       <Wrench
-        x={300}
-        y={250}
+        x={624}
+        y={220}
         activation={() => {
           setShowWrenchCaption(true)
           setTimeout(() => {

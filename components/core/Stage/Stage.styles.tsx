@@ -40,6 +40,10 @@ export const Inner = styled.div<InnerProps>`
   &.helm {
     margin-left: calc(50vw - 32rem - 192rem);
   }
+
+  &.title {
+    margin-left: calc(50vw - 32rem - 295rem);
+  }
 `;
 
 type FloorProps = {
