@@ -62,16 +62,12 @@ const Stage = ({
       <Container offset={offset}>
         <Inner className={scene}>
           <Bedroom className={scene !== "bedroom" ? "deselected" : null}>
-            <RightButton onClick={() => setScene("kitchen", "right", 880)}>
-              Right
-            </RightButton>
-
             <ActionsBedroom
-            language={language}
-            setTargetLocationLover={setTargetLocationLover}
-            setShowOverlayNotClickable={setShowOverlayNotClickable}
-            increaseLovePoints={increaseLovePoints}
-            decreaseLovePoints={decreaseLovePoints}
+              language={language}
+              setTargetLocationLover={setTargetLocationLover}
+              setShowOverlayNotClickable={setShowOverlayNotClickable}
+              increaseLovePoints={increaseLovePoints}
+              decreaseLovePoints={decreaseLovePoints}
             />
 
             <Floor
