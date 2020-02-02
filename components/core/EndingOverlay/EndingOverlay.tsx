@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import ProgressBar from './ProgressBar';
 
 const OverlayModal = styled.div`
   position: fixed;
@@ -52,6 +53,8 @@ const Modal = ({ typeEnding }: OverlayProps) => {
                         <Text>and closes it behind him.</Text>
                         <Text>Guess he really doesn't love you anymore</Text>
                         <Text>You die.</Text>
+
+                        <ProgressBar progress={20} />
                     </Column>
                 )
 
