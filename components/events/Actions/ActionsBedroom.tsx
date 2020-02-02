@@ -14,7 +14,6 @@ import Wrench from "../../captions/texts/bedroom/Wrench";
 
 
 const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotClickable }) => {
-
   // Bedroom captions states
   const [showArgument, setShowArgument] = useState(true);
   const [showBedCaption, setShowBedCaption] = useState(false);

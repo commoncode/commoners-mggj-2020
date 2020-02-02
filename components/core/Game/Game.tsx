@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
 import OverlayNotClickable from "../OverlayNotClickable/OverlayNotClickable";
+import EndingOverlay from "../EndingOverlay";
 
 import "../Audio";
 import Stage from "../Stage";
@@ -95,6 +96,7 @@ const Game = () => {
     <>
       <GlobalStyle />
       <OverlayNotClickable isToggled={showOverlayNotClickable} />
+      <EndingOverlay typeEnding={1} />
       <Water />
       <Stage
         scene={gameState.player.position.scene}
