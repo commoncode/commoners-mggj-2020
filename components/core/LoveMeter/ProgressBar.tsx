@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Bar = styled.div`
   background-color: white;
   height: 2.5rem;
-  width: 416px;
+  width: 418px;
   position: absolute;
   margin: auto;
   left: 50px;
