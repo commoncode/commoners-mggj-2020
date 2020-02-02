@@ -120,7 +120,7 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
         />
       }
 
-      {showSecondLeak && <Leak x={835} y={216} activation={() => {
+      {showSecondLeak && <Leak x={835} y={216} isSecondVersion activation={() => {
 
         // setShowSecondLeak(false);
       }}
