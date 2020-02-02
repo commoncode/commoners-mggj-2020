@@ -29,6 +29,9 @@ const Stage = ({
   setTargetLocationLover,
   setShowOverlayNotClickable,
   setScene,
+  setHasCookie,
+  setHasFlower,
+  setHasWrench,
   setTypeEnding
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
@@ -64,11 +67,14 @@ const Stage = ({
         <Inner className={scene}>
           <Bedroom className={scene !== "bedroom" ? "deselected" : null}>
             <ActionsBedroom
-              language={language}
-              setTargetLocationLover={setTargetLocationLover}
-              setShowOverlayNotClickable={setShowOverlayNotClickable}
-              increaseLovePoints={increaseLovePoints}
-              decreaseLovePoints={decreaseLovePoints}
+            language={language}
+            setTargetLocationLover={setTargetLocationLover}
+            setShowOverlayNotClickable={setShowOverlayNotClickable}
+            increaseLovePoints={increaseLovePoints}
+            decreaseLovePoints={decreaseLovePoints}
+            setHasCookie={setHasCookie}
+            setHasFlower={setHasFlower}
+            setHasWrench={setHasWrench}
             />
 
             <Floor
@@ -97,9 +103,13 @@ const Stage = ({
             {scene === "kitchen" ? (
               <>
                 <ActionsKitchen
-                  language={language}
-                  increaseLovePoints={increaseLovePoints}
-                  decreaseLovePoints={decreaseLovePoints} />
+                language={language}
+                increaseLovePoints={increaseLovePoints}
+                decreaseLovePoints={decreaseLovePoints}
+                setHasCookie={setHasCookie}
+                setHasFlower={setHasFlower}
+                setHasWrench={setHasWrench}
+                />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -126,9 +136,12 @@ const Stage = ({
             {scene === "hatch" ? (
               <>
                 <ActionsHatch
-                  language={language}
-                  increaseLovePoints={increaseLovePoints}
-                  decreaseLovePoints={decreaseLovePoints}
+                language={language}
+                increaseLovePoints={increaseLovePoints}
+                decreaseLovePoints={decreaseLovePoints}
+                setHasCookie={setHasCookie}
+                setHasFlower={setHasFlower}
+                setHasWrench={setHasWrench}
                 />
 
                 <Floor
@@ -156,10 +169,13 @@ const Stage = ({
             {scene === "helm" ? (
               <>
                 <ActionsHelm
-                  language={language}
-                  setTypeEnding={setTypeEnding}
-                  increaseLovePoints={increaseLovePoints}
-                  decreaseLovePoints={decreaseLovePoints}
+                language={language}
+                increaseLovePoints={increaseLovePoints}
+                decreaseLovePoints={decreaseLovePoints}
+                setHasCookie={setHasCookie}
+                setHasFlower={setHasFlower}
+                setHasWrench={setHasWrench}
+                setTypeEnding={setTypeEnding}
                 />
 
                 <Floor

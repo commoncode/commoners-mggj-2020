@@ -9,7 +9,15 @@ import AskForHelp from "../../captions/texts/helm/AskForHelp";
 import BreakWindow from "../../captions/texts/helm/BreakWindow";
 import Punch from "../../captions/texts/helm/Punch";
 
-const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints, setTypeEnding }) => {
+const ActionsHelm = ({
+  language,
+  increaseLovePoints,
+  decreaseLovePoints,
+  setHasCookie,
+  setHasFlower,
+  setHasWrench,
+  setTypeEnding
+}) => {
 
   // Control Room captions states
   const [showAskForHelp, setShowAskForHelp] = useState(false);
@@ -55,11 +63,15 @@ const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints, setType
           }, 3000)
         }}
         breakWindow={() => {
-          setShowBreakWindow(true)
-          setTimeout(() => {
-            setShowBreakWindow(false)
-          }, 3000)
-        }}
+          if (setHasWrench) {
+            setShowBreakWindow(true)
+            setTimeout(() => {
+              setShowBreakWindow(false)
+              setHasWrench(false)
+            }, 3000)
+          }
+        }
+        }
       />
     </>
   )

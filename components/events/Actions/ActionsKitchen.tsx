@@ -17,7 +17,9 @@ import WrenchCaption from "../../captions/texts/kitchen/WrenchCaption";
 import GrabWrenchCaption from "../../captions/texts/kitchen/GrabWrenchCaption";
 import PutItemBackCaption from "../../captions/texts/PutItemBackCaption";
 
-const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) => {
+const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setHasCookie,
+  setHasFlower,
+  setHasWrench }) => {
 
   // Kitchen captions states
   const [showCoffeeCaption, setShowCoffeeCaption] = useState(false);
@@ -83,6 +85,7 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
           setShowGrabCookieCaption(true)
           setTimeout(() => {
             setShowCrumbCaption(false)
+            setHasCookie(true)
           }, 3000)
         }}
       />
@@ -100,12 +103,14 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
           setShowGrabFlowerCaption(true)
           setTimeout(() => {
             setShowGrabFlowerCaption(false)
+            setHasFlower(true)
           }, 3000)
         }}
         put={() => {
           setShowPutItemBackCaption(true)
           setTimeout(() => {
             setShowPutItemBackCaption(false)
+            setHasFlower(false)
           }, 3000)
         }}
       />
@@ -124,12 +129,14 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
           setTimeout(() => {
             setShowGrabWrenchCaption(false)
           }, 3000)
+          setHasWrench(true)
         }}
         put={() => {
           setShowPutItemBackCaption(true)
           setTimeout(() => {
             setShowPutItemBackCaption(false)
           }, 3000)
+          setHasWrench(false)
         }}
       />
 

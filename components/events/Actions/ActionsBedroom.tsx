@@ -17,7 +17,10 @@ const ActionsBedroom = ({
   setTargetLocationLover,
   setShowOverlayNotClickable,
   increaseLovePoints,
-  decreaseLovePoints
+  decreaseLovePoints,
+  setHasCookie,
+  setHasFlower,
+  setHasWrench
 }) => {
   // Bedroom captions states
   const [showArgument, setShowArgument] = useState(true);
