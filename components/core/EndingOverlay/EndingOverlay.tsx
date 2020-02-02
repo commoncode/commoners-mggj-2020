@@ -73,7 +73,7 @@ const Modal = ({ typeEnding }: OverlayProps) => {
 
             {/* Breaking the glass, bleeding out */}
             {
-                typeEnding === 2 && (
+                typeEnding === 3 && (
                     <Column>
                         <Text>Punching the glass was a real dumb idea</Text>
                         <Text>You slice your hand open and bleed to death</Text>

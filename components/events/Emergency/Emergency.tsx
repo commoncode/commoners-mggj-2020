@@ -10,9 +10,10 @@ type EmergencyProps = {
   activation: () => void;
   punch?: () => void;
   breakWindow?: () => void;
+  style?: any;
 }
 
-const Emergency = ({ x, y, activation, punch, breakWindow }: EmergencyProps) => {
+const Emergency = ({ x, y, style, activation, punch, breakWindow }: EmergencyProps) => {
   const option = useActionCaption();
   const eventRef = useRef(null);
 
@@ -43,6 +44,7 @@ const Emergency = ({ x, y, activation, punch, breakWindow }: EmergencyProps) => 
       <Event
         x={x}
         y={y}
+        style={style}
         ref={eventRef}
         activation={(event) => {
           option.setShow(!option.show);

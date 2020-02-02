@@ -40,8 +40,12 @@ const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints, setHasC
       />
 
       <Emergency
-        x={200}
+        x={40}
         y={200}
+        style={{
+          width: '110px',
+          height: '140px',
+        }}
         activation={() => {
 
         }}
@@ -59,6 +63,8 @@ const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints, setHasC
               setHasWrench(false)
             }, 3000)
           }
+            setTypeEnding(3)
+          }, 3000)
         }}
       />
     </>
