@@ -8,7 +8,7 @@ import EndingOverlay from "../EndingOverlay";
 import "../Audio";
 import Stage from "../Stage";
 import Water from "./Water";
-import LoveMeter from "./LoveMeter";
+import LoveMeter from "../LoveMeter/LoveMeter";
 
 import { GlobalStyle } from "./Game.styles";
 import { getWalkDuration } from "./movement";
@@ -83,6 +83,9 @@ const Game = () => {
   // Love Meter (works with percent 0%-100%)
   const [progressLove, setProgressLove] = useState(60);
 
+  // Setup ending
+  const [typeEnding, setTypeEnding] = useState(null);
+
   const gameLoop = useRef(null);
   useEffect(() => {
     gameLoop.current = setInterval(() => {
@@ -100,9 +103,9 @@ const Game = () => {
     <>
       <GlobalStyle />
       <OverlayNotClickable isToggled={showOverlayNotClickable} />
-      <EndingOverlay typeEnding={1} progressLove={progressLove} />
+      {typeEnding && <EndingOverlay typeEnding={typeEnding} progressLove={progressLove} />}
       <Water />
-      <LoveMeter />
+      <LoveMeter progressLove={progressLove} />
       <Stage
         scene={gameState.player.position.scene}
         language={gameState.language}

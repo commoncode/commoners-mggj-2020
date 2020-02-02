@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ProgressBar from "./ProgressBar";
 
 const Svg = styled.svg`
 position: absolute;
@@ -8,9 +9,11 @@ left: 20px;
 bottom: 20px;
 height: 7rem;
 z-index: 200;
-`
+`;
 
-const LoveMeter = () => (
+const WrapperLoveMeter = styled.div``;
+
+const LoveMeterSvg = () => (
 
    <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 919.5 228.22">
       <g>
@@ -30,5 +33,12 @@ const LoveMeter = () => (
 
 
 );
+
+const LoveMeter = ({ progressLove }) => (
+   <WrapperLoveMeter>
+      <LoveMeterSvg />
+      <ProgressBar progress={progressLove} />
+   </WrapperLoveMeter>
+)
 
 export default LoveMeter;

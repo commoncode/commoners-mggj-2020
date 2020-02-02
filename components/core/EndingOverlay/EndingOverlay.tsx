@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ProgressBar from './ProgressBar';
-import LoveMeter from '../Game/LoveMeter';
+import ProgressBar from '../LoveMeter/ProgressBar';
+import LoveMeter from '../LoveMeter/LoveMeter';
 
 const OverlayModal = styled.div`
   position: fixed;
@@ -32,9 +32,6 @@ const Text = styled.span`
     font-weight: bold;
 `;
 
-const WrapperLoveMeter = styled.div`
-
-`;
 
 type OverlayProps = {
     typeEnding: number;
@@ -59,11 +56,7 @@ const Modal = ({ typeEnding, progressLove }: OverlayProps) => {
                         <Text>and closes it behind him.</Text>
                         <Text>Guess he really doesn't love you anymore</Text>
                         <Text>You die.</Text>
-
-                        <WrapperLoveMeter>
-                            <LoveMeter />
-                            <ProgressBar progress={progressLove} />
-                        </WrapperLoveMeter>
+                        <LoveMeter progressLove={progressLove} />
                     </Column>
                 )
 
