@@ -12,13 +12,7 @@ import ActionsKitchen from "../../events/Actions/ActionsKitchen";
 import ActionsHatch from "../../events/Actions/ActionsHatch";
 import ActionsHelm from "../../events/Actions/ActionsHelm";
 
-import {
-  Container,
-  Inner,
-  Floor,
-  LeftButton,
-  RightButton
-} from "./Stage.styles";
+import { Container, Inner, Floor } from "./Stage.styles";
 
 const Stage = ({
   children,
@@ -31,6 +25,9 @@ const Stage = ({
   setTargetLocationLover,
   setShowOverlayNotClickable,
   setScene,
+  setHasCookie,
+  setHasFlower,
+  setHasWrench,
   setTypeEnding
 }) => {
   const [startGame, setStartGame] = useState(false);
@@ -68,12 +65,15 @@ const Stage = ({
         <Inner className={scene}>
           <Bedroom className={scene !== "bedroom" ? "deselected" : null}>
             <ActionsBedroom
+              startGame={startGame}
               language={language}
               setTargetLocationLover={setTargetLocationLover}
               setShowOverlayNotClickable={setShowOverlayNotClickable}
               increaseLovePoints={increaseLovePoints}
               decreaseLovePoints={decreaseLovePoints}
-              startGame={startGame}
+              setHasCookie={setHasCookie}
+              setHasFlower={setHasFlower}
+              setHasWrench={setHasWrench}
             />
 
             <Floor
@@ -105,6 +105,9 @@ const Stage = ({
                   language={language}
                   increaseLovePoints={increaseLovePoints}
                   decreaseLovePoints={decreaseLovePoints}
+                  setHasCookie={setHasCookie}
+                  setHasFlower={setHasFlower}
+                  setHasWrench={setHasWrench}
                 />
 
                 <Floor
@@ -135,6 +138,9 @@ const Stage = ({
                   language={language}
                   increaseLovePoints={increaseLovePoints}
                   decreaseLovePoints={decreaseLovePoints}
+                  setHasCookie={setHasCookie}
+                  setHasFlower={setHasFlower}
+                  setHasWrench={setHasWrench}
                 />
 
                 <Floor
@@ -163,9 +169,12 @@ const Stage = ({
               <>
                 <ActionsHelm
                   language={language}
-                  setTypeEnding={setTypeEnding}
                   increaseLovePoints={increaseLovePoints}
                   decreaseLovePoints={decreaseLovePoints}
+                  setHasCookie={setHasCookie}
+                  setHasFlower={setHasFlower}
+                  setHasWrench={setHasWrench}
+                  setTypeEnding={setTypeEnding}
                 />
 
                 <Floor

@@ -11,7 +11,9 @@ import InteractionCaption from "../../captions/texts/hatch/InteractionCaption";
 import LookAtCalendar from "../../captions/texts/hatch/LookAtCalendar";
 import TryNotToDie from "../../captions/texts/hatch/TryNotToDie";
 
-const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints }) => {
+const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints, setHasCookie,
+  setHasFlower,
+  setHasWrench }) => {
 
   // Hatch captions states
   const [showInteractionCaption, setShowInteractionCaption] = useState(false);

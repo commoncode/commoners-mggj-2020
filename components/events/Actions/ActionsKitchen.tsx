@@ -17,7 +17,9 @@ import WrenchCaption from "../../captions/texts/kitchen/WrenchCaption";
 import GrabWrenchCaption from "../../captions/texts/kitchen/GrabWrenchCaption";
 import PutItemBackCaption from "../../captions/texts/PutItemBackCaption";
 
-const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) => {
+const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setHasCookie,
+  setHasFlower,
+  setHasWrench }) => {
 
   // Kitchen captions states
   const [showCoffeeCaption, setShowCoffeeCaption] = useState(false);
@@ -49,7 +51,7 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
       <PutItemBackCaption x={624} y={100} language={language} isToggled={showPutItemBackCaption} />
 
       <ActionEvent
-        x={240}
+        x={280}
         y={320}
         style={{
           width: '2rem',
@@ -64,7 +66,7 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
         }} />
 
       <Cookie
-        x={150}
+        x={350}
         y={320}
         activation={() => {
           setShowCookieCaption(true)
@@ -83,13 +85,14 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
           setShowGrabCookieCaption(true)
           setTimeout(() => {
             setShowCrumbCaption(false)
+            setHasCookie(true)
           }, 3000)
         }}
       />
 
       <Flower
-        x={250}
-        y={320}
+        x={520}
+        y={190}
         activation={() => {
           setShowFlowerCaption(true)
           setTimeout(() => {
@@ -100,19 +103,21 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
           setShowGrabFlowerCaption(true)
           setTimeout(() => {
             setShowGrabFlowerCaption(false)
+            setHasFlower(true)
           }, 3000)
         }}
         put={() => {
           setShowPutItemBackCaption(true)
           setTimeout(() => {
             setShowPutItemBackCaption(false)
+            setHasFlower(false)
           }, 3000)
         }}
       />
 
       <Wrench
-        x={624}
-        y={220}
+        x={625}
+        y={255}
         activation={() => {
           setShowWrenchCaption(true)
           setTimeout(() => {
@@ -124,12 +129,14 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) =>
           setTimeout(() => {
             setShowGrabWrenchCaption(false)
           }, 3000)
+          setHasWrench(true)
         }}
         put={() => {
           setShowPutItemBackCaption(true)
           setTimeout(() => {
             setShowPutItemBackCaption(false)
           }, 3000)
+          setHasWrench(false)
         }}
       />
 

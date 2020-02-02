@@ -18,7 +18,10 @@ const ActionsBedroom = ({
   setShowOverlayNotClickable,
   increaseLovePoints,
   decreaseLovePoints,
-  startGame
+  startGame,
+  setHasCookie,
+  setHasFlower,
+  setHasWrench
 }) => {
   // Bedroom captions states
   const [showArgument, setShowArgument] = useState(true);
@@ -105,8 +108,8 @@ const ActionsBedroom = ({
       {/* Leaks */}
       {showFirstLeak && (
         <Leak
-          x={500}
-          y={200}
+          x={750}
+          y={160}
           activation={() => {
             console.log("click leak");
           }}
@@ -141,8 +144,8 @@ const ActionsBedroom = ({
 
       {showSecondLeak && (
         <Leak
-          x={835}
-          y={216}
+          x={870}
+          y={200}
           activation={() => {
             // setShowSecondLeak(false);
           }}
