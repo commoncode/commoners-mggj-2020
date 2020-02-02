@@ -28,7 +28,8 @@ const Stage = ({
   setHasCookie,
   setHasFlower,
   setHasWrench,
-  setTypeEnding
+  setTypeEnding,
+  setLanguage
 }) => {
   const [startGame, setStartGame] = useState(false);
 
@@ -188,7 +189,8 @@ const Stage = ({
           </Helm>
 
           <Title
-            onClick={() => {
+            onClick={lang => {
+              setLanguage(lang);
               setScene("bedroom", "right", 880);
 
               setTimeout(() => setStartGame(true), 2000);

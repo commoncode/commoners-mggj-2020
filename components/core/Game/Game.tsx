@@ -77,6 +77,7 @@ const Game = () => {
   const [gameState, setGameState] = useState({ ...initialState });
   const [offset, setOffset] = useState(0);
   const [showOverlayNotClickable, setShowOverlayNotClickable] = useState(false);
+  const [language, setLanguage] = useState("english");
 
   // Player states
   const [playerWalking, setPlayerWalking] = useState(false);
@@ -133,7 +134,8 @@ const Game = () => {
       <LoveMeter progressLove={progressLove} />
       <Stage
         scene={gameState.player.position.scene}
-        language={gameState.language}
+        language={language}
+        setLanguage={lang => setLanguage(lang)}
         offset={offset}
         setTypeEnding={setTypeEnding}
         increaseLovePoints={increaseLovePoints}

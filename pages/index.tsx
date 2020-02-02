@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Game from "../components/core/Game";
 
 export const PageHead = () => (
   <Head>
@@ -10,10 +11,10 @@ export const PageHead = () => (
 );
 
 const IndexPage = () => (
-  <div>
+  <>
     <PageHead />
-    This is the index
-  </div>
+    <Game />
+  </>
 );
 
 export default IndexPage;
