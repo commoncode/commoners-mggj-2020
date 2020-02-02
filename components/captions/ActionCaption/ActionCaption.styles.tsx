@@ -15,7 +15,14 @@ align-items: center;
 width: 5rem;
 
 /* animation */
-transition: visibility 0s, opacity 0.5s linear;
+transition: opacity 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+
+background: #282828;
+color: #fff;
+padding: 12px;
+font-size: 18px;
+border-radius: 8px;
+
 `
 const isVisibleStyle = css`
 visibility: 'visibility';

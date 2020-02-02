@@ -14,9 +14,8 @@ export const eventBase = css`
   width: 3rem;
   height: 3rem;
 
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid black;
-
+  /* background: rgba(255, 255, 255, 0.8); */
+  /* border: 2px solid black; */
   top: -5rem;
 `;
 

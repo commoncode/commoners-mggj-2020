@@ -106,7 +106,6 @@ const ActionsBedroom = ({
             console.log("click leak");
           }}
           repair={() => {
-            setShowFirstLeak(false);
             setShowSecondLeak(true);
           }}
           yell={async () => {
@@ -136,11 +135,12 @@ const ActionsBedroom = ({
 
       {showSecondLeak && (
         <Leak
-          x={700}
-          y={200}
+          x={835}
+          y={216}
           activation={() => {
             // setShowSecondLeak(false);
           }}
+          isSecondVersion
           repair={() => {
             setShowSecondLeak(false);
             setShowFirstLeak(true);

@@ -37,10 +37,10 @@ const ActionsKitchen = ({ language }) => {
       <CrumbCaption x={30} y={180} language={language} isToggled={showCrumbCaption} />
       <GrabCookieCaption x={50} y={250} language={language} isToggled={showGrabCookieCaption} />
       <FlowerCaption x={300} y={100} language={language} isToggled={showFlowerCaption} />
-      <GrabFlowerCaption x={300} y={100} language={language} isToggled={showGrabFlowerCaption}/>
-      <WrenchCaption x={300} y={100} language={language} isToggled={showWrenchCaption}/>
+      <GrabFlowerCaption x={300} y={100} language={language} isToggled={showGrabFlowerCaption} />
+      <WrenchCaption x={300} y={100} language={language} isToggled={showWrenchCaption} />
       <GrabWrenchCaption x={300} y={100} language={language} isToggled={showGrabWrenchCaption} />
-      <PutItemBackCaption x={300} y={100} language={language} isToggled={showPutItemBackCaption}/>
+      <PutItemBackCaption x={300} y={100} language={language} isToggled={showPutItemBackCaption} />
 
       <ActionEvent
         x={240}
@@ -66,16 +66,15 @@ const ActionsKitchen = ({ language }) => {
             setShowCookieCaption(false)
           }, 2000)
         }}
-        eat={async () => {
+        eat={() => {
           setShowCrumbCaption(true)
-
-          await setTimeout(() => {
+          setTimeout(() => {
             setShowCrumbCaption(false)
           }, 3000)
         }}
-        grab={async () => {
+        grab={() => {
           setShowGrabCookieCaption(true)
-          await setTimeout(() => {
+          setTimeout(() => {
             setShowCrumbCaption(false)
           }, 3000)
         }}
@@ -90,17 +89,15 @@ const ActionsKitchen = ({ language }) => {
             setShowFlowerCaption(false)
           }, 3000)
         }}
-        grab={async () => {
+        grab={() => {
           setShowGrabFlowerCaption(true)
-
-          await setTimeout(() => {
+          setTimeout(() => {
             setShowGrabFlowerCaption(false)
           }, 3000)
         }}
-        put={async () => {
+        put={() => {
           setShowPutItemBackCaption(true)
-
-          await setTimeout(() => {
+          setTimeout(() => {
             setShowPutItemBackCaption(false)
           }, 3000)
         }}
@@ -115,17 +112,15 @@ const ActionsKitchen = ({ language }) => {
             setShowWrenchCaption(false)
           }, 3000)
         }}
-        grab={async () => {
+        grab={() => {
           setShowGrabWrenchCaption(true)
-
-          await setTimeout(() => {
+          setTimeout(() => {
             setShowGrabWrenchCaption(false)
           }, 3000)
         }}
-        put={async () => {
+        put={() => {
           setShowPutItemBackCaption(true)
-
-          await setTimeout(() => {
+          setTimeout(() => {
             setShowPutItemBackCaption(false)
           }, 3000)
         }}

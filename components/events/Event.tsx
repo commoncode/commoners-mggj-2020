@@ -7,7 +7,9 @@ const Event = (state) =>
         y={state.y}
         onClick={state.activation}
         style={state.style}
-    />
+    >
+        {state.children}
+    </Container>
 
 
 export default Event;
