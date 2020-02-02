@@ -1,6 +1,6 @@
 import Caption from "../../Caption"
 
-const Escape = ({ x, y, language, isToggled }) => {
+const EscapeCaption = ({ x, y, language, isToggled }) => {
   let text = null;
 
   switch(language) {
@@ -21,4 +21,4 @@ const Escape = ({ x, y, language, isToggled }) => {
     </Caption>
 }
 
-export default Escape;
+export default EscapeCaption;
