@@ -104,8 +104,8 @@ const ActionsBedroom = ({
       {/* Leaks */}
       {showFirstLeak && (
         <Leak
-          x={500}
-          y={200}
+          x={748}
+          y={180}
           activation={() => {
             console.log("click leak");
           }}
