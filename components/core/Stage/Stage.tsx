@@ -175,6 +175,7 @@ const Stage = ({
                 setHasCookie={setHasCookie}
                 setHasFlower={setHasFlower}
                 setHasWrench={setHasWrench}
+                setTypeEnding={setTypeEnding}
                 />
 
                 <Floor
