@@ -46,6 +46,7 @@ const Modal = ({ typeEnding }: OverlayProps) => {
 
     return (
         <OverlayModal>
+            {/* Up the hatch, love meter low */}
             {
                 typeEnding === 1 && (
                     <Column>
@@ -56,6 +57,30 @@ const Modal = ({ typeEnding }: OverlayProps) => {
                     </Column>
                 )
 
+            }
+
+            {/*  Up the hatch, love meter high */}
+            {
+                typeEnding === 2 && (
+                    <Column>
+                        <Text>Moustachio climbs up the hatch and you scramble out after him</Text>
+                        <Text>Escaping certain death reminded him how much he loves you</Text>
+                        <Text>You both live happily ever after on a tropical deserted island</Text>
+                        <Text>Cute!</Text>
+                    </Column>
+                )
+            }
+
+            {/* Breaking the glass, bleeding out */}
+            {
+                typeEnding === 2 && (
+                    <Column>
+                        <Text>Punching the glass was a real dumb idea</Text>
+                        <Text>You slice your hand open and bleed to death</Text>
+                        <Text>Moustachio has to clean up the mess.</Text>
+                        <Text>So now you're dead and single.</Text>
+                    </Column>
+                )
             }
         </OverlayModal>
     );

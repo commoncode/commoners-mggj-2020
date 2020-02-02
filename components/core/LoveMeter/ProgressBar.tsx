@@ -4,13 +4,13 @@ import styled from "styled-components";
 const Bar = styled.div`
   background-color: white;
   height: 2.5rem;
-  width: 420px;
+  width: 416px;
   position: absolute;
   margin: auto;
   left: 50px;
   bottom: 40px;
   z-index: 900001;
-  border-radius: 20px;
+  border-radius: 32px;
 `;
 
 const Filler = styled.div`

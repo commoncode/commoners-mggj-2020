@@ -81,7 +81,7 @@ const Game = () => {
   const [loverExpression, setLoverExpression] = useState("sad");
 
   // Love Meter (works with percent 0%-100%)
-  const [progressLove, setProgressLove] = useState(60);
+  const [progressLove, setProgressLove] = useState(100);
 
   // Setup ending
   const [typeEnding, setTypeEnding] = useState(null);
