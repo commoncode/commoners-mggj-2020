@@ -9,7 +9,7 @@ import AskForHelp from "../../captions/texts/helm/AskForHelp";
 import BreakWindow from "../../captions/texts/helm/BreakWindow";
 import Punch from "../../captions/texts/helm/Punch";
 
-const ActionsHelm = ({ language }) => {
+const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints }) => {
 
   // Control Room captions states
   const [showAskForHelp, setShowAskForHelp] = useState(false);
@@ -32,6 +32,7 @@ const ActionsHelm = ({ language }) => {
             setShowAskForHelp(true)
             setTimeout(() => {
               setShowAskForHelp(false)
+              increaseLovePoints()
             }, 3000)
           }}
         />

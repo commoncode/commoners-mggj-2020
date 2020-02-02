@@ -123,6 +123,7 @@ const ActionsBedroom = ({
             await setTimeout(() => {
               setShowLoverYelling(false);
             }, 3500);
+            decreaseLovePoints()
           }}
           panic={async () => {
             setShowPanicCaption(true);
