@@ -106,6 +106,11 @@ const Game = () => {
     };
   });
 
+  // Triggering bad ending when there is no more love :(
+  if (progressLove === 0 && !typeEnding) {
+    setTypeEnding(1)
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -117,6 +122,7 @@ const Game = () => {
         scene={gameState.player.position.scene}
         language={gameState.language}
         offset={offset}
+        setTypeEnding={setTypeEnding}
         increaseLovePoints={increaseLovePoints}
         decreaseLovePoints={decreaseLovePoints}
         setShowOverlayNotClickable={setShowOverlayNotClickable}

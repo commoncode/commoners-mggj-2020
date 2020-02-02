@@ -17,7 +17,7 @@ import WrenchCaption from "../../captions/texts/kitchen/WrenchCaption";
 import GrabWrenchCaption from "../../captions/texts/kitchen/GrabWrenchCaption";
 import PutItemBackCaption from "../../captions/texts/PutItemBackCaption";
 
-const ActionsKitchen = ({ language }) => {
+const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints }) => {
 
   // Kitchen captions states
   const [showCoffeeCaption, setShowCoffeeCaption] = useState(false);
@@ -77,6 +77,7 @@ const ActionsKitchen = ({ language }) => {
           setTimeout(() => {
             setShowCrumbCaption(false)
           }, 3000)
+          decreaseLovePoints()
         }}
         grab={() => {
           setShowGrabCookieCaption(true)

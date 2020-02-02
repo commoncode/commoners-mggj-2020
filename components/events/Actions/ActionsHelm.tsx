@@ -9,7 +9,7 @@ import AskForHelp from "../../captions/texts/helm/AskForHelp";
 import BreakWindow from "../../captions/texts/helm/BreakWindow";
 import Punch from "../../captions/texts/helm/Punch";
 
-const ActionsHelm = ({ language }) => {
+const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints, setTypeEnding }) => {
 
   // Control Room captions states
   const [showAskForHelp, setShowAskForHelp] = useState(false);
@@ -22,39 +22,45 @@ const ActionsHelm = ({ language }) => {
       <BreakWindow x={300} y={100} language={language} isToggled={showBreakWindow} />
       <Punch x={300} y={100} language={language} isToggled={showPunch} />
 
-        <Interaction
-          x={100}
-          y={100}
-          activation={() => {
+      <Interaction
+        x={100}
+        y={100}
+        activation={() => {
 
-          }}
-          ask={() => {
-            setShowAskForHelp(true)
-            setTimeout(() => {
-              setShowAskForHelp(false)
-            }, 3000)
-          }}
-        />
+        }}
+        ask={() => {
+          setShowAskForHelp(true)
+          setTimeout(() => {
+            setShowAskForHelp(false)
+            increaseLovePoints()
+          }, 3000)
+        }}
+      />
 
-        <Emergency
-          x={200}
-          y={200}
-          activation={() => {
+      <Emergency
+        x={40}
+        y={200}
+        style={{
+          width: '110px',
+          height: '140px',
+        }}
+        activation={() => {
 
-          }}
-          punch={() => {
-            setShowPunch(true)
-            setTimeout(() => {
-              setShowPunch(false)
-            }, 3000)
-          }}
-          breakWindow={() => {
-            setShowBreakWindow(true)
-            setTimeout(() => {
-              setShowBreakWindow(false)
-            }, 3000)
-          }}
-        />
+        }}
+        punch={() => {
+          setShowPunch(true)
+          setTimeout(() => {
+            setShowPunch(false)
+            setTypeEnding(3)
+          }, 3000)
+        }}
+        breakWindow={() => {
+          setShowBreakWindow(true)
+          setTimeout(() => {
+            setShowBreakWindow(false)
+          }, 3000)
+        }}
+      />
     </>
   )
 }

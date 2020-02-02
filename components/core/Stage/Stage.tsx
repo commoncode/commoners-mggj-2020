@@ -28,7 +28,8 @@ const Stage = ({
   setLocation,
   setTargetLocationLover,
   setShowOverlayNotClickable,
-  setScene
+  setScene,
+  setTypeEnding
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
@@ -95,7 +96,10 @@ const Stage = ({
           <Kitchen className={scene !== "kitchen" ? "deselected" : null}>
             {scene === "kitchen" ? (
               <>
-                <ActionsKitchen language={language} />
+                <ActionsKitchen
+                  language={language}
+                  increaseLovePoints={increaseLovePoints}
+                  decreaseLovePoints={decreaseLovePoints} />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -121,7 +125,11 @@ const Stage = ({
           <Hatch className={scene !== "hatch" ? "deselected" : null}>
             {scene === "hatch" ? (
               <>
-                <ActionsHatch language={language} />
+                <ActionsHatch
+                  language={language}
+                  increaseLovePoints={increaseLovePoints}
+                  decreaseLovePoints={decreaseLovePoints}
+                />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -147,7 +155,12 @@ const Stage = ({
           <Helm className={scene !== "helm" ? "deselected" : null}>
             {scene === "helm" ? (
               <>
-                <ActionsHelm language={language} />
+                <ActionsHelm
+                  language={language}
+                  setTypeEnding={setTypeEnding}
+                  increaseLovePoints={increaseLovePoints}
+                  decreaseLovePoints={decreaseLovePoints}
+                />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, 800)}

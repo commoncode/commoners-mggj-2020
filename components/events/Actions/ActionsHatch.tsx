@@ -11,7 +11,7 @@ import InteractionCaption from "../../captions/texts/hatch/InteractionCaption";
 import LookAtCalendar from "../../captions/texts/hatch/LookAtCalendar";
 import TryNotToDie from "../../captions/texts/hatch/TryNotToDie";
 
-const ActionsHatch = ({ language }) => {
+const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints }) => {
 
   // Hatch captions states
   const [showInteractionCaption, setShowInteractionCaption] = useState(false);
@@ -98,20 +98,23 @@ const ActionsHatch = ({ language }) => {
         }}
         activation={() => {
 
-        }}
-        look={() => {
-          setShowLookAtCalendar(true)
-          setTimeout(() => {
-            setShowLookAtCalendar(false)
-          }, 3000)
-        }}
-        admire={() => {
-          setShowFiries(true)
-          setTimeout(() => {
-            setShowFiries(false)
-          }, 3000)
-        }}
-      />
+          }}
+          look={() => {
+            setShowLookAtCalendar(true)
+            setTimeout(() => {
+              setShowLookAtCalendar(false)
+            }, 3000)
+            increaseLovePoints()
+          }}
+          admire={() => {
+            setShowFiries(true)
+            setTimeout(() => {
+              setShowFiries(false);
+              window.open('https://quickweb.westpac.com.au/OnlinePaymentServlet?cd_community=NSWRFS&cd_currency=AUD&cd_supplier_business=DONATIONS&action=EnterDetails', '_blank');
+            }, 3000)
+            decreaseLovePoints()
+          }}
+        />
     </>
   )
 }
