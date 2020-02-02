@@ -9,7 +9,9 @@ import AskForHelp from "../../captions/texts/helm/AskForHelp";
 import BreakWindow from "../../captions/texts/helm/BreakWindow";
 import Punch from "../../captions/texts/helm/Punch";
 
-const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints }) => {
+const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints, setHasCookie,
+  setHasFlower,
+  setHasWrench }) => {
 
   // Control Room captions states
   const [showAskForHelp, setShowAskForHelp] = useState(false);
@@ -22,40 +24,43 @@ const ActionsHelm = ({ language, increaseLovePoints, decreaseLovePoints }) => {
       <BreakWindow x={300} y={100} language={language} isToggled={showBreakWindow} />
       <Punch x={300} y={100} language={language} isToggled={showPunch} />
 
-        <Interaction
-          x={100}
-          y={100}
-          activation={() => {
+      <Interaction
+        x={100}
+        y={100}
+        activation={() => {
 
-          }}
-          ask={() => {
-            setShowAskForHelp(true)
-            setTimeout(() => {
-              setShowAskForHelp(false)
-              increaseLovePoints()
-            }, 3000)
-          }}
-        />
+        }}
+        ask={() => {
+          setShowAskForHelp(true)
+          setTimeout(() => {
+            setShowAskForHelp(false)
+            increaseLovePoints()
+          }, 3000)
+        }}
+      />
 
-        <Emergency
-          x={200}
-          y={200}
-          activation={() => {
+      <Emergency
+        x={200}
+        y={200}
+        activation={() => {
 
-          }}
-          punch={() => {
-            setShowPunch(true)
-            setTimeout(() => {
-              setShowPunch(false)
-            }, 3000)
-          }}
-          breakWindow={() => {
+        }}
+        punch={() => {
+          setShowPunch(true)
+          setTimeout(() => {
+            setShowPunch(false)
+          }, 3000)
+        }}
+        breakWindow={() => {
+          if (setHasWrench) {
             setShowBreakWindow(true)
             setTimeout(() => {
               setShowBreakWindow(false)
+              setHasWrench(false)
             }, 3000)
-          }}
-        />
+          }
+        }}
+      />
     </>
   )
 }

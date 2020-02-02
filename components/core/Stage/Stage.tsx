@@ -28,7 +28,10 @@ const Stage = ({
   setLocation,
   setTargetLocationLover,
   setShowOverlayNotClickable,
-  setScene
+  setScene,
+  setHasCookie,
+  setHasFlower,
+  setHasWrench,
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
@@ -72,6 +75,9 @@ const Stage = ({
             setShowOverlayNotClickable={setShowOverlayNotClickable}
             increaseLovePoints={increaseLovePoints}
             decreaseLovePoints={decreaseLovePoints}
+            setHasCookie={setHasCookie}
+            setHasFlower={setHasFlower}
+            setHasWrench={setHasWrench}
             />
 
             <Floor
@@ -102,7 +108,11 @@ const Stage = ({
                 <ActionsKitchen
                 language={language}
                 increaseLovePoints={increaseLovePoints}
-                decreaseLovePoints={decreaseLovePoints}/>
+                decreaseLovePoints={decreaseLovePoints}
+                setHasCookie={setHasCookie}
+                setHasFlower={setHasFlower}
+                setHasWrench={setHasWrench}
+                />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -132,6 +142,9 @@ const Stage = ({
                 language={language}
                 increaseLovePoints={increaseLovePoints}
                 decreaseLovePoints={decreaseLovePoints}
+                setHasCookie={setHasCookie}
+                setHasFlower={setHasFlower}
+                setHasWrench={setHasWrench}
                 />
 
                 <Floor
@@ -162,6 +175,9 @@ const Stage = ({
                 language={language}
                 increaseLovePoints={increaseLovePoints}
                 decreaseLovePoints={decreaseLovePoints}
+                setHasCookie={setHasCookie}
+                setHasFlower={setHasFlower}
+                setHasWrench={setHasWrench}
                 />
 
                 <Floor

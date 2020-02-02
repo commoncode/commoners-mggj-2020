@@ -38,6 +38,9 @@ type GameStateType = {
   // Tracking
   love: number;
   time: number;
+  hasWrench: boolean;
+  hasFlower: boolean;
+  hasCookie: boolean;
 };
 
 const initialState: GameStateType = {
@@ -64,7 +67,10 @@ const initialState: GameStateType = {
   },
   language: "english",
   love: 100,
-  time: 60 * 5
+  time: 60 * 5,
+  hasCookie: false,
+  hasFlower: false,
+  hasWrench: false
 };
 
 const Game = () => {
@@ -75,6 +81,9 @@ const Game = () => {
   // Player states
   const [playerWalking, setPlayerWalking] = useState(false);
   const [playerExpression, setPlayerExpression] = useState("sad");
+  const [hasWrench, setHasWrench] = useState(false);
+  const [hasFlower, setHasFlower] = useState(false);
+  const [hasCookie, setHasCookie] = useState(false);
 
   // Lover States
   const [loverWalking, setLoverWalking] = useState(false);
@@ -120,6 +129,9 @@ const Game = () => {
         increaseLovePoints={increaseLovePoints}
         decreaseLovePoints={decreaseLovePoints}
         setShowOverlayNotClickable={setShowOverlayNotClickable}
+        setHasCookie={setHasCookie}
+        setHasFlower={setHasFlower}
+        setHasWrench={setHasWrench}
         setLocation={(x, y) => {
           const duration = getWalkDuration(
             x,
