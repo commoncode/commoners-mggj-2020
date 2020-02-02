@@ -10,9 +10,10 @@ type CalendarProps = {
   activation: () => void;
   look?: () => void;
   admire?: () => void;
+  style?: any;
 }
 
-const Calendar = ({ x, y, activation, look, admire }: CalendarProps) => {
+const Calendar = ({ x, y, style, activation, look, admire }: CalendarProps) => {
   const option = useActionCaption();
   const eventRef = useRef(null);
 
@@ -43,6 +44,7 @@ const Calendar = ({ x, y, activation, look, admire }: CalendarProps) => {
       <Event
         x={x}
         y={y}
+        style={style}
         ref={eventRef}
         activation={(event) => {
           option.setShow(!option.show);

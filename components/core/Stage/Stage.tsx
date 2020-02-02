@@ -22,6 +22,8 @@ const Stage = ({
   children,
   scene,
   language,
+  increaseLovePoints,
+  decreaseLovePoints,
   offset, // wave offset
   setLocation,
   setTargetLocationLover,
@@ -60,10 +62,16 @@ const Stage = ({
       <Container offset={offset}>
         <Inner className={scene}>
           <Bedroom className={scene !== "bedroom" ? "deselected" : null}>
+            <RightButton onClick={() => setScene("kitchen", "right", 880)}>
+              Right
+            </RightButton>
+
             <ActionsBedroom
-              language={language}
-              setTargetLocationLover={setTargetLocationLover}
-              setShowOverlayNotClickable={setShowOverlayNotClickable}
+            language={language}
+            setTargetLocationLover={setTargetLocationLover}
+            setShowOverlayNotClickable={setShowOverlayNotClickable}
+            increaseLovePoints={increaseLovePoints}
+            decreaseLovePoints={decreaseLovePoints}
             />
 
             <Floor

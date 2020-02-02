@@ -3,11 +3,12 @@ import { useState, useRef, useEffect } from "react";
 import Player from "../../characters/Player";
 import Lover from "../../characters/Lover";
 import OverlayNotClickable from "../OverlayNotClickable/OverlayNotClickable";
+import EndingOverlay from "../EndingOverlay";
 
 import "../Audio";
 import Stage from "../Stage";
 import Water from "./Water";
-import LoveMeter from "./LoveMeter";
+import LoveMeter from "../LoveMeter/LoveMeter";
 
 import { GlobalStyle } from "./Game.styles";
 import { getWalkDuration } from "./movement";
@@ -62,7 +63,7 @@ const initialState: GameStateType = {
     isToggled: true
   },
   language: "english",
-  love: 0,
+  love: 100,
   time: 60 * 5
 };
 
@@ -78,6 +79,19 @@ const Game = () => {
   // Lover States
   const [loverWalking, setLoverWalking] = useState(false);
   const [loverExpression, setLoverExpression] = useState("sad");
+
+  // Love Meter (works with percent 0%-100%)
+  const [progressLove, setProgressLove] = useState(100);
+
+  const increaseLovePoints = () => {
+    return progressLove <= 90 ? setProgressLove(progressLove + 10) : setProgressLove(progressLove);
+  }
+  const decreaseLovePoints = () => {
+    return progressLove >= 10 ? setProgressLove(progressLove - 10) : setProgressLove(progressLove);
+  }
+
+  // Setup ending
+  const [typeEnding, setTypeEnding] = useState(null);
 
   const gameLoop = useRef(null);
   useEffect(() => {
@@ -96,12 +110,15 @@ const Game = () => {
     <>
       <GlobalStyle />
       <OverlayNotClickable isToggled={showOverlayNotClickable} />
+      {typeEnding && <EndingOverlay typeEnding={typeEnding} />}
       <Water />
-      <LoveMeter />
+      <LoveMeter progressLove={progressLove} />
       <Stage
         scene={gameState.player.position.scene}
         language={gameState.language}
         offset={offset}
+        increaseLovePoints={increaseLovePoints}
+        decreaseLovePoints={decreaseLovePoints}
         setShowOverlayNotClickable={setShowOverlayNotClickable}
         setLocation={(x, y) => {
           const duration = getWalkDuration(
