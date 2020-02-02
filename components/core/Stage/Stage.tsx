@@ -6,6 +6,7 @@ import Kitchen from "../../scenes/Kitchen";
 import ActionsBedroom from "../../events/Actions/ActionsBedroom";
 import ActionsKitchen from "../../events/Actions/ActionsKitchen";
 import ActionsHatch from "../../events/Actions/ActionsHatch";
+import ActionsHelm from "../../events/Actions/ActionsHelm";
 
 import {
   Container,
@@ -125,6 +126,8 @@ const Stage = ({
                 <LeftButton onClick={() => setScene("hatch", "left")}>
                   Left
                 </LeftButton>
+
+                <ActionsHelm language={language}/>
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
