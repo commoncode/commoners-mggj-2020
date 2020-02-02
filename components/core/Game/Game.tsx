@@ -13,7 +13,7 @@ import { GlobalStyle } from "./Game.styles";
 import { getWalkDuration } from "./movement";
 
 type Position = {
-  scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending";
+  scene: "kitchen" | "bedroom" | "helm" | "hatch" | "ending" | "title";
   x: number;
   y: number;
   duration: number; // The calculated speed at which the character should move to its new position
@@ -42,7 +42,7 @@ type GameStateType = {
 const initialState: GameStateType = {
   player: {
     position: {
-      scene: "bedroom",
+      scene: "title",
       x: 200,
       y: 80,
       duration: 1,
