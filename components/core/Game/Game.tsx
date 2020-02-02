@@ -106,6 +106,11 @@ const Game = () => {
     };
   });
 
+  // Triggering bad ending when there is no more love :(
+  if (progressLove === 0 && !typeEnding) {
+    setTypeEnding(1)
+  }
+
   return (
     <>
       <GlobalStyle />
