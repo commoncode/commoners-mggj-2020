@@ -111,10 +111,9 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
             }, 3500)
 
           }}
-          panic={async () => {
+          panic={() => {
             setShowPanicCaption(true)
-
-            await setTimeout(() => {
+            setTimeout(() => {
               setShowPanicCaption(false)
             }, 2500)
           }}
@@ -145,10 +144,9 @@ const ActionsBedroom = ({ language, setTargetLocationLover, setShowOverlayNotCli
             setShowLoverYelling(false)
           }, 3500)
         }}
-        panic={async () => {
+        panic={() => {
           setShowPanicCaption(true)
-
-          await setTimeout(() => {
+          setTimeout(() => {
             setShowPanicCaption(false)
           }, 2500)
         }}
