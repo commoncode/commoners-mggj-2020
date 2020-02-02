@@ -28,7 +28,8 @@ const Stage = ({
   setLocation,
   setTargetLocationLover,
   setShowOverlayNotClickable,
-  setScene
+  setScene,
+  setTypeEnding
 }) => {
   const handleClick = (e, clipLeft, clipRight) => {
     const rect = e.target.classList.contains("floor")
@@ -67,11 +68,11 @@ const Stage = ({
             </RightButton>
 
             <ActionsBedroom
-            language={language}
-            setTargetLocationLover={setTargetLocationLover}
-            setShowOverlayNotClickable={setShowOverlayNotClickable}
-            increaseLovePoints={increaseLovePoints}
-            decreaseLovePoints={decreaseLovePoints}
+              language={language}
+              setTargetLocationLover={setTargetLocationLover}
+              setShowOverlayNotClickable={setShowOverlayNotClickable}
+              increaseLovePoints={increaseLovePoints}
+              decreaseLovePoints={decreaseLovePoints}
             />
 
             <Floor
@@ -100,9 +101,9 @@ const Stage = ({
             {scene === "kitchen" ? (
               <>
                 <ActionsKitchen
-                language={language}
-                increaseLovePoints={increaseLovePoints}
-                decreaseLovePoints={decreaseLovePoints}/>
+                  language={language}
+                  increaseLovePoints={increaseLovePoints}
+                  decreaseLovePoints={decreaseLovePoints} />
 
                 <Floor
                   onClick={e => handleClick(e, capLeft, capRight)}
@@ -129,9 +130,9 @@ const Stage = ({
             {scene === "hatch" ? (
               <>
                 <ActionsHatch
-                language={language}
-                increaseLovePoints={increaseLovePoints}
-                decreaseLovePoints={decreaseLovePoints}
+                  language={language}
+                  increaseLovePoints={increaseLovePoints}
+                  decreaseLovePoints={decreaseLovePoints}
                 />
 
                 <Floor
@@ -159,9 +160,10 @@ const Stage = ({
             {scene === "helm" ? (
               <>
                 <ActionsHelm
-                language={language}
-                increaseLovePoints={increaseLovePoints}
-                decreaseLovePoints={decreaseLovePoints}
+                  language={language}
+                  setTypeEnding={setTypeEnding}
+                  increaseLovePoints={increaseLovePoints}
+                  decreaseLovePoints={decreaseLovePoints}
                 />
 
                 <Floor
