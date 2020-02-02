@@ -24,14 +24,12 @@ const ActionsBedroom = ({
   const [showPanicCaption, setShowPanicCaption] = useState(false);
   const [showPlayerShout, setShowPlayerShout] = useState(false);
   const [showLoverYelling, setShowLoverYelling] = useState(false);
-  const [showFirstLeak, setShowFirstLeak] = useState(false);
+
+  // leaks
+  const [showFirstLeak, setShowFirstLeak] = useState(true);
   const [showSecondLeak, setShowSecondLeak] = useState(false);
 
   const runInitialConversation = async () => {
-    await setTimeout(() => {
-      setShowFirstLeak(true);
-    }, 500);
-
     await setTimeout(() => {
       setShowArgument(false);
       setShowOverlayNotClickable(false);
@@ -141,10 +139,6 @@ const ActionsBedroom = ({
             // setShowSecondLeak(false);
           }}
           isSecondVersion
-          repair={() => {
-            setShowSecondLeak(false);
-            setShowFirstLeak(true);
-          }}
           yell={async () => {
             setShowPlayerShout(true);
 
