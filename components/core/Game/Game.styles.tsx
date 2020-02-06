@@ -16,5 +16,20 @@ export const GlobalStyle = createGlobalStyle`
 
         background: #72a8c1;
         font-family: 'Itim', cursive;
+
+
+        /* To avoid selecting text on clicks and avoid triggering anything on text selected */
+        /* iOS Safari */
+        -webkit-touch-callout: none; 
+        /* Safari */
+        -webkit-user-select: none;
+        /* Konqueror HTML */
+        -khtml-user-select: none; 
+        /* Old versions of Firefox */
+        -moz-user-select: none; 
+        /* Internet Explorer/Edge */
+        -ms-user-select: none; 
+        /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+        user-select: none;
     }
 `;
