@@ -111,7 +111,7 @@ const Game = () => {
   useEffect(() => {
     gameLoop.current = setInterval(() => {
       // Randomly generate a new offset for the ship every 5 seconds
-      let items = [0, 25, 50, 125, -25, -50, -125];
+      let items = [0, 25, 50, 75, -25, -50, -75];
       setOffset(items[Math.floor(Math.random() * items.length)]);
     }, 5000); // Frame renderer
 
