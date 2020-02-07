@@ -47,11 +47,11 @@ const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints, setHas
       <Firies x={300} y={100} language={language} isToggled={showFiries} />
 
       <ActionEvent
-        x={240}
-        y={320}
+        x={770}
+        y={100}
         style={{
-          width: '2rem',
-          height: '2rem',
+          width: '8rem',
+          height: '12rem',
           background: 'transparent',
         }}
         activation={() => {
@@ -62,11 +62,11 @@ const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints, setHas
         }} />
 
       <ActionEvent
-        x={200}
-        y={320}
+        x={640}
+        y={130}
         style={{
-          width: '2rem',
-          height: '2rem',
+          width: '6rem',
+          height: '7rem',
           background: 'transparent',
         }}
         activation={() => {
@@ -77,10 +77,10 @@ const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints, setHas
         }} />
 
       <ActionEvent
-        x={200}
-        y={320}
+        x={390}
+        y={290}
         style={{
-          width: '2rem',
+          width: '3rem',
           height: '2rem',
           background: 'transparent',
         }}
@@ -92,11 +92,11 @@ const ActionsHatch = ({ language, increaseLovePoints, decreaseLovePoints, setHas
         }} />
 
       <Calendar
-        x={50}
-        y={110}
+        x={90}
+        y={150}
         style={{
-          width: '96px',
-          height: '120px'
+          width: '5rem',
+          height: '8rem'
         }}
         activation={() => {
 

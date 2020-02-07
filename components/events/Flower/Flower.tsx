@@ -7,12 +7,13 @@ import useActionCaption from "../../captions/ActionCaption/useActionCaption";
 type FlowerProps = {
   x: number;
   y: number;
+  style?: any;
   activation: () => void;
   grab?: () => void;
   put?: () => void;
 }
 
-const Flower = ({ x, y, activation, grab, put }: FlowerProps) => {
+const Flower = ({ x, y, style, activation, grab, put }: FlowerProps) => {
   const option = useActionCaption();
   const eventRef = useRef(null);
 
@@ -43,6 +44,7 @@ const Flower = ({ x, y, activation, grab, put }: FlowerProps) => {
       <Event
         x={x}
         y={y}
+        style={style}
         ref={eventRef}
         activation={(event) => {
           option.setShow(!option.show);
