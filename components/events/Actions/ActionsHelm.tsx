@@ -31,8 +31,8 @@ const ActionsHelm = ({
       <Punch x={300} y={100} language={language} isToggled={showPunch} />
 
       <Interaction
-        x={100}
-        y={100}
+        x={800}
+        y={320}
         activation={() => {
 
         }}

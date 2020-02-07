@@ -11,6 +11,7 @@ export const eventBase = css`
   align-items: center;
   justify-content: center;
 
+  border: red 2px solid ;
   width: 3rem;
   height: 3rem;
 

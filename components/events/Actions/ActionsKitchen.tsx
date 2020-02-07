@@ -34,7 +34,7 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
 
   return (
     <>
-      <CoffeeCaption x={200} y={280} language={language} isToggled={showCoffeeCaption} />
+      <CoffeeCaption x={160} y={220} language={language} isToggled={showCoffeeCaption} />
 
       {/* Cookie captions */}
       <CookieCaption x={120} y={280} language={language} isToggled={showCookieCaption} />
@@ -42,10 +42,10 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
       <GrabCookieCaption x={50} y={250} language={language} isToggled={showGrabCookieCaption} />
 
       {/* Flower captions */}
-      <FlowerCaption x={300} y={100} language={language} isToggled={showFlowerCaption} />
+      <FlowerCaption x={220} y={90} language={language} isToggled={showFlowerCaption} />
       <GrabFlowerCaption x={300} y={100} language={language} isToggled={showGrabFlowerCaption} />
 
-      {/* Brench captions */}
+      {/* Wrench captions */}
       <WrenchCaption x={640} y={100} language={language} isToggled={showWrenchCaption} />
       <GrabWrenchCaption x={620} y={100} language={language} isToggled={showGrabWrenchCaption} />
       <PutItemBackCaption x={624} y={100} language={language} isToggled={showPutItemBackCaption} />
@@ -91,8 +91,12 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
       />
 
       <Flower
-        x={520}
-        y={190}
+        x={500}
+        y={130}
+        style={{
+          width: '5rem',
+          height: '6rem'
+        }}
         activation={() => {
           setShowFlowerCaption(true)
           setTimeout(() => {
