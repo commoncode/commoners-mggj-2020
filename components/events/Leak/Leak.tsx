@@ -15,24 +15,32 @@ type LeakProps = {
   isSecondVersion?: boolean;
 };
 
-const Leak = ({
-  x,
-  y,
-  activation,
-  repair,
-  yell,
-  panic,
-  isSecondVersion
-}: LeakProps) => {
-  const { ref: eventRef, showActions, setShowActions } = useEvent();
+const actions = [
+  { x: -35, y: -80, caption: "Repair", action: "repair" },
+  { x: 50, y: -20, caption: "Yell", action: "yell" },
+  { x: -35, y: 40, caption: "PANIC!", action: "panic" }
+  // { x: -140, y: -20, caption: "action 4" }
+];
+
+const Leak = (props: LeakProps) => {
+  const { x, y, activation, isSecondVersion } = props;
+
+  const {
+    ref: eventRef,
+    showActions,
+    setShowActions,
+    coordsActions,
+    calcCoordsOnClick
+  } = useEvent();
   return (
     <>
       <Event
         x={x}
         y={y}
         ref={eventRef}
-        activation={() => {
+        activation={e => {
           setShowActions(!showActions);
+          calcCoordsOnClick(e);
           activation();
         }}
       />
@@ -42,44 +50,18 @@ const Leak = ({
         <Leak2 x={x - 77} y={y + 25} style={{ width: "180px" }} />
       )}
 
-      {repair && (
-        <ActionCaption
-          x={x + 20}
-          y={y - 20}
-          activation={() => {
-            repair();
-            console.log("click repair");
-          }}
-          isToggled={showActions}
-        >
-          Repair
-        </ActionCaption>
-      )}
-      {yell && (
-        <ActionCaption
-          x={x + 20}
-          y={y + 80}
-          activation={() => {
-            yell();
-            console.log("click yell");
-          }}
-          isToggled={showActions}
-        >
-          Yell
-        </ActionCaption>
-      )}
-      {panic && (
-        <ActionCaption
-          x={x - 50}
-          y={y + 40}
-          activation={() => {
-            panic();
-            console.log("click PANIC");
-          }}
-          isToggled={showActions}
-        >
-          PANIC!
-        </ActionCaption>
+      {actions.map(
+        a =>
+          props[a.action] && (
+            <ActionCaption
+              x={coordsActions.x + a.x}
+              y={coordsActions.y + a.y}
+              activation={props[a.action]}
+              isToggled={showActions}
+            >
+              {a.caption}
+            </ActionCaption>
+          )
       )}
     </>
   );
