@@ -1,34 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from "react";
 
-const useEvent = ({ activation, remainingTime }) => {
-    const [show, setShow] = useState(false);
-    const [actualTime, setActualTime] = useState(0);
-    const intervalRef = useRef(null);
+const useEvent = () => {
+  const [showActions, setShowActions] = useState(false);
+  const ref = useRef(null);
 
-    useEffect(() => {
-        intervalRef.current = setInterval(() => {
-            const time = actualTime + 1000;
-            setActualTime(time);
-            if (time <= remainingTime) {
-                activateAndHide();
-            }
-        }, 1000)
+  const handleClickInside = event => {
+    if (
+      ref &&
+      ref.current &&
+      ref.current.contains(event.target) &&
+      !showActions
+    ) {
+      setShowActions(true);
+    } else {
+      setShowActions(false);
+    }
+  };
 
-        return () => {
-            clearInterval(intervalRef.current);
-        }
-    })
+  useEffect(() => {
+    document.addEventListener("click", handleClickInside, true);
 
-    const activateAndHide = () => {
-        // clear event from the map
-        clearInterval(intervalRef.current);
-        setShow(false)
-
-        // activate a function
-        activation();
+    return () => {
+      document.removeEventListener("click", handleClickInside, true);
     };
+  }, []);
 
-    return { show, setShow, activateAndHide };
+  return { ref, showActions, setShowActions };
 };
 
 export default useEvent;

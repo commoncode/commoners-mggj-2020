@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React from "react";
 
-import Event from '../Event';
-import ActionCaption from '../../captions/ActionCaption';
-import useActionCaption from "../../captions/ActionCaption/useActionCaption";
+import Event from "../Event";
+import ActionCaption from "../../captions/ActionCaption";
+import useEvent from "../useEvent";
 
 type InteractionProps = {
   x: number;
@@ -10,33 +10,16 @@ type InteractionProps = {
   activation: () => void;
   ask?: () => void;
   apologise?: () => void;
-}
+};
 
-const Interaction = ({ x, y, activation, ask, apologise }: InteractionProps) => {
-  const option = useActionCaption();
-  const eventRef = useRef(null);
-
-  const handleClickInside = event => {
-    if (
-      eventRef &&
-      eventRef.current &&
-      eventRef.current.contains(event.target) &&
-      !option.show
-    ) {
-      option.setShow(true);
-    }
-    else {
-      option.setShow(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickInside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickInside, true);
-    };
-  }, []);
+const Interaction = ({
+  x,
+  y,
+  activation,
+  ask,
+  apologise
+}: InteractionProps) => {
+  const { ref: eventRef, showActions, setShowActions } = useEvent();
 
   return (
     <>
@@ -44,15 +27,33 @@ const Interaction = ({ x, y, activation, ask, apologise }: InteractionProps) => 
         x={x}
         y={y}
         ref={eventRef}
-        activation={(event) => {
-          option.setShow(!option.show);
+        activation={event => {
+          setShowActions(!showActions);
           activation();
         }}
       />
-      <ActionCaption x={x + 20} y={y - 20} activation={() => { ask && ask() }} isToggled={option.show}>Ask For Help</ActionCaption>
-      <ActionCaption x={x - 50} y={y + 40} activation={() => { apologise && apologise() }} isToggled={option.show}>Apologise</ActionCaption>
+      <ActionCaption
+        x={x + 20}
+        y={y - 20}
+        activation={() => {
+          ask && ask();
+        }}
+        isToggled={showActions}
+      >
+        Ask For Help
+      </ActionCaption>
+      <ActionCaption
+        x={x - 50}
+        y={y + 40}
+        activation={() => {
+          apologise && apologise();
+        }}
+        isToggled={showActions}
+      >
+        Apologise
+      </ActionCaption>
     </>
-  )
-}
+  );
+};
 
 export default Interaction;

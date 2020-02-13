@@ -17,10 +17,14 @@ import WrenchCaption from "../../captions/texts/kitchen/WrenchCaption";
 import GrabWrenchCaption from "../../captions/texts/kitchen/GrabWrenchCaption";
 import PutItemBackCaption from "../../captions/texts/PutItemBackCaption";
 
-const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setHasCookie,
+const ActionsKitchen = ({
+  language,
+  increaseLovePoints,
+  decreaseLovePoints,
+  setHasCookie,
   setHasFlower,
-  setHasWrench }) => {
-
+  setHasWrench
+}) => {
   // Kitchen captions states
   const [showCoffeeCaption, setShowCoffeeCaption] = useState(false);
   const [showCookieCaption, setShowCookieCaption] = useState(false);
@@ -34,59 +38,105 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
 
   return (
     <>
-      <CoffeeCaption x={160} y={220} language={language} isToggled={showCoffeeCaption} />
+      <CoffeeCaption
+        x={160}
+        y={220}
+        language={language}
+        isToggled={showCoffeeCaption}
+      />
 
       {/* Cookie captions */}
-      <CookieCaption x={120} y={280} language={language} isToggled={showCookieCaption} />
-      <CrumbCaption x={30} y={180} language={language} isToggled={showCrumbCaption} />
-      <GrabCookieCaption x={50} y={250} language={language} isToggled={showGrabCookieCaption} />
+      <CookieCaption
+        x={120}
+        y={280}
+        language={language}
+        isToggled={showCookieCaption}
+      />
+      <CrumbCaption
+        x={30}
+        y={180}
+        language={language}
+        isToggled={showCrumbCaption}
+      />
+      <GrabCookieCaption
+        x={50}
+        y={250}
+        language={language}
+        isToggled={showGrabCookieCaption}
+      />
 
       {/* Flower captions */}
-      <FlowerCaption x={220} y={90} language={language} isToggled={showFlowerCaption} />
-      <GrabFlowerCaption x={300} y={100} language={language} isToggled={showGrabFlowerCaption} />
+      <FlowerCaption
+        x={220}
+        y={90}
+        language={language}
+        isToggled={showFlowerCaption}
+      />
+      <GrabFlowerCaption
+        x={300}
+        y={100}
+        language={language}
+        isToggled={showGrabFlowerCaption}
+      />
 
       {/* Wrench captions */}
-      <WrenchCaption x={640} y={100} language={language} isToggled={showWrenchCaption} />
-      <GrabWrenchCaption x={620} y={100} language={language} isToggled={showGrabWrenchCaption} />
-      <PutItemBackCaption x={624} y={100} language={language} isToggled={showPutItemBackCaption} />
+      <WrenchCaption
+        x={640}
+        y={100}
+        language={language}
+        isToggled={showWrenchCaption}
+      />
+      <GrabWrenchCaption
+        x={620}
+        y={100}
+        language={language}
+        isToggled={showGrabWrenchCaption}
+      />
+      <PutItemBackCaption
+        x={624}
+        y={100}
+        language={language}
+        isToggled={showPutItemBackCaption}
+      />
 
       <ActionEvent
         x={280}
         y={320}
         style={{
-          width: '2rem',
-          height: '2rem',
-          background: 'transparent',
+          width: "2rem",
+          height: "2rem",
+          background: "transparent"
         }}
         activation={() => {
-          setShowCoffeeCaption(true)
+          setShowCoffeeCaption(true);
           setTimeout(() => {
-            setShowCoffeeCaption(false)
-          }, 2000)
-        }} />
+            setShowCoffeeCaption(false);
+          }, 2000);
+        }}
+      />
 
       <Cookie
         x={350}
         y={320}
         activation={() => {
-          setShowCookieCaption(true)
+          setShowCookieCaption(true);
           setTimeout(() => {
-            setShowCookieCaption(false)
-          }, 2000)
+            setShowCookieCaption(false);
+          }, 2000);
         }}
         eat={() => {
-          setShowCrumbCaption(true)
+          setShowCrumbCaption(true);
           setTimeout(() => {
-            setShowCrumbCaption(false)
-          }, 3000)
-          decreaseLovePoints()
+            setShowCrumbCaption(false);
+          }, 3000);
+          decreaseLovePoints();
         }}
         grab={() => {
-          setShowGrabCookieCaption(true)
+          setShowGrabCookieCaption(true);
           setTimeout(() => {
-            setShowCrumbCaption(false)
-            setHasCookie(true)
-          }, 3000)
+            setShowGrabCookieCaption(false);
+            setHasCookie(true);
+          }, 3000);
         }}
       />
 
@@ -94,28 +144,28 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
         x={500}
         y={130}
         style={{
-          width: '5rem',
-          height: '6rem'
+          width: "5rem",
+          height: "6rem"
         }}
         activation={() => {
-          setShowFlowerCaption(true)
+          setShowFlowerCaption(true);
           setTimeout(() => {
-            setShowFlowerCaption(false)
-          }, 3000)
+            setShowFlowerCaption(false);
+          }, 3000);
         }}
         grab={() => {
-          setShowGrabFlowerCaption(true)
+          setShowGrabFlowerCaption(true);
           setTimeout(() => {
-            setShowGrabFlowerCaption(false)
-            setHasFlower(true)
-          }, 3000)
+            setShowGrabFlowerCaption(false);
+            setHasFlower(true);
+          }, 3000);
         }}
         put={() => {
-          setShowPutItemBackCaption(true)
+          setShowPutItemBackCaption(true);
           setTimeout(() => {
-            setShowPutItemBackCaption(false)
-            setHasFlower(false)
-          }, 3000)
+            setShowPutItemBackCaption(false);
+            setHasFlower(false);
+          }, 3000);
         }}
       />
 
@@ -123,29 +173,28 @@ const ActionsKitchen = ({ language, increaseLovePoints, decreaseLovePoints, setH
         x={625}
         y={255}
         activation={() => {
-          setShowWrenchCaption(true)
+          setShowWrenchCaption(true);
           setTimeout(() => {
-            setShowWrenchCaption(false)
-          }, 3000)
+            setShowWrenchCaption(false);
+          }, 3000);
         }}
         grab={() => {
-          setShowGrabWrenchCaption(true)
+          setShowGrabWrenchCaption(true);
           setTimeout(() => {
-            setShowGrabWrenchCaption(false)
-          }, 3000)
-          setHasWrench(true)
+            setShowGrabWrenchCaption(false);
+          }, 3000);
+          setHasWrench(true);
         }}
         put={() => {
-          setShowPutItemBackCaption(true)
+          setShowPutItemBackCaption(true);
           setTimeout(() => {
-            setShowPutItemBackCaption(false)
-          }, 3000)
-          setHasWrench(false)
+            setShowPutItemBackCaption(false);
+          }, 3000);
+          setHasWrench(false);
         }}
       />
-
     </>
-  )
-}
+  );
+};
 
 export default ActionsKitchen;

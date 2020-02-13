@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
-import Event from '../Event';
-import ActionCaption from '../../captions/ActionCaption';
+import Event from "../Event";
+import ActionCaption from "../../captions/ActionCaption";
 import useActionCaption from "../../captions/ActionCaption/useActionCaption";
+import useEvent from "../useEvent";
 
 type EmergencyProps = {
   x: number;
@@ -11,33 +12,17 @@ type EmergencyProps = {
   punch?: () => void;
   breakWindow?: () => void;
   style?: any;
-}
+};
 
-const Emergency = ({ x, y, style, activation, punch, breakWindow }: EmergencyProps) => {
-  const option = useActionCaption();
-  const eventRef = useRef(null);
-
-  const handleClickInside = event => {
-    if (
-      eventRef &&
-      eventRef.current &&
-      eventRef.current.contains(event.target) &&
-      !option.show
-    ) {
-      option.setShow(true);
-    }
-    else {
-      option.setShow(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickInside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickInside, true);
-    };
-  }, []);
+const Emergency = ({
+  x,
+  y,
+  style,
+  activation,
+  punch,
+  breakWindow
+}: EmergencyProps) => {
+  const { ref: eventRef, showActions, setShowActions } = useEvent();
 
   return (
     <>
@@ -46,15 +31,33 @@ const Emergency = ({ x, y, style, activation, punch, breakWindow }: EmergencyPro
         y={y}
         style={style}
         ref={eventRef}
-        activation={(event) => {
-          option.setShow(!option.show);
+        activation={event => {
+          setShowActions(!showActions);
           activation();
         }}
       />
-      <ActionCaption x={x + 20} y={y - 20} activation={() => { punch && punch() }} isToggled={option.show}>Punch</ActionCaption>
-      <ActionCaption x={x - 50} y={y + 40} activation={() => { breakWindow && breakWindow() }} isToggled={option.show}>Break</ActionCaption>
+      <ActionCaption
+        x={x + 20}
+        y={y - 20}
+        activation={() => {
+          punch && punch();
+        }}
+        isToggled={showActions}
+      >
+        Punch
+      </ActionCaption>
+      <ActionCaption
+        x={x - 50}
+        y={y + 40}
+        activation={() => {
+          breakWindow && breakWindow();
+        }}
+        isToggled={showActions}
+      >
+        Break
+      </ActionCaption>
     </>
-  )
-}
+  );
+};
 
 export default Emergency;
