@@ -1,10 +1,10 @@
 # Contributing
 
-There are multiple ways to contribuite with this project.
+There are multiple ways to contribute with this project.
 
 ## Fix bugs and general improvements
 
-Yeah, let's be honest. We developed this game in less than 48 hours and it's full of bugs. You can contribuite with of these ones but there surely you can find more:
+Yeah, let's be honest. We developed this game in less than 48 hours and it is full of bugs. You can contribute with these but surely you will find more for your own:
 
 - The interaction with objects and events can be improved.
 - The administration of events is kinda clunky.
@@ -37,11 +37,11 @@ The complete diagram with possible endings
 
 ## Add inventory
 
-- The overall idea is create an inventory that allows to pick up items
-- When the character pick up an item, this one dissapears from the map but appears in the top of the screen, on the **intentory**.
+- The overall idea is to create an inventory that allows you to collect items.
+- When the character pick up an item, this one dissapears from the map but appears in the top of the screen.
 - There are some assets that are already designed for this purpose.
   - The cookie of doom! [*+100 all stats, invulnevarity in real life*]: ![Single cookie](content/Single_Cookie.svg)
-  - The wrench of overwhelming power[*can repair stuff, it's made with iron that can't ben manipulated with metalbending*]: ![Wrench](content/Wrench.svg)
+  - The wrench of overwhelming power[*can repair stuff, it can't be manipulated with metalbending*]: ![Wrench](content/Wrench.svg)
 
 ## Add voice clips
 
