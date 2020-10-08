@@ -2,14 +2,22 @@
 
 There are multiple ways to contribute with this project.
 
+## Improve documentation
+
+- `README.md`:
+  - Needs more info about the current state of the project
+  - Include photos or description of the event
+  - Add instructions of how to start the project for new collaborators.
+- `CONTRIBUTING.md` is a good starting point but it needs more info about the roadmap and actionable ideas.
+
 ## Fix bugs and general improvements
 
 Yeah, let's be honest. We developed this game in less than 48 hours and it is full of bugs. You can contribute with these but surely you will find more for your own:
 
 - The interaction with objects and events can be improved.
-- The administration of events is kinda clunky.
+- The administration of events is kinda clunky. We are using `hooks` and that easily becomes messy and complex, `react context` could be more appropiated.
 - The second character should not be interactive until some specific events.
-- Is not possible to active any winning condition!.
+- Is not possible to activate any winning condition!.
 
 ## Add more endings
 
