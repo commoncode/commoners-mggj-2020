@@ -48,7 +48,7 @@ The complete diagram with possible endings
 - The overall idea is to create an inventory that allows you to collect items.
 - When the character pick up an item, this one dissapears from the map but appears in the top of the screen.
 - There are some assets that are already designed for this purpose.
-  - The cookie of doom! [*+100 all stats, invulnevarity in real life*]: ![Single cookie](content/Single_Cookie.svg)
+  - The cookie of doom! [*+100 all stats, invulnerability in real life*]: ![Single cookie](content/Single_Cookie.svg)
   - The wrench of overwhelming power[*can repair stuff, it can't be manipulated with metalbending*]: ![Wrench](content/Wrench.svg)
 
 ## Add voice clips
