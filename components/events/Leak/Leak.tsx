@@ -58,6 +58,7 @@ const Leak = (props: LeakProps) => {
               y={coordsActions.y + a.y}
               activation={props[a.action]}
               isToggled={showActions}
+              key={a.action}
             >
               {a.caption}
             </ActionCaption>
