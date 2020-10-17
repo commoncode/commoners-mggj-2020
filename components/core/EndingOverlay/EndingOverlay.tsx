@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
+import {Ending1, Ending2, Ending3} from './ending-captions';
+
 const OverlayModal = styled.div`
   position: fixed;
   top: 0;
@@ -17,25 +19,12 @@ const OverlayModal = styled.div`
   width: 100%;
 `;
 
-const Column = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-
-const Text = styled.span`
-    color: #020D18;
-    font-size: 30px;
-    font-weight: bold;
-`;
-
-
 type OverlayProps = {
     typeEnding: number;
+    language: string;
 };
 
-const Modal = ({ typeEnding }: OverlayProps) => {
+const Modal = ({typeEnding, language}: OverlayProps) => {
     useEffect(() => {
         document.body.style.overflow = 'hidden';
 
@@ -49,37 +38,21 @@ const Modal = ({ typeEnding }: OverlayProps) => {
             {/* Up the hatch, love meter low */}
             {
                 typeEnding === 1 && (
-                    <Column>
-                        <Text>Moustachio climbs up the hatch...</Text>
-                        <Text>and closes it behind him.</Text>
-                        <Text>Guess he really doesn't love you anymore</Text>
-                        <Text>You die.</Text>
-                    </Column>
+                    <Ending1 language={language}/>
                 )
-
             }
 
             {/*  Up the hatch, love meter high */}
             {
                 typeEnding === 2 && (
-                    <Column>
-                        <Text>Moustachio climbs up the hatch and you scramble out after him</Text>
-                        <Text>Escaping certain death reminded him how much he loves you</Text>
-                        <Text>You both live happily ever after on a tropical deserted island</Text>
-                        <Text>Cute!</Text>
-                    </Column>
+                    <Ending2 language={language}/>
                 )
             }
 
             {/* Breaking the glass, bleeding out */}
             {
                 typeEnding === 3 && (
-                    <Column>
-                        <Text>Punching the glass was a real dumb idea</Text>
-                        <Text>You slice your hand open and bleed to death</Text>
-                        <Text>Moustachio has to clean up the mess.</Text>
-                        <Text>So now you're dead and single.</Text>
-                    </Column>
+                    <Ending3 language={language}/>
                 )
             }
         </OverlayModal>
