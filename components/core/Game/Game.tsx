@@ -129,7 +129,7 @@ const Game = () => {
     <>
       <GlobalStyle />
       <OverlayNotClickable isToggled={showOverlayNotClickable} />
-      {typeEnding && <EndingOverlay typeEnding={typeEnding} />}
+      {typeEnding && <EndingOverlay typeEnding={typeEnding} language={language} />}
       <Water />
       <LoveMeter progressLove={progressLove} />
       <Stage
